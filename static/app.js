@@ -1932,33 +1932,17 @@ function t(key) {
 }
 
 function translateUI() {
-  const labels = document.querySelectorAll('.sidebar-section-label');
-  if (labels.length >= 4) {
-    labels[0].textContent = t('sec_home');
-    labels[1].textContent = t('sec_optimize');
-    labels[2].textContent = t('sec_manage');
-    labels[3].textContent = t('sec_system');
-  }
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (key) {
+      el.textContent = t(key);
+    }
+  });
 
-  const navMap = {
-    '': t('nav_overview'),
-    'performance': t('nav_performance'),
-    'display': t('nav_display'),
-    'audio': t('nav_audio'),
-    'network': t('nav_network'),
-    'apps': t('nav_apps'),
-    'launcher': t('nav_launcher'),
-    'remote': t('nav_remote'),
-    'hardware': t('nav_hardware'),
-    'settings': t('nav_preferences'),
-    'about': t('nav_about')
-  };
-
-  document.querySelectorAll('.sidebar-nav-item').forEach(item => {
-    const route = item.getAttribute('data-route');
-    if (navMap[route] !== undefined) {
-      const span = item.querySelector('span:last-child');
-      if (span) span.textContent = navMap[route];
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const key = el.getAttribute('data-i18n-ph');
+    if (key) {
+      el.setAttribute('placeholder', t(key));
     }
   });
 
@@ -1976,10 +1960,10 @@ function setLanguage(langCode) {
   document.documentElement.setAttribute('lang', langCode);
 
   const topbarSel = document.getElementById('topbar-language-select');
-  if (topbarSel) topbarSel.value = langCode;
+  if (topbarSel && topbarSel.value !== langCode) topbarSel.value = langCode;
 
   const prefSel = document.getElementById('language-select');
-  if (prefSel) prefSel.value = langCode;
+  if (prefSel && prefSel.value !== langCode) prefSel.value = langCode;
   
   // RTL (Right-to-Left) Direction Engine
   const rtlLanguages = ['ar', 'he', 'fa', 'ur'];
@@ -1990,6 +1974,7 @@ function setLanguage(langCode) {
   }
 
   translateUI();
+  renderPage();
 
   const langNames = {
     'en': 'English (US)', 'en-GB': 'English (UK)', 'es': 'Español (Spanish)', 'es-MX': 'Español (Latinoamérica)',
