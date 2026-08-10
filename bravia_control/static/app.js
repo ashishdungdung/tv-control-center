@@ -1728,6 +1728,9 @@ function renderSettings() {
             <option value="uk" ${currentLang==='uk'?'selected':''}>🇺🇦 Українська (Ukrainian)</option>
             <option value="ko" ${currentLang==='ko'?'selected':''}>🇰🇷 한국어 (Korean)</option>
             <option value="ar" ${currentLang==='ar'?'selected':''}>🇸🇦 العربية (Arabic)</option>
+            <option value="he" ${currentLang==='he'?'selected':''}>🇮🇱 עברית (Hebrew)</option>
+            <option value="fa" ${currentLang==='fa'?'selected':''}>🇮🇷 فارسی (Persian)</option>
+            <option value="ur" ${currentLang==='ur'?'selected':''}>🇵🇰 اردو (Urdu)</option>
             <option value="nl" ${currentLang==='nl'?'selected':''}>🇳🇱 Nederlands (Dutch)</option>
             <option value="pl" ${currentLang==='pl'?'selected':''}>🇵🇱 Polski (Polish)</option>
             <option value="se" ${currentLang==='se'?'selected':''}>🇸🇪 Svenska (Swedish)</option>
@@ -1827,6 +1830,15 @@ function setLanguage(langCode) {
   currentLang = langCode;
   localStorage.setItem('bravia_lang', langCode);
   document.documentElement.setAttribute('lang', langCode);
+  
+  // RTL (Right-to-Left) Direction Engine
+  const rtlLanguages = ['ar', 'he', 'fa', 'ur'];
+  if (rtlLanguages.includes(langCode)) {
+    document.documentElement.setAttribute('dir', 'rtl');
+  } else {
+    document.documentElement.setAttribute('dir', 'ltr');
+  }
+
   const langNames = {
     'en': 'English (US)',
     'en-GB': 'English (UK)',
@@ -1847,6 +1859,9 @@ function setLanguage(langCode) {
     'uk': 'Українська (Ukrainian)',
     'ko': '한국어 (Korean)',
     'ar': 'العربية (Arabic)',
+    'he': 'עברית (Hebrew)',
+    'fa': 'فارسی (Persian)',
+    'ur': 'اردو (Urdu)',
     'nl': 'Nederlands (Dutch)',
     'pl': 'Polski (Polish)',
     'se': 'Svenska (Swedish)',
@@ -1881,6 +1896,12 @@ function initTheme() {
   document.documentElement.setAttribute('data-theme', savedTheme);
   const savedLang = localStorage.getItem('bravia_lang') || 'en';
   document.documentElement.setAttribute('lang', savedLang);
+  const rtlLanguages = ['ar', 'he', 'fa', 'ur'];
+  if (rtlLanguages.includes(savedLang)) {
+    document.documentElement.setAttribute('dir', 'rtl');
+  } else {
+    document.documentElement.setAttribute('dir', 'ltr');
+  }
 }
 
 function renderAppearance() {

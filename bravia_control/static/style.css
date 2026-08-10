@@ -143,14 +143,36 @@
 [data-theme="neon-amber"] {
   --bg-base:      #140b05;
   --bg-surface:   #26150a;
-  --bg-elevated:  #38200f;
-  --bg-hover:     #4a2b14;
-  --border:       #5c3618;
+  --bg-elevated:  #381f0f;
+  --bg-hover:     #4a2914;
+  --border:       #5c3318;
   --accent:       #f59e0b;
   --accent-hover: #d97706;
   --accent-muted: rgba(245, 158, 11, 0.18);
   --text-primary:   #fffbeb;
   --text-secondary: #fde68a;
+}
+
+/* ── Right-To-Left (RTL) Layout Engine ──────────────────────── */
+[dir="rtl"] body {
+  direction: rtl;
+  text-align: right;
+}
+
+[dir="rtl"] .sidebar {
+  border-right: none;
+  border-left: 1px solid var(--border);
+}
+
+[dir="rtl"] .setting-row,
+[dir="rtl"] .topbar,
+[dir="rtl"] .nav-item {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .topbar-left {
+  margin-left: auto;
+  margin-right: 0;
 }
 
 /* ── Side Drawer Overlay ────────────────────────────────────── */

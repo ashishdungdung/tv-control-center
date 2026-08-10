@@ -184,6 +184,32 @@ DEVICE_PROFILES = {
         "has_oled": False,
         "has_fald": False,
         "has_120hz": False,
+    },
+
+    # ── SOUTH KOREA & MIDDLE EAST EXPANSION ───────────────────────
+    "lg_oled_companion": {
+        "brand": "LG",
+        "series": "LG OLED C2 / C3 / G3 / G4 & Android TV Companion",
+        "models": ["OLED55C2", "OLED65C3", "OLED77G4"],
+        "processor": "LG Alpha 9 Gen 6 / Gen 7 AI Processor",
+        "panel_type": "WOLED / MLA OLED (120Hz / 144Hz VRR)",
+        "audio_engine": "AI Sound Pro 9.1.2 Virtual Surround",
+        "os": "webOS / Android ADB Bridge",
+        "has_oled": True,
+        "has_fald": False,
+        "has_120hz": True,
+    },
+    "arab_me_bravia": {
+        "brand": "Sony Middle East & North Africa",
+        "series": "Sony BRAVIA KSA / UAE / Egypt Special Edition",
+        "models": ["KD-65X85K-MENA", "XR-75X90K-ME"],
+        "processor": "Sony Cognitive Processor XR (Arabic Subtitles & OS Native)",
+        "panel_type": "FALD / OLED 120Hz",
+        "audio_engine": "Acoustic Surface Audio+ / Atmos",
+        "os": "Google TV (Arabic / MENA Regional Build)",
+        "has_oled": False,
+        "has_fald": True,
+        "has_120hz": True,
     }
 }
 
