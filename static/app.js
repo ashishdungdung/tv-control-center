@@ -1824,6 +1824,133 @@ function renderAbout() {
   `;
 }
 
+// ── INTERNATIONALIZATION (i18n) DICTIONARY ENGINE ─────────────
+const I18N_DICTIONARY = {
+  'en': {
+    sec_home: 'Home', sec_optimize: 'Optimize', sec_manage: 'Manage', sec_system: 'System',
+    nav_overview: 'Overview', nav_performance: 'Performance', nav_display: 'Display', nav_audio: 'Audio',
+    nav_network: 'Network', nav_apps: 'Apps & Debloater', nav_launcher: 'Launcher', nav_remote: 'Remote Control',
+    nav_hardware: 'Hardware Profiles', nav_preferences: 'Preferences', nav_about: 'About & Support',
+    simple: 'Simple', advanced: 'Advanced', connected: 'Connected'
+  },
+  'es': {
+    sec_home: 'Inicio', sec_optimize: 'Optimizar', sec_manage: 'Gestionar', sec_system: 'Sistema',
+    nav_overview: 'Visión General', nav_performance: 'Rendimiento', nav_display: 'Pantalla', nav_audio: 'Sonido y Audio',
+    nav_network: 'Red y DoT DNS', nav_apps: 'Aplicaciones', nav_launcher: 'Lanzador', nav_remote: 'Mando a Distancia',
+    nav_hardware: 'Perfiles Hardware', nav_preferences: 'Preferencias', nav_about: 'Acerca de',
+    simple: 'Sencillo', advanced: 'Avanzado', connected: 'Conectado'
+  },
+  'de': {
+    sec_home: 'Start', sec_optimize: 'Optimieren', sec_manage: 'Verwalten', sec_system: 'System',
+    nav_overview: 'Übersicht', nav_performance: 'Leistung', nav_display: 'Bildschirm', nav_audio: 'Audio & Ton',
+    nav_network: 'Netzwerk', nav_apps: 'Apps & Bloatware', nav_launcher: 'Launcher', nav_remote: 'Fernbedienung',
+    nav_hardware: 'Hardware-Profile', nav_preferences: 'Einstellungen', nav_about: 'Über & Support',
+    simple: 'Einfach', advanced: 'Erweitert', connected: 'Verbunden'
+  },
+  'fr': {
+    sec_home: 'Accueil', sec_optimize: 'Optimiser', sec_manage: 'Gérer', sec_system: 'Système',
+    nav_overview: 'Aperçu', nav_performance: 'Performance', nav_display: 'Affichage', nav_audio: 'Audio & Son',
+    nav_network: 'Réseau', nav_apps: 'Applications', nav_launcher: 'Lanceur', nav_remote: 'Télécommande',
+    nav_hardware: 'Profils Matériel', nav_preferences: 'Préférences', nav_about: 'À propos',
+    simple: 'Simple', advanced: 'Avancé', connected: 'Connecté'
+  },
+  'ja': {
+    sec_home: 'ホーム', sec_optimize: '最適化', sec_manage: '管理', sec_system: 'システム',
+    nav_overview: '概要', nav_performance: 'パフォーマンス', nav_display: 'ディスプレイ', nav_audio: 'オーディオ',
+    nav_network: 'ネットワーク', nav_apps: 'アプリ削除', nav_launcher: 'ランチャー', nav_remote: 'リモコン',
+    nav_hardware: 'ハードウェア構成', nav_preferences: '設定', nav_about: 'サポート・情報',
+    simple: 'シンプル', advanced: '高度', connected: '接続済み'
+  },
+  'hi': {
+    sec_home: 'होम', sec_optimize: 'अनुकूलन', sec_manage: 'प्रबंधन', sec_system: 'सिस्टम',
+    nav_overview: 'अवलोकन', nav_performance: 'प्रदर्शन (RAM)', nav_display: 'डिस्प्ले Calibration', nav_audio: 'ध्वनि एवं ऑडियो',
+    nav_network: 'नेटवर्क (DNS)', nav_apps: 'ऐप्स एवं डिब्लोटर', nav_launcher: 'लॉन्चर', nav_remote: 'रिमोट कंट्रोल',
+    nav_hardware: 'हार्डवेयर प्रोफाइल', nav_preferences: 'प्राथमिकताएं', nav_about: 'के बारे में',
+    simple: 'सरल', advanced: 'उन्नत', connected: 'कनेक्टेड'
+  },
+  'zh-CN': {
+    sec_home: '首页', sec_optimize: '优化', sec_manage: '管理', sec_system: '系统',
+    nav_overview: '概览', nav_performance: '性能优化', nav_display: '显示校准', nav_audio: '声音音频',
+    nav_network: '网络设置', nav_apps: '应用卸载', nav_launcher: '桌面切换', nav_remote: '遥控器',
+    nav_hardware: '硬件信息', nav_preferences: '偏好设置', nav_about: '关于支持',
+    simple: '精简', advanced: '专业', connected: '已连接'
+  },
+  'ar': {
+    sec_home: 'الرئيسية', sec_optimize: 'تحسين', sec_manage: 'إدارة', sec_system: 'النظام',
+    nav_overview: 'نظرة عامة', nav_performance: 'الأداء والذاكرة', nav_display: 'الشاشة والعرض', nav_audio: 'الصوت',
+    nav_network: 'الشبكة والـ DNS', nav_apps: 'التطبيقات', nav_launcher: 'مشغل الشاشة', nav_remote: 'جهاز التحكم',
+    nav_hardware: 'مواصفات الجهاز', nav_preferences: 'التفضيلات', nav_about: 'حول البرنامج',
+    simple: 'بسيط', advanced: 'متقدم', connected: 'متصل'
+  },
+  'ko': {
+    sec_home: '홈', sec_optimize: '최적화', sec_manage: '관리', sec_system: '시스템',
+    nav_overview: '개요', nav_performance: '성능 최적화', nav_display: '디스플레이', nav_audio: '오디오',
+    nav_network: '네트워크', nav_apps: '앱 관리', nav_launcher: '런처 변경', nav_remote: '리모컨',
+    nav_hardware: '하드웨어 프로필', nav_preferences: '환경 설정', nav_about: '정보 및 지원',
+    simple: '기본', advanced: '고급', connected: '연결됨'
+  },
+  'pt-BR': {
+    sec_home: 'Início', sec_optimize: 'Otimizar', sec_manage: 'Gerenciar', sec_system: 'Sistema',
+    nav_overview: 'Visão Geral', nav_performance: 'Desempenho', nav_display: 'Tela e Calibração', nav_audio: 'Áudio e Som',
+    nav_network: 'Rede e DNS', nav_apps: 'Aplicativos', nav_launcher: 'Launcher', nav_remote: 'Controle Remoto',
+    nav_hardware: 'Perfis de Hardware', nav_preferences: 'Preferências', nav_about: 'Sobre e Suporte',
+    simple: 'Simples', advanced: 'Avançado', connected: 'Conectado'
+  },
+  'ru': {
+    sec_home: 'Главная', sec_optimize: 'Оптимизация', sec_manage: 'Управление', sec_system: 'Система',
+    nav_overview: 'Обзор', nav_performance: 'Производительность', nav_display: 'Дисплей', nav_audio: 'Звук и Аудио',
+    nav_network: 'Сеть и DNS', nav_apps: 'Приложения', nav_launcher: 'Лаунчер', nav_remote: 'Пульт ДУ',
+    nav_hardware: 'Профили ТВ', nav_preferences: 'Настройки', nav_about: 'О программе',
+    simple: 'Простой', advanced: 'Расширенный', connected: 'Подключено'
+  }
+};
+
+function t(key) {
+  const lang = currentLang || 'en';
+  if (I18N_DICTIONARY[lang] && I18N_DICTIONARY[lang][key]) return I18N_DICTIONARY[lang][key];
+  const shortLang = lang.split('-')[0];
+  if (I18N_DICTIONARY[shortLang] && I18N_DICTIONARY[shortLang][key]) return I18N_DICTIONARY[shortLang][key];
+  if (I18N_DICTIONARY['en'] && I18N_DICTIONARY['en'][key]) return I18N_DICTIONARY['en'][key];
+  return key;
+}
+
+function translateUI() {
+  const labels = document.querySelectorAll('.sidebar-section-label');
+  if (labels.length >= 4) {
+    labels[0].textContent = t('sec_home');
+    labels[1].textContent = t('sec_optimize');
+    labels[2].textContent = t('sec_manage');
+    labels[3].textContent = t('sec_system');
+  }
+
+  const navMap = {
+    '': t('nav_overview'),
+    'performance': t('nav_performance'),
+    'display': t('nav_display'),
+    'audio': t('nav_audio'),
+    'network': t('nav_network'),
+    'apps': t('nav_apps'),
+    'launcher': t('nav_launcher'),
+    'remote': t('nav_remote'),
+    'hardware': t('nav_hardware'),
+    'settings': t('nav_preferences'),
+    'about': t('nav_about')
+  };
+
+  document.querySelectorAll('.sidebar-nav-item').forEach(item => {
+    const route = item.getAttribute('data-route');
+    if (navMap[route] !== undefined) {
+      const span = item.querySelector('span:last-child');
+      if (span) span.textContent = navMap[route];
+    }
+  });
+
+  const simpleLabel = document.getElementById('mode-label-simple');
+  if (simpleLabel) simpleLabel.textContent = t('simple');
+  const advLabel = document.getElementById('mode-label-advanced');
+  if (advLabel) advLabel.textContent = t('advanced');
+}
+
 let currentLang = localStorage.getItem('bravia_lang') || 'en';
 
 function setLanguage(langCode) {
@@ -1845,45 +1972,19 @@ function setLanguage(langCode) {
     document.documentElement.setAttribute('dir', 'ltr');
   }
 
+  translateUI();
+
   const langNames = {
-    'en': 'English (US)',
-    'en-GB': 'English (UK)',
-    'es': 'Español (Spanish)',
-    'es-MX': 'Español (Latinoamérica)',
-    'de': 'Deutsch (German)',
-    'fr': 'Français (French)',
-    'fr-CA': 'Français (Canadien)',
-    'ja': '日本語 (Japanese)',
-    'hi': 'हिन्दी (Hindi)',
-    'zh-CN': '中文 (Simplified Chinese)',
-    'zh-TW': '繁體中文 (Traditional Chinese)',
-    'zh-HK': '廣東話 (Cantonese / HK)',
-    'pt-BR': 'Português (Brasil)',
-    'pt-PT': 'Português (Portugal)',
-    'it': 'Italiano (Italian)',
-    'ru': 'Русский (Russian)',
-    'uk': 'Українська (Ukrainian)',
-    'ko': '한국어 (Korean)',
-    'ar': 'العربية (Arabic)',
-    'he': 'עברית (Hebrew)',
-    'fa': 'فارسی (Persian)',
-    'ur': 'اردو (Urdu)',
-    'nl': 'Nederlands (Dutch)',
-    'pl': 'Polski (Polish)',
-    'se': 'Svenska (Swedish)',
-    'no': 'Norsk (Norwegian)',
-    'da': 'Dansk (Danish)',
-    'fi': 'Suomi (Finnish)',
-    'tr': 'Türkçe (Turkish)',
-    'el': 'Ελληνικά (Greek)',
-    'cs': 'Čeština (Czech)',
-    'hu': 'Magyar (Hungarian)',
-    'ro': 'Română (Romanian)',
-    'id': 'Bahasa Indonesia (Indonesian)',
-    'ms': 'Bahasa Melayu (Malay)',
-    'vi': 'Tiếng Việt (Vietnamese)',
-    'th': 'ไทย (Thai)',
-    'tl': 'Filipino (Tagalog)'
+    'en': 'English (US)', 'en-GB': 'English (UK)', 'es': 'Español (Spanish)', 'es-MX': 'Español (Latinoamérica)',
+    'de': 'Deutsch (German)', 'fr': 'Français (French)', 'fr-CA': 'Français (Canadien)', 'ja': '日本語 (Japanese)',
+    'hi': 'हिन्दी (Hindi)', 'zh-CN': '中文 (Simplified Chinese)', 'zh-TW': '繁體中文 (Traditional Chinese)',
+    'zh-HK': '廣東話 (Cantonese / HK)', 'pt-BR': 'Português (Brasil)', 'pt-PT': 'Português (Portugal)',
+    'it': 'Italiano (Italian)', 'ru': 'Русский (Russian)', 'uk': 'Українська (Ukrainian)', 'ko': '한국어 (Korean)',
+    'ar': 'العربية (Arabic)', 'he': 'עברית (Hebrew)', 'fa': 'فارسی (Persian)', 'ur': 'اردو (Urdu)',
+    'nl': 'Nederlands (Dutch)', 'pl': 'Polski (Polish)', 'se': 'Svenska (Swedish)', 'no': 'Norsk (Norwegian)',
+    'da': 'Dansk (Danish)', 'fi': 'Suomi (Finnish)', 'tr': 'Türkçe (Turkish)', 'el': 'Ελληνικά (Greek)',
+    'cs': 'Čeština (Czech)', 'hu': 'Magyar (Hungarian)', 'ro': 'Română (Romanian)', 'id': 'Bahasa Indonesia (Indonesian)',
+    'ms': 'Bahasa Melayu (Malay)', 'vi': 'Tiếng Việt (Vietnamese)', 'th': 'ไทย (Thai)', 'tl': 'Filipino (Tagalog)'
   };
   showToast('Language Updated', `Switched language to ${langNames[langCode] || langCode}`);
   logActivity('Language Switch', `Active language: ${langNames[langCode] || langCode}`);
@@ -1911,6 +2012,7 @@ function initTheme() {
   } else {
     document.documentElement.setAttribute('dir', 'ltr');
   }
+  translateUI();
 }
 
 function renderAppearance() {
@@ -2162,6 +2264,9 @@ function init() {
       showToast('APK Selected', `Selected file: ${file.name}`, 'info');
     }
   });
+
+  // Init Theme & i18n Language Engine
+  initTheme();
 
   // Render initial page
   renderPage();
