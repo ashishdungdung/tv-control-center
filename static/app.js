@@ -942,14 +942,16 @@ function renderOverview() {
       <div class="card" style="cursor:pointer" onclick="doProfile('performance')">
         <div style="font-weight:600; margin-bottom:var(--sp-1)">⚡ Performance Preset</div>
         <div class="text-caption">0.5x animations, GPU composition, TCP 4MB buffer.</div>
+        <div style="font-weight:600; margin-bottom:var(--sp-1)">⚡ ${t('perf_preset')}</div>
+        <div class="text-caption">${t('perf_desc')}</div>
       </div>
       <div class="card" style="cursor:pointer" onclick="doProfile('gaming')">
-        <div style="font-weight:600; margin-bottom:var(--sp-1)">🎮 Gaming Preset</div>
-        <div class="text-caption">ALLM game mode, 0x animations, low latency EGL.</div>
+        <div style="font-weight:600; margin-bottom:var(--sp-1)">🎮 ${t('game_preset')}</div>
+        <div class="text-caption">${t('game_desc')}</div>
       </div>
       <div class="card" style="cursor:pointer" onclick="doProfile('cinema')">
-        <div style="font-weight:600; margin-bottom:var(--sp-1)">🎬 Cinema Preset</div>
-        <div class="text-caption">True 24p cadence, HDR tone mapping, night audio.</div>
+        <div style="font-weight:600; margin-bottom:var(--sp-1)">🎬 ${t('cinema_preset')}</div>
+        <div class="text-caption">${t('cinema_desc')}</div>
       </div>
     </div>
 
@@ -1031,7 +1033,7 @@ function renderPerformance() {
 function renderDisplay() {
   return `
     <div class="page-header">
-      <h1>Display & Picture Engine Tuning</h1>
+      <h1>${t('nav_display')} — Calibration</h1>
       <p class="page-subtitle">Calibrate GPU composition, frame cadence, HDR tone mapping, and 1:1 pixel overscan</p>
     </div>
 
@@ -1106,7 +1108,7 @@ function renderDisplay() {
 function renderAudio() {
   return `
     <div class="page-header">
-      <h1>Audio</h1>
+      <h1>${t('nav_audio')}</h1>
       <p class="page-subtitle">Sound profiles, dialogue enhancement, and dynamic range</p>
     </div>
 
@@ -1135,7 +1137,7 @@ function renderAudio() {
 function renderNetwork() {
   return `
     <div class="page-header">
-      <h1>Network</h1>
+      <h1>${t('nav_network')}</h1>
       <p class="page-subtitle">Wi-Fi optimization, DNS, and TCP tuning</p>
     </div>
 
