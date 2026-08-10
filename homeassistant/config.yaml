@@ -1,0 +1,21 @@
+name: "BRAVIA Control Center"
+description: "Desktop power-user control console and optimization engine for Sony BRAVIA Android TVs."
+version: "3.0.0"
+slug: "bravia_control_center"
+init: false
+arch:
+  - armhf
+  - armv7
+  - aarch64
+  - amd64
+  - i386
+startup: application
+boot: auto
+ingress: true
+ingress_port: 8888
+panel_title: "BRAVIA Control"
+panel_icon: "mdi:television-box"
+options:
+  target_ip: "192.168.2.122:5555"
+schema:
+  target_ip: "str"

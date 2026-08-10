@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+dist/
+*.egg-info/
+*.apk
+
+# Local data & temporary caches
+*.log
+scratch/
+.system_generated/
+.DS_Store
+
+# User local configs
+snapshots.json
+profiles.json
