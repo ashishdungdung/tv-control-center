@@ -1715,6 +1715,20 @@ function renderSettings() {
             <option value="fr" ${currentLang==='fr'?'selected':''}>🇫🇷 Français (French)</option>
             <option value="ja" ${currentLang==='ja'?'selected':''}>🇯🇵 日本語 (Japanese)</option>
             <option value="hi" ${currentLang==='hi'?'selected':''}>🇮🇳 हिन्दी (Hindi)</option>
+            <option value="zh-CN" ${currentLang==='zh-CN'?'selected':''}>🇨🇳 中文 (Simplified Chinese)</option>
+            <option value="zh-TW" ${currentLang==='zh-TW'?'selected':''}>🇹🇼 繁體中文 (Traditional Chinese)</option>
+            <option value="pt" ${currentLang==='pt'?'selected':''}>🇵🇹 Português (Portuguese)</option>
+            <option value="it" ${currentLang==='it'?'selected':''}>🇮🇹 Italiano (Italian)</option>
+            <option value="ru" ${currentLang==='ru'?'selected':''}>🇷🇺 Русский (Russian)</option>
+            <option value="ko" ${currentLang==='ko'?'selected':''}>🇰🇷 한국어 (Korean)</option>
+            <option value="ar" ${currentLang==='ar'?'selected':''}>🇸🇦 العربية (Arabic)</option>
+            <option value="nl" ${currentLang==='nl'?'selected':''}>🇳🇱 Nederlands (Dutch)</option>
+            <option value="pl" ${currentLang==='pl'?'selected':''}>🇵🇱 Polski (Polish)</option>
+            <option value="se" ${currentLang==='se'?'selected':''}>🇸🇪 Svenska (Swedish)</option>
+            <option value="tr" ${currentLang==='tr'?'selected':''}>🇹🇷 Türkçe (Turkish)</option>
+            <option value="id" ${currentLang==='id'?'selected':''}>🇮🇩 Bahasa Indonesia (Indonesian)</option>
+            <option value="vi" ${currentLang==='vi'?'selected':''}>🇻🇳 Tiếng Việt (Vietnamese)</option>
+            <option value="th" ${currentLang==='th'?'selected':''}>🇹🇭 ไทย (Thai)</option>
           </select>
         </div>
       </div>
@@ -1804,7 +1818,21 @@ function setLanguage(langCode) {
     'de': 'Deutsch (German)',
     'fr': 'Français (French)',
     'ja': '日本語 (Japanese)',
-    'hi': 'हिन्दी (Hindi)'
+    'hi': 'हिन्दी (Hindi)',
+    'zh-CN': '中文 (Simplified Chinese)',
+    'zh-TW': '繁體中文 (Traditional Chinese)',
+    'pt': 'Português (Portuguese)',
+    'it': 'Italiano (Italian)',
+    'ru': 'Русский (Russian)',
+    'ko': '한국어 (Korean)',
+    'ar': 'العربية (Arabic)',
+    'nl': 'Nederlands (Dutch)',
+    'pl': 'Polski (Polish)',
+    'se': 'Svenska (Swedish)',
+    'tr': 'Türkçe (Turkish)',
+    'id': 'Bahasa Indonesia (Indonesian)',
+    'vi': 'Tiếng Việt (Vietnamese)',
+    'th': 'ไทย (Thai)'
   };
   showToast('Language Updated', `Switched language to ${langNames[langCode] || langCode}`);
   logActivity('Language Switch', `Active language: ${langNames[langCode] || langCode}`);
