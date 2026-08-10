@@ -2,7 +2,7 @@
 Safe Package Debloater Subsystem Module
 """
 from typing import Dict, List
-from bravia_control.adb import run_adb_timeout, DEFAULT_TARGET
+from tv_control_center.adb import run_adb_timeout, DEFAULT_TARGET
 
 SAFE_TO_DISABLE = {
     "tv.samba.ssm": "Samba TV Automatic Content Recognition (ACR) Telemetry",

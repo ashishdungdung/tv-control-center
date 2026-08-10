@@ -13,8 +13,8 @@ help:
 install:
 	pip install -e .
 
-run:
-	python3 -m bravia_control serve --port 8888
+serve:
+	python3 -m tv_control_center serve --port 8888
 
 build:
 	python3 -m pip install --upgrade build

@@ -31,12 +31,11 @@ Repository = "https://github.com/ashishdungdung/tv-control-center.git"
 Issues = "https://github.com/ashishdungdung/tv-control-center/issues"
 
 [project.scripts]
-tv-control-center = "bravia_control.cli:main"
-bravia-control = "bravia_control.cli:main"
+tv-control-center = "tv_control_center.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["bravia_control*"]
+include = ["tv_control_center*"]
 
 [tool.setuptools.package-data]
-bravia_control = ["static/*"]
+tv_control_center = ["static/*"]

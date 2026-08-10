@@ -3,8 +3,8 @@ Metrics & Hardware Audit Module
 """
 import re
 from typing import Dict, Any
-from bravia_control.adb import run_adb_timeout, DEFAULT_TARGET
-from bravia_control.core.debloat import SAFE_TO_DISABLE, CAUTION_PACKAGES, CRITICAL_DO_NOT_TOUCH
+from tv_control_center.adb import run_adb_timeout, DEFAULT_TARGET
+from tv_control_center.core.debloat import SAFE_TO_DISABLE, CAUTION_PACKAGES, CRITICAL_DO_NOT_TOUCH
 
 def get_quick_metrics(target: str = DEFAULT_TARGET) -> Dict[str, str]:
     batch_cmd = "cat /proc/meminfo; echo ===DF===; df -h /data; echo ===UP===; uptime; echo ===WM===; wm size; wm density"

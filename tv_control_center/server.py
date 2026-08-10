@@ -11,10 +11,10 @@ import urllib.parse
 import os
 import sys
 from typing import Dict, Any
-from bravia_control.adb import run_adb_timeout, get_devices, DEFAULT_TARGET
-from bravia_control.core.devices import DEVICE_PROFILES, detect_device_profile
-from bravia_control.core.metrics import get_quick_metrics, get_full_audit
-from bravia_control.core.debloat import apply_safe_debloat, toggle_package, SAFE_TO_DISABLE, CAUTION_PACKAGES, CRITICAL_DO_NOT_TOUCH
+from tv_control_center.adb import run_adb_timeout, get_devices, DEFAULT_TARGET
+from tv_control_center.core.devices import DEVICE_PROFILES, detect_device_profile
+from tv_control_center.core.metrics import get_quick_metrics, get_full_audit
+from tv_control_center.core.debloat import apply_safe_debloat, toggle_package, SAFE_TO_DISABLE, CAUTION_PACKAGES, CRITICAL_DO_NOT_TOUCH
 
 class ADBDashboardHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):

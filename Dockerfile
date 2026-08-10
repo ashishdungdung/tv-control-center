@@ -7,7 +7,7 @@ WORKDIR /app
 
 # Copy package files
 COPY pyproject.toml setup.py README.md LICENSE ./
-COPY bravia_control ./bravia_control
+COPY tv_control_center ./tv_control_center
 
 # Install package
 RUN pip install --no-cache-dir -e .

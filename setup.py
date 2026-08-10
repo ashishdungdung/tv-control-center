@@ -6,12 +6,11 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     package_data={
-        "bravia_control": ["static/*"],
+        "tv_control_center": ["static/*"],
     },
     entry_points={
         "console_scripts": [
-            "tv-control-center=bravia_control.cli:main",
-            "bravia-control=bravia_control.cli:main",
+            "tv-control-center=tv_control_center.cli:main",
         ],
     },
 )
