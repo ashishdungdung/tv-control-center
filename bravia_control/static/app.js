@@ -1048,6 +1048,21 @@ function renderDisplay() {
       </div>
     </div>
 
+    <!-- Hardware Upgrade Recommendation Card -->
+    <div class="card mb-6" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.08) 0%, rgba(99, 102, 241, 0.05) 100%); border: 1px solid rgba(168, 85, 247, 0.2);">
+      <div class="flex items-center justify-between">
+        <div>
+          <div style="font-weight:600; font-size:0.9375rem; color:var(--accent-purple);" class="mb-1">🎮 Certified Ultra High Speed HDMI 2.1 (48Gbps)</div>
+          <div class="text-caption" style="color:var(--text-secondary); max-width:620px;">
+            Eliminate 4K 120Hz VRR signal dropouts, black screens, and eARC audio desync on PS5, Xbox Series X, and PC gaming with certified 48Gbps HDMI 2.1 cables.
+          </div>
+        </div>
+        <a href="https://amazon.com/dp/B08X6VFCH9?tag=tvcontrolcenter-20" target="_blank" class="btn btn-secondary btn-sm" style="text-decoration:none; white-space:nowrap; gap:6px;">
+          ⚡ Recommended HDMI 2.1 Cable ↗
+        </a>
+      </div>
+    </div>
+
     ${sectionHeader('1:1 Pixel Aspect Ratio & Overscan')}
     <div class="card mb-6">
       ${settingRow('1:1 Pixel Mapping (Overscan Removal)', 'Zero out display overscan margins to prevent picture crop on 4K content.', 'wm overscan 0,0,0,0', 'mod2_overscan')}
@@ -1141,6 +1156,21 @@ function renderNetwork() {
           <div class="text-caption">MAC Address</div>
           <div class="text-setting text-technical">44:E4:EE:E4:E8:0A</div>
         </div>
+      </div>
+    </div>
+
+    <!-- Hardware Upgrade Recommendation Card -->
+    <div class="card mb-6" style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.08) 0%, rgba(37, 99, 235, 0.05) 100%); border: 1px solid rgba(56, 189, 248, 0.2);">
+      <div class="flex items-center justify-between">
+        <div>
+          <div style="font-weight:600; font-size:0.9375rem; color:var(--accent);" class="mb-1">🚀 Bypass 100Mbps Ethernet Limit (Get 400+ Mbps)</div>
+          <div class="text-caption" style="color:var(--text-secondary); max-width:620px;">
+            Most Smart TVs (Sony BRAVIA, TCL, Hisense) have legacy 100Mbps Ethernet ports. Connecting a USB 3.0 Gigabit Ethernet adapter unlocks 400+ Mbps for zero-buffering 4K REMUX streaming.
+          </div>
+        </div>
+        <a href="https://amazon.com/dp/B00BBD7NFU?tag=tvcontrolcenter-20" target="_blank" class="btn btn-secondary btn-sm" style="text-decoration:none; white-space:nowrap; gap:6px;">
+          🔌 Recommended Gigabit Adapter ↗
+        </a>
       </div>
     </div>
 
