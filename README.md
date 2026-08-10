@@ -185,9 +185,9 @@ TV Control Center is 100% free and open-source software. You can sponsor ongoing
 
 | Recommended Hardware | Problem Solved | Link |
 | :--- | :--- | :--- |
-| **USB 3.0 Gigabit Ethernet Adapter** | Bypasses the 100Mbps Ethernet port cap on Sony BRAVIA, TCL, and Hisense TVs for 400+ Mbps zero-buffering 4K REMUX streaming. | [View on Amazon](https://amazon.com/dp/B00BBD7NFU?tag=tvcontrolcenter-20) |
-| **Certified HDMI 2.1 48Gbps Cable** | Fixes 4K @ 120Hz VRR signal dropouts, black screens, and eARC audio sync issues on PS5 and Xbox Series X. | [View on Amazon](https://amazon.com/dp/B08X6VFCH9?tag=tvcontrolcenter-20) |
-| **FLIRC USB Wireless IR Receiver** | Adds universal infrared remote control and custom key-mapping support to any Smart TV or Fire TV dongle. | [View on Amazon](https://amazon.com/dp/B021FLIRC1?tag=tvcontrolcenter-20) |
+| **USB 3.0 Gigabit Ethernet Adapter** | Bypasses the 100Mbps Ethernet port cap on Sony BRAVIA, TCL, and Hisense TVs for 400+ Mbps zero-buffering 4K REMUX streaming. | [View on Amazon](https://amazon.com/dp/B00BBD7NFU?tag=vtete-20) |
+| **Certified HDMI 2.1 48Gbps Cable** | Fixes 4K @ 120Hz VRR signal dropouts, black screens, and eARC audio sync issues on PS5 and Xbox Series X. | [View on Amazon](https://amazon.com/dp/B08X6VFCH9?tag=vtete-20) |
+| **FLIRC USB Wireless IR Receiver** | Adds universal infrared remote control and custom key-mapping support to any Smart TV or Fire TV dongle. | [View on Amazon](https://amazon.com/dp/B021FLIRC1?tag=vtete-20) |
 
 ---
 

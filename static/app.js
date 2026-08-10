@@ -1057,7 +1057,7 @@ function renderDisplay() {
             Eliminate 4K 120Hz VRR signal dropouts, black screens, and eARC audio desync on PS5, Xbox Series X, and PC gaming with certified 48Gbps HDMI 2.1 cables.
           </div>
         </div>
-        <a href="https://amazon.com/dp/B08X6VFCH9?tag=tvcontrolcenter-20" target="_blank" class="btn btn-secondary btn-sm" style="text-decoration:none; white-space:nowrap; gap:6px;">
+        <a href="https://amazon.com/dp/B08X6VFCH9?tag=vtete-20" target="_blank" class="btn btn-secondary btn-sm" style="text-decoration:none; white-space:nowrap; gap:6px;">
           ⚡ Recommended HDMI 2.1 Cable ↗
         </a>
       </div>
@@ -1168,7 +1168,7 @@ function renderNetwork() {
             Most Smart TVs (Sony BRAVIA, TCL, Hisense) have legacy 100Mbps Ethernet ports. Connecting a USB 3.0 Gigabit Ethernet adapter unlocks 400+ Mbps for zero-buffering 4K REMUX streaming.
           </div>
         </div>
-        <a href="https://amazon.com/dp/B00BBD7NFU?tag=tvcontrolcenter-20" target="_blank" class="btn btn-secondary btn-sm" style="text-decoration:none; white-space:nowrap; gap:6px;">
+        <a href="https://amazon.com/dp/B00BBD7NFU?tag=vtete-20" target="_blank" class="btn btn-secondary btn-sm" style="text-decoration:none; white-space:nowrap; gap:6px;">
           🔌 Recommended Gigabit Adapter ↗
         </a>
       </div>
