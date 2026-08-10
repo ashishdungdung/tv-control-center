@@ -405,6 +405,12 @@ class ADBDashboardHandler(http.server.SimpleHTTPRequestHandler):
         else:
             self.send_json({"error": "Endpoint not found"}, status=404)
 
+    def end_headers(self):
+        self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
+        self.send_header("Pragma", "no-cache")
+        self.send_header("Expires", "0")
+        super().end_headers()
+
     def send_json(self, data, status=200):
         body = json.dumps(data).encode('utf-8')
         self.send_response(status)

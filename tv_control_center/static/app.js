@@ -939,22 +939,20 @@ function renderOverview() {
     ${sectionHeader('Active System Preset Profiles')}
     <div class="grid-4 mb-6">
       <div class="card" style="cursor:pointer" onclick="doProfile('balanced')">
-        <div style="font-weight:600; margin-bottom:var(--sp-1)">⚖️ Balanced Preset</div>
-        <div class="text-caption">Standard 1.0x UI, stock audio HAL, default network buffers.</div>
+        <div style="font-weight:600; margin-bottom:var(--sp-1)">⚖️ ${t('Balanced Preset')}</div>
+        <div class="text-caption">${t('Standard 1.0x UI, stock audio HAL, default network buffers.')}</div>
       </div>
       <div class="card" style="cursor:pointer" onclick="doProfile('performance')">
-        <div style="font-weight:600; margin-bottom:var(--sp-1)">⚡ Performance Preset</div>
-        <div class="text-caption">0.5x animations, GPU composition, TCP 4MB buffer.</div>
-        <div style="font-weight:600; margin-bottom:var(--sp-1)">⚡ ${t('perf_preset')}</div>
-        <div class="text-caption">${t('perf_desc')}</div>
+        <div style="font-weight:600; margin-bottom:var(--sp-1)">⚡ ${t('Performance Preset')}</div>
+        <div class="text-caption">${t('0.5x animations, GPU composition, TCP 4MB buffer.')}</div>
       </div>
       <div class="card" style="cursor:pointer" onclick="doProfile('gaming')">
-        <div style="font-weight:600; margin-bottom:var(--sp-1)">🎮 ${t('game_preset')}</div>
-        <div class="text-caption">${t('game_desc')}</div>
+        <div style="font-weight:600; margin-bottom:var(--sp-1)">🎮 ${t('Gaming Preset')}</div>
+        <div class="text-caption">${t('ALLM game mode, 0x animations, low latency EGL.')}</div>
       </div>
       <div class="card" style="cursor:pointer" onclick="doProfile('cinema')">
-        <div style="font-weight:600; margin-bottom:var(--sp-1)">🎬 ${t('cinema_preset')}</div>
-        <div class="text-caption">${t('cinema_desc')}</div>
+        <div style="font-weight:600; margin-bottom:var(--sp-1)">🎬 ${t('Cinema Preset')}</div>
+        <div class="text-caption">${t('True 24p cadence, HDR tone mapping, night audio.')}</div>
       </div>
     </div>
 
