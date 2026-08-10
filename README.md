@@ -95,7 +95,32 @@ Open **`http://localhost:8888`** in your browser.
 
 ---
 
-### Option 3: Run from Source Code (GitHub)
+### Option 3: Install via Homebrew (macOS / Linux)
+```bash
+# Tap repository & install formula
+brew tap ashishdungdung/tap https://github.com/ashishdungdung/tv-control-center
+brew install tv-control-center
+
+# Run background service
+brew services start tv-control-center
+```
+Open **`http://localhost:8888`** in your browser.
+
+---
+
+### Option 4: Home Assistant Custom Integration & HACS
+Copy `custom_components/tv_control_center/` to your Home Assistant `config/custom_components/` folder:
+
+```bash
+cd /config/custom_components/
+git clone https://github.com/ashishdungdung/tv-control-center.git /tmp/tvcc
+cp -r /tmp/tvcc/custom_components/tv_control_center ./
+```
+Go to **Home Assistant ➔ Settings ➔ Devices & Services ➔ Add Integration ➔ "TV Control Center"**.
+
+---
+
+### Option 5: Run from Source Code (GitHub)
 ```bash
 git clone https://github.com/ashishdungdung/tv-control-center.git
 cd tv-control-center
