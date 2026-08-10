@@ -789,7 +789,7 @@ function updateOverviewMetrics(m) {
 function settingRow(name, desc, techInfo, modId, isActive = true, opts = {}) {
   const trName = t(name);
   const trDesc = t(desc);
-  const restoreLabel = t('btn_restore_stock');
+  const restoreLabel = t('Restore Stock');
   const showTech = advancedMode && techInfo;
   const restoreBtn = opts.noRestore ? '' : `<button class="btn btn-ghost btn-sm" onclick="doToggleMod('${modId}', 'default')">${restoreLabel}</button>`;
   return `
@@ -1037,19 +1037,19 @@ function renderDisplay() {
   return `
     <div class="page-header">
       <h1>${t('nav_display')} — Calibration</h1>
-      <p class="page-subtitle">Calibrate GPU composition, frame cadence, HDR tone mapping, and 1:1 pixel overscan</p>
+      <p class="page-subtitle">${t('Calibrate GPU composition, frame cadence, HDR tone mapping, and 1:1 pixel overscan')}</p>
     </div>
 
     <!-- Live Display Output Status Banner -->
     <div class="card mb-6" style="background:var(--bg-elevated); border-left:4px solid var(--accent)">
       <div class="flex items-center justify-between">
         <div>
-          <div style="font-weight:600; font-size:1.125rem;" class="mb-1">📺 Active Output: 3840 x 2160 @ 60 Hz</div>
+          <div style="font-weight:600; font-size:1.125rem;" class="mb-1">📺 ${t('Active Output')}: 3840 x 2160 @ 60 Hz</div>
           <div class="text-caption" style="color:var(--text-secondary)">
-            Processor: <strong>Sony X1 4K HDR Engine / Pentonic 1000</strong> • Color Space: <strong>YUV420 10-bit HDR10</strong> • Composition: <strong>GPU SurfaceFlinger</strong>
+            ${t('Processor:')} <strong>Sony X1 4K HDR Engine / Pentonic 1000</strong> • ${t('Color Space:')} <strong>YUV420 10-bit HDR10</strong> • ${t('Composition:')} <strong>GPU SurfaceFlinger</strong>
           </div>
         </div>
-        <span class="badge badge-success">✓ 4K UHD Native</span>
+        <span class="badge badge-success">✓ ${t('4K UHD Native')}</span>
       </div>
     </div>
 
@@ -1057,13 +1057,13 @@ function renderDisplay() {
     <div class="card mb-6" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.08) 0%, rgba(99, 102, 241, 0.05) 100%); border: 1px solid rgba(168, 85, 247, 0.2);">
       <div class="flex items-center justify-between">
         <div>
-          <div style="font-weight:600; font-size:0.9375rem; color:var(--accent-purple);" class="mb-1">🎮 Certified Ultra High Speed HDMI 2.1 (48Gbps)</div>
+          <div style="font-weight:600; font-size:0.9375rem; color:var(--accent-purple);" class="mb-1">🎮 ${t('Certified Ultra High Speed HDMI 2.1 (48Gbps)')}</div>
           <div class="text-caption" style="color:var(--text-secondary); max-width:620px;">
-            Eliminate 4K 120Hz VRR signal dropouts, black screens, and eARC audio desync on PS5, Xbox Series X, and PC gaming with certified 48Gbps HDMI 2.1 cables.
+            ${t('Eliminate 4K 120Hz VRR signal dropouts, black screens, and eARC audio desync on PS5, Xbox Series X, and PC gaming with certified 48Gbps HDMI 2.1 cables.')}
           </div>
         </div>
         <a href="https://www.amazon.com/dp/B081N5Y67Y?tag=vtete-20" target="_blank" class="btn btn-secondary btn-sm" style="text-decoration:none; white-space:nowrap; gap:6px;">
-          ⚡ Recommended HDMI 2.1 Cable ↗
+          ⚡ ${t('Recommended HDMI 2.1 Cable')} ↗
         </a>
       </div>
     </div>
@@ -1072,7 +1072,7 @@ function renderDisplay() {
     <div class="card mb-6">
       ${settingRow('1:1 Pixel Mapping (Overscan Removal)', 'Zero out display overscan margins to prevent picture crop on 4K content.', 'wm overscan 0,0,0,0', 'mod2_overscan')}
       <div class="text-caption mt-2 px-3 py-2" style="background:var(--bg-surface); border-radius:var(--radius-sm)">
-        💡 <strong>Why use it:</strong> Stock TV firmware often scales 4K inputs by 2–5% overscan, blurring fine pixel details. Executing <code>wm overscan 0,0,0,0</code> guarantees edge-to-edge 1:1 pixel fidelity.
+        💡 <strong>${t('Why use it:')}</strong> ${t('Stock TV firmware often scales 4K inputs by 2–5% overscan, blurring fine pixel details. Executing wm overscan 0,0,0,0 guarantees edge-to-edge 1:1 pixel fidelity.')}
       </div>
     </div>
 
@@ -1098,10 +1098,10 @@ function renderDisplay() {
 
     <div class="flex gap-3 mt-6">
       <button class="btn btn-primary" onclick="apiPost('/api/calibrate_display', {action:'enable_all_mods'}).then(d => { if(d) { showToast('Display Calibrated', d.result); logActivity('Display Calibration', d.result); } })">
-        ⚡ Apply All Display Optimizations
+        ⚡ ${t('Apply All Display Optimizations')}
       </button>
       <button class="btn btn-secondary" onclick="openSettingDrawer('overscan_fix')">
-        🔍 Inspect Overscan ADB Command
+        🔍 ${t('Inspect Overscan ADB Command')}
       </button>
     </div>
   `;
@@ -1112,14 +1112,14 @@ function renderAudio() {
   return `
     <div class="page-header">
       <h1>${t('nav_audio')}</h1>
-      <p class="page-subtitle">Sound profiles, dialogue enhancement, and dynamic range</p>
+      <p class="page-subtitle">${t('Sound profiles, dialogue enhancement, and dynamic range')}</p>
     </div>
 
     ${sectionHeader('Sound Profile')}
     <div class="card mb-6">
       <div class="flex gap-3 mb-6">
-        <button class="btn btn-primary" onclick="doNightMode('on')">🌙 Night Mode</button>
-        <button class="btn btn-secondary" onclick="doNightMode('off')">☀️ Standard</button>
+        <button class="btn btn-primary" onclick="doNightMode('on')">🌙 ${t('Night Mode')}</button>
+        <button class="btn btn-secondary" onclick="doNightMode('off')">☀️ ${t('Standard')}</button>
       </div>
       ${settingRow('Dialogue Enhancement', 'Boost vocal frequencies (1–3 kHz) for clear movie dialogue.', 'voice_zoom = 3 (Level 3)', 'mod_voice')}
       ${settingRow('Dynamic Range Compression', 'Compress loud peaks for night-time viewing.', 'audio_drc_mode = 1', 'mod_drc')}
@@ -1129,8 +1129,8 @@ function renderAudio() {
     ${advancedMode ? `
     ${sectionHeader('Advanced — Audio HAL')}
     <div class="card">
-      <div class="text-caption mb-4">Sony Multi-channel Sound Processing with Dolby Atmos & DTS passthrough</div>
-      <button class="btn btn-secondary btn-sm" onclick="apiPost('/api/open_tv_menu', {menu:'sound'}).then(d=>{if(d)showToast('TV Menu',d.result)})">Open Sound Settings on TV</button>
+      <div class="text-caption mb-4">${t('Sony Multi-channel Sound Processing with Dolby Atmos & DTS passthrough')}</div>
+      <button class="btn btn-secondary btn-sm" onclick="apiPost('/api/open_tv_menu', {menu:'sound'}).then(d=>{if(d)showToast('TV Menu',d.result)})">${t('Open Sound Settings on TV')}</button>
     </div>
     ` : ''}
   `;
@@ -1141,24 +1141,24 @@ function renderNetwork() {
   return `
     <div class="page-header">
       <h1>${t('nav_network')}</h1>
-      <p class="page-subtitle">Wi-Fi optimization, DNS, and TCP tuning</p>
+      <p class="page-subtitle">${t('Wi-Fi optimization, DNS, and TCP tuning')}</p>
     </div>
 
     <!-- Connection Status -->
     <div class="card mb-6">
       <div class="grid-3">
         <div>
-          <div class="text-caption">Interface</div>
+          <div class="text-caption">${t('Interface')}</div>
           <div class="text-setting">Wi-Fi 5 (802.11ac)</div>
           <div class="text-technical mt-2">192.168.2.122</div>
         </div>
         <div>
-          <div class="text-caption">DNS</div>
+          <div class="text-caption">${t('DNS')}</div>
           <div class="text-setting">Cloudflare</div>
           <div class="text-technical mt-2">one.one.one.one (DoT)</div>
         </div>
         <div>
-          <div class="text-caption">MAC Address</div>
+          <div class="text-caption">${t('MAC Address')}</div>
           <div class="text-setting text-technical">44:E4:EE:E4:E8:0A</div>
         </div>
       </div>
@@ -1168,13 +1168,13 @@ function renderNetwork() {
     <div class="card mb-6" style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.08) 0%, rgba(37, 99, 235, 0.05) 100%); border: 1px solid rgba(56, 189, 248, 0.2);">
       <div class="flex items-center justify-between">
         <div>
-          <div style="font-weight:600; font-size:0.9375rem; color:var(--accent);" class="mb-1">🚀 Bypass 100Mbps Ethernet Limit (Get 400+ Mbps)</div>
+          <div style="font-weight:600; font-size:0.9375rem; color:var(--accent);" class="mb-1">🚀 ${t('Bypass 100Mbps Ethernet Limit (Get 400+ Mbps)')}</div>
           <div class="text-caption" style="color:var(--text-secondary); max-width:620px;">
-            Most Smart TVs (Sony BRAVIA, TCL, Hisense) have legacy 100Mbps Ethernet ports. Connecting a USB 3.0 Gigabit Ethernet adapter unlocks 400+ Mbps for zero-buffering 4K REMUX streaming.
+            ${t('Most Smart TVs (Sony BRAVIA, TCL, Hisense) have legacy 100Mbps Ethernet ports. Connecting a USB 3.0 Gigabit Ethernet adapter unlocks 400+ Mbps for zero-buffering 4K REMUX streaming.')}
           </div>
         </div>
         <a href="https://amazon.com/dp/B00BBD7NFU?tag=vtete-20" target="_blank" class="btn btn-secondary btn-sm" style="text-decoration:none; white-space:nowrap; gap:6px;">
-          🔌 Recommended Gigabit Adapter ↗
+          🔌 ${t('Recommended Gigabit Adapter')} ↗
         </a>
       </div>
     </div>
@@ -1185,7 +1185,7 @@ function renderNetwork() {
         <button class="btn btn-primary" onclick="doSetDNS('cloudflare')">Cloudflare 1.1.1.1</button>
         <button class="btn btn-secondary" onclick="doSetDNS('adguard')">AdGuard (Ad Block)</button>
         <button class="btn btn-secondary" onclick="doSetDNS('google')">Google 8.8.8.8</button>
-        <button class="btn btn-ghost" onclick="doSetDNS('off')">ISP Default</button>
+        <button class="btn btn-ghost" onclick="doSetDNS('off')">${t('ISP Default')}</button>
       </div>
     </div>
 
@@ -1202,7 +1202,7 @@ function renderNetwork() {
       ${settingRow('TCP Receive Buffer (4.0 MB)', 'Ultra-large TCP window for 4K streaming without stalls.', 'net.tcp.buffersize.wifi = 524288,1048576,4194304,...', 'mod_tcp')}
       ${settingRow('TCP Initial Window Boost', 'Start TCP connections at full speed (60 segments).', 'net.tcp.default_init_rwnd = 60', 'mod25_rwnd')}
       <div class="flex gap-3 mt-4">
-        <button class="btn btn-primary btn-sm" onclick="apiPost('/api/optimize_network',{action:'tcp_buffers'}).then(d=>{if(d){showToast('Network',d.result);logActivity('TCP Tuning',d.result)}})">Apply TCP Tuning</button>
+        <button class="btn btn-primary btn-sm" onclick="apiPost('/api/optimize_network',{action:'tcp_buffers'}).then(d=>{if(d){showToast('Network',d.result);logActivity('TCP Tuning',d.result)}})">${t('Apply TCP Tuning')}</button>
       </div>
     </div>
     ` : ''}
@@ -1213,40 +1213,40 @@ function renderNetwork() {
 function renderApps() {
   return `
     <div class="page-header">
-      <h1>Apps</h1>
-      <p class="page-subtitle">Manage installed applications and debloat</p>
+      <h1>${t('nav_apps')}</h1>
+      <p class="page-subtitle">${t('Manage installed applications and debloat')}</p>
     </div>
 
     <div class="card mb-6">
       <div class="card-header">
         <div>
-          <div class="card-title">App Cleanup</div>
-          <div class="card-subtitle">Review and disable unnecessary apps to free RAM and storage.</div>
+          <div class="card-title">${t('App Cleanup')}</div>
+          <div class="card-subtitle">${t('Review and disable unnecessary apps to free RAM and storage.')}</div>
         </div>
         <div class="flex gap-3">
-          <button class="btn btn-primary" onclick="loadAppAudit()">Scan Apps</button>
-          <button class="btn btn-danger" onclick="doApplySafeDebloat()">Apply Safe Debloat</button>
+          <button class="btn btn-primary" onclick="loadAppAudit()">${t('Scan Apps')}</button>
+          <button class="btn btn-danger" onclick="doApplySafeDebloat()">${t('Apply Safe Debloat')}</button>
         </div>
       </div>
 
       <div class="flex gap-2 mb-4">
-        <input type="text" id="app-search" placeholder="Search installed apps..."
+        <input type="text" id="app-search" placeholder="${t('Search installed apps...')}"
                oninput="filterAppList(this.value)"
                style="flex:1; background:var(--bg-elevated); border:1px solid var(--border); border-radius:var(--radius-md); padding:var(--sp-2) var(--sp-4); color:var(--text-primary); font-family:var(--font-sans); font-size:0.875rem; outline:none;">
         <select id="app-filter" onchange="filterAppList(document.getElementById('app-search').value)"
                 style="background:var(--bg-elevated); border:1px solid var(--border); border-radius:var(--radius-md); padding:var(--sp-2) var(--sp-4); color:var(--text-primary); font-family:var(--font-sans); font-size:0.875rem; outline:none;">
-          <option value="all">All</option>
-          <option value="active">Active</option>
-          <option value="idle">Idle</option>
-          <option value="disabled">Disabled</option>
-          <option value="removal">Candidates for Removal</option>
+          <option value="all">${t('All')}</option>
+          <option value="active">${t('Active')}</option>
+          <option value="idle">${t('Idle')}</option>
+          <option value="disabled">${t('Disabled')}</option>
+          <option value="removal">${t('Candidates for Removal')}</option>
         </select>
       </div>
 
       <div id="app-list">
         <div class="empty-state">
           <div class="empty-icon">📦</div>
-          <div class="empty-text">Click "Scan Apps" to audit installed applications</div>
+          <div class="empty-text">${t('Click "Scan Apps" to audit installed applications')}</div>
         </div>
       </div>
     </div>
@@ -1255,14 +1255,14 @@ function renderApps() {
     <div class="card">
       <div class="dropzone" id="apk-dropzone" onclick="document.getElementById('apk-file-input').click()">
         <div class="dropzone-icon">📦</div>
-        <div class="dropzone-text">Drop APK here or click to browse</div>
-        <div class="dropzone-hint">Installs directly to your TV over wireless ADB</div>
+        <div class="dropzone-text">${t('Drop APK here or click to browse')}</div>
+        <div class="dropzone-hint">${t('Installs directly to your TV over wireless ADB')}</div>
         <input type="file" id="apk-file-input" accept=".apk" style="display:none">
       </div>
       <div class="flex gap-3 mt-4">
         <input type="text" id="apk-path-input" placeholder="e.g. /home/user/Downloads/SmartTube.apk"
                style="flex:1; background:var(--bg-elevated); border:1px solid var(--border); border-radius:var(--radius-md); padding:var(--sp-2) var(--sp-4); color:var(--text-primary); font-family:var(--font-mono); font-size:0.8125rem; outline:none;">
-        <button class="btn btn-primary" onclick="doSideloadAPK()">Install APK</button>
+        <button class="btn btn-primary" onclick="doSideloadAPK()">${t('Install APK')}</button>
       </div>
     </div>
   `;
@@ -1795,34 +1795,6 @@ function renderAbout() {
           <tr><td>Android Debug Bridge (ADB)</td><td>Google Android Open Source Project</td><td><a href="https://developer.android.com/tools/adb" target="_blank">Apache 2.0</a></td></tr>
         </tbody>
       </table>
-    </div>
-
-    ${sectionHeader('Express Warranty Exclusion & Limitation of Liability')}
-    <div class="card mb-6" style="border-color: var(--warning)">
-      <div class="text-caption mb-3" style="line-height: 1.6; color: var(--warning);">
-        <strong>⚠️ Strict Legal Disclaimer & Warranty Exclusion:</strong> THIS SOFTWARE IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
-        IN NO EVENT SHALL THE AUTHORS, DEVELOPERS, MAINTAINERS, OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, PUNITIVE, OR CONSEQUENTIAL DAMAGES (INCLUDING HARDWARE MALFUNCTION, BOOT-LOOPS, SYSTEM INSTABILITY, DEBLOATING LOSS, OR MANUFACTURER WARRANTY VOIDANCE) ARISING OUT OF THE USE OF THIS SOFTWARE.
-        ALL ADB OVERRIDES AND SYSTEM PROPERTY MODIFICATIONS ARE EXECUTED AT YOUR SOLE RISK AND DISCRETION.
-      </div>
-    </div>
-
-    ${sectionHeader('Trademarks & Independent Release')}
-    <div class="card">
-      <div class="text-caption mb-3" style="line-height: 1.6; color: var(--text-muted);">
-        <strong>Trademark Release:</strong> BRAVIA® is a registered trademark of Sony Group Corporation. Android TV™, Google Play™, YouTube™, and Google TV™ are trademarks of Google LLC.
-        SHIELD® is a registered trademark of NVIDIA Corporation. Amazon® and Fire TV® are trademarks of Amazon.com, Inc. MediaTek®, Amlogic®, Realtek®, TCL®, Hisense®, Philips®, Panasonic®, Sharp®, Vu®, and Xiaomi® are trademarks of their respective copyright holders.
-        TV Control Center is an independent, community-driven open-source utility designed for universal power-user management over Android Debug Bridge (ADB).
-        It is not affiliated with, endorsed by, authorized by, or sponsored by Sony Corporation, Google LLC, NVIDIA Corporation, TCL Electronics, Hisense Co. Ltd., Amazon.com Inc., MediaTek Inc., Philips N.V., Panasonic Corp., Sharp Corp., Vu Technologies, Xiaomi Corp., or their subsidiaries.
-        All product names, logos, and brands are property of their respective owners.
-      </div>
-      <table class="data-table">
-        <tbody>
-          <tr><td class="text-caption">Product Title</td><td>TV Control Center — Universal Smart TV Management Suite</td></tr>
-          <tr><td class="text-caption">Release Version</td><td>v0.0.2</td></tr>
-          <tr><td class="text-caption">Compatible Hardware</td><td>Universal Multi-TV (Sony BRAVIA, NVIDIA SHIELD, TCL, Hisense, Fire TV, Chromecast, Xiaomi)</td></tr>
-          <tr><td class="text-caption">Target Platform</td><td>Android TV OS / Google TV / Fire OS (API Level 28–34)</td></tr>
-          <tr><td class="text-caption">Storage Architecture</td><td>Host JSON (snapshots.json) • Browser localStorage • On-TV Storage (/data/local/tmp/)</td></tr>
-          <tr><td class="text-caption">Software License</td><td>MIT Open Source License (NO LIABILITY)</td></tr>
         </tbody>
       </table>
     </div>
