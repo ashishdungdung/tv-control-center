@@ -24,3 +24,7 @@ scratch/
 # User local configs
 snapshots.json
 profiles.json
+
+# Internal Design Instructions & Scratch Notes
+BRAVIA_Control_Center_*.txt
+*.txt
