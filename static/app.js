@@ -2229,6 +2229,7 @@ function renderPage() {
   const renderer = routes[currentRoute];
   if (renderer) {
     document.getElementById('main-content').innerHTML = renderer();
+    translateUI();
   }
 }
 
