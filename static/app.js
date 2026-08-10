@@ -1689,7 +1689,7 @@ function renderAbout() {
       </div>
       <div class="flex gap-3 mt-3">
         <a href="https://buymeacoffee.com/ashishdungdung" target="_blank" class="btn btn-primary" style="text-decoration:none">☕ Sponsor on Buy Me a Coffee</a>
-        <a href="https://github.com/sponsors/anumac" target="_blank" class="btn btn-secondary" style="text-decoration:none">💖 GitHub Sponsors</a>
+        <a href="https://github.com/sponsors/ashishdungdung" target="_blank" class="btn btn-secondary" style="text-decoration:none">💖 GitHub Sponsors</a>
       </div>
     </div>
 
