@@ -2,7 +2,7 @@
 
 [![PyPI Package](https://img.shields.io/pypi/v/tv-control-center?logo=pypi&color=blue)](https://pypi.org/project/tv-control-center/)
 [![Docker Image](https://img.shields.io/badge/Docker%20Hub-ashishdungdung%2Ftv--control--center-blue?logo=docker)](https://hub.docker.com/repository/docker/ashishdungdung/tv-control-center/general)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0.html)
 [![Python 3.8+](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python)](https://www.python.org/)
 [![Platform: Android TV / Google TV](https://img.shields.io/badge/Platform-Android%20TV%20%7C%20Google%20TV-green?logo=android)](https://developer.android.com/)
 [![Target: Universal Multi-TV](https://img.shields.io/badge/Target-Universal%20Multi--TV-red)](https://github.com/ashishdungdung/tv-control-center)
@@ -225,6 +225,9 @@ TV Control Center is an independent, community-driven open-source project. It is
 
 ---
 
-## 📄 License
+## 📄 License & Copyleft Protection
 
-This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)** — see the [LICENSE](LICENSE) file and [DISCLAIMER.md](DISCLAIMER.md) for full legal terms.
+
+- **Open-Source Guarantee**: Free to use, inspect, fork, and self-host.
+- **Network Copyleft Protection**: Any modified network deployment or SaaS service using this code must release its full source code under AGPL-3.0 with complete copyright attribution to **Ashish Dungdung**.

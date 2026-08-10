@@ -1,49 +1,44 @@
-# ⚖️ STRICT LEGAL DISCLOSURE, EXPRESS WARRANTY EXCLUSION & LIMITATION OF LIABILITY
+# ⚖️ Legal Disclaimer, Warranty Exclusion & Copy Protection Disclosures
 
-**PLEASE READ THIS LEGAL NOTICE CAREFULLY BEFORE INSTALLING, RUNNING, OR USING TV CONTROL CENTER.**
-
----
-
-## 1. EXPRESS EXCLUSION OF ALL WARRANTIES ("AS-IS" AND "AS-AVAILABLE")
-
-**TV CONTROL CENTER** (THE "SOFTWARE") IS PROVIDED **"AS IS"** AND **"AS AVAILABLE"**, WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE DEVELOPERS, MAINTAINERS, AND CONTRIBUTORS EXPRESSLY DISCLAIM ALL WARRANTIES, INCLUDING BUT NOT LIMITED TO:
-
-- **IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.**
-- **WARRANTIES OF TITLE AND NON-INFRINGEMENT OF THIRD-PARTY INTELLECTUAL PROPERTY RIGHTS.**
-- **WARRANTIES REGARDING SYSTEM UNINTERRUPTED OPERATION, ERROR-FREE BEHAVIOR, OR ACCURACY.**
-- **WARRANTIES OF CONTINUED COMPATIBILITY WITH FUTURE MANUFACTURER FIRMWARE UPDATES (SONY, GOOGLE, NVIDIA, TCL, HISENSE, AMAZON, PHILIPS, PANASONIC, SHARP, VU, XIAOMI).**
+**TV Control Center — Universal Smart TV Management Suite**
+Copyright (c) 2026 Ashish Dungdung <https://github.com/ashishdungdung>
 
 ---
 
-## 2. STRICT LIMITATION OF LIABILITY
+## 1. Express Warranty Exclusion ("AS IS")
 
-TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL THE AUTHORS, DEVELOPERS, MAINTAINERS, CONTRIBUTORS, DISTRIBUTORS, OR COPYRIGHT HOLDERS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, PUNITIVE, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, SAVINGS, OR PROFITS; SYSTEM INSTABILITY; BOOT-LOOPS; DEVICE BRICKING; HARDWARE OVERHEATING; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-THIS LIMITATION APPLIES SPECIFICALLY TO:
-
-1. **HARDWARE & FIRMWARE INTEGRITY:** Any damage, malfunction, boot-loop, bricking, soft-bricking, display panel degradation, SoC mainboard damage, or overheating on your Smart TV, streaming box, or connected AV receiver.
-2. **MANUFACTURER WARRANTY VOIDANCE:** Any invalidation, voiding, or revocation of original equipment manufacturer (OEM) warranties (Sony, Google, NVIDIA, TCL, Hisense, Amazon, Philips, Panasonic, Sharp, Vu, Xiaomi) or retail service agreements.
-3. **DATA, STORAGE & APP DEBLOATING:** Any loss of data, user accounts, application state, DRM keys, or system settings resulting from package disabling, cache purging, or property overrides over Android Debug Bridge (ADB).
-4. **NETWORK DISRUPTIONS:** Any local network drops, router interface stalls, or DNS resolution failures caused by TCP buffer vector modifications or Private DNS-over-TLS specifiers.
+> [!CAUTION]
+> **NO WARRANTY:**
+> TV Control Center is provided **"AS IS"** and **"AS AVAILABLE"** without warranties or conditions of any kind, whether express, implied, statutory, or collateral.
+> 
+> The author (**Ashish Dungdung**) and contributors explicitly disclaim all implied warranties of merchantability, fitness for a particular purpose, title, quiet enjoyment, and non-infringement.
 
 ---
 
-## 3. ABSOLUTE USER ASSUMPTION OF RISK & INDEMNIFICATION
+## 2. Limitation of Liability & User-Assumed Risk
 
-BY LAUNCHING THIS CONSOLE OR EXECUTING ANY ADB OVERRIDES, YOU EXPRESSLY AGREE AND ACKNOWLEDGE THAT:
+Under no circumstances shall the author, maintainers, or contributors be held liable for any direct, indirect, incidental, special, exemplary, punitive, or consequential damages (including, but not limited to, device bricking, soft-bricking, boot-loops, firmware corruption, voided manufacturer warranties, data loss, app malfunction, or system instability) arising out of the use or inability to use this software.
 
-- YOU ASSUME 100% SOLE RISK AND RESPONSIBILITY FOR ALL MODIFICATIONS EXECUTED ON YOUR TELEVISION OR NETWORK.
-- YOU AGREE TO INDEMNIFY AND HOLD HARMLESS THE DEVELOPERS AND CONTRIBUTORS FROM ANY AND ALL CLAIMS, LOSSES, LIABILITIES, AND EXPENSES ARISING FROM YOUR USE OF THIS SOFTWARE.
-- YOU WILL CREATE RECOVERABLE SYSTEM SNAPSHOTS BEFORE APPLYING SYSTEM-WIDE MODIFICATIONS.
+All Android Debug Bridge (ADB) property overrides (`setprop`), package debloating (`pm disable-user`), display overscan modifications, and network buffer tweaks are executed at the **user's sole risk and discretion**.
 
 ---
 
-## 4. INDEPENDENT OPEN-SOURCE TRADEMARK & AFFILIATION RELEASE
+## 3. Copy Protection, Licensing & Network Copyleft (AGPL-3.0)
+
+This software is protected under the **GNU Affero General Public License v3.0 (AGPL-3.0)**:
+
+1. **Network Server Copyleft**: If any individual or entity modifies, re-hosts, or deploys this software over a network server, web portal, or SaaS product, they **MUST** make their complete modified source code publicly available under the AGPL-3.0 license.
+2. **Attribution & Copyright Preservation**: You may **NOT** remove, obscure, or strip copyright attribution (`Copyright (c) 2026 Ashish Dungdung`) or trademark disclaimers from the web interface, source code, or documentation.
+3. **No Commercial Rebranding**: Commercial entities are strictly prohibited from rebranding this software as proprietary closed-source software without an explicit written commercial license from the author.
+
+---
+
+## 4. Trademark Notice
 
 - **Sony®** and **BRAVIA®** are registered trademarks of **Sony Group Corporation**.
 - **Android TV™**, **Google Play™**, **YouTube™**, and **Google TV™** are trademarks of **Google LLC**.
-- **SHIELD®** and **Tegra®** are registered trademarks of **NVIDIA Corporation**.
-- **Amazon®**, **Fire TV®**, and **Fire OS®** are trademarks of **Amazon.com, Inc.**.
-- **MediaTek®**, **Amlogic®**, **Realtek®**, **TCL®**, **Hisense®**, **Philips®**, **Panasonic®**, **Sharp®**, **Vu®**, and **Xiaomi®** are trademarks of their respective copyright holders.
+- **NVIDIA®** and **SHIELD®** are registered trademarks of **NVIDIA Corporation**.
+- **Amazon®** and **Fire TV®** are trademarks of **Amazon.com, Inc.**.
+- All other product names, logos, brands, trademarks, and registered trademarks mentioned are property of their respective owners.
 
-**TV Control Center** is an independent, community-driven open-source utility designed for universal power-user system management over Android Debug Bridge (ADB). It is **NOT** affiliated with, authorized by, maintained by, sponsored by, or endorsed by Sony Group Corporation, Google LLC, NVIDIA Corporation, TCL Electronics, Hisense Co. Ltd., Amazon.com Inc., MediaTek Inc., Philips N.V., Panasonic Corp., Sharp Corp., Vu Technologies, Xiaomi Corp., or their subsidiaries.
+TV Control Center is an independent open-source project. It is **not affiliated with, authorized by, maintained by, sponsored by, or endorsed by Sony Group Corporation, Google LLC, NVIDIA Corporation, Amazon.com Inc., or any of their subsidiaries**.
