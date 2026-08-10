@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  tv-control-center:
+    image: ashishdungdung/tv-control-center:latest
+    container_name: tv-control-center
+    restart: unless-stopped
+    ports:
+      - "8888:8888"
+    environment:
+      - ADB_TARGET=192.168.2.122:5555

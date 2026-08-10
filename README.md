@@ -120,7 +120,50 @@ Go to **Home Assistant ➔ Settings ➔ Devices & Services ➔ Add Integration �
 
 ---
 
-### Option 5: Run from Source Code (GitHub)
+### Option 5: Apple HomeKit & Siri (Homebridge Plugin)
+Integrate your Smart TV into the **Apple Home** app and control it via **Siri**:
+
+```bash
+npm install -g homebridge-tv-control-center
+```
+Add to your `config.json` under `accessories`:
+```json
+{
+  "accessory": "TVControlCenter",
+  "name": "Living Room TV",
+  "host": "192.168.2.122",
+  "port": 8888
+}
+```
+
+---
+
+### Option 6: Node-RED Flow Palette
+Install custom automation nodes directly inside **Node-RED**:
+
+```bash
+cd ~/.node-red
+npm install node-red-contrib-tv-control-center
+```
+
+---
+
+### Option 7: Hubitat Elevation Groovy Driver
+Import `hubitat/tv-control-center-driver.groovy` under **Hubitat ➔ Drivers Code ➔ Import URL**:
+`https://raw.githubusercontent.com/ashishdungdung/tv-control-center/main/hubitat/tv-control-center-driver.groovy`
+
+---
+
+### Option 8: Homelab App Store Templates (1-Click Deployment)
+- **CasaOS & ZimaOS:** Import `homelab/casaos-app.yaml` in CasaOS App Store.
+- **Portainer App Templates:** Import `homelab/portainer-template.json` in Portainer.
+- **Unraid OS Community Apps:** Add template URL `https://raw.githubusercontent.com/ashishdungdung/tv-control-center/main/homelab/unraid-tv-control-center.xml`.
+- **Umbrel OS:** Import manifest `homelab/umbrel-app.yml`.
+- **Synology DSM:** Import Compose file `homelab/synology-compose.yml` in Container Manager.
+
+---
+
+### Option 9: Run from Source Code (GitHub)
 ```bash
 git clone https://github.com/ashishdungdung/tv-control-center.git
 cd tv-control-center

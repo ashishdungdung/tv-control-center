@@ -1,0 +1,21 @@
+name: TV Control Center
+version: 0.0.2
+title:
+  en_us: TV Control Center — Universal Smart TV Suite
+tagline:
+  en_us: Universal system management suite and optimization engine for Smart TVs.
+description:
+  en_us: High-performance desktop web console that connects wirelessly to your Smart TV over ADB. Audit hardware, tune performance, calibrate display & audio engines, clean RAM, and manage apps.
+category: Tools
+developer: Ashish Dungdung
+icon: https://raw.githubusercontent.com/ashishdungdung/tv-control-center/main/bravia_control/static/favicon.ico
+port_map: "8888"
+scheme: http
+store_app_id: tv-control-center
+author: Ashish Dungdung
+image: ashishdungdung/tv-control-center:latest
+envs:
+  - container: ADB_TARGET
+    host: ADB_TARGET
+    desc: Target Smart TV IP and Port (e.g. 192.168.2.122:5555)
+    value: "192.168.2.122:5555"

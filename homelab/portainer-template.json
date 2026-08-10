@@ -1,0 +1,24 @@
+{
+  "version": "2",
+  "templates": [
+    {
+      "type": 1,
+      "title": "TV Control Center",
+      "name": "tv-control-center",
+      "description": "Universal Smart TV Management Suite for Sony BRAVIA, NVIDIA SHIELD, TCL, Hisense, Fire TV, Chromecast, Xiaomi",
+      "logo": "https://raw.githubusercontent.com/ashishdungdung/tv-control-center/main/bravia_control/static/favicon.ico",
+      "image": "ashishdungdung/tv-control-center:latest",
+      "ports": [
+        "8888:8888/tcp"
+      ],
+      "env": [
+        {
+          "name": "ADB_TARGET",
+          "label": "Smart TV IP Address and ADB Port",
+          "default": "192.168.2.122:5555"
+        }
+      ],
+      "restart_policy": "unless-stopped"
+    }
+  ]
+}

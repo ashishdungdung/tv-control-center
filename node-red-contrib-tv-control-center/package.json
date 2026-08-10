@@ -1,0 +1,23 @@
+{
+  "name": "node-red-contrib-tv-control-center",
+  "version": "0.0.2",
+  "description": "Node-RED flow nodes for TV Control Center — Universal Smart TV Management Suite",
+  "license": "MIT",
+  "keywords": [
+    "node-red",
+    "smart-tv",
+    "bravia",
+    "android-tv",
+    "tv-control-center"
+  ],
+  "node-red": {
+    "nodes": {
+      "tv-control-center": "tv-control-center.js"
+    }
+  },
+  "author": "Ashish Dungdung <https://github.com/ashishdungdung>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashishdungdung/tv-control-center.git"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "homebridge-tv-control-center",
+  "version": "0.0.2",
+  "description": "Apple HomeKit & Siri integration for TV Control Center — Universal Smart TV Management Suite",
+  "license": "MIT",
+  "keywords": [
+    "homebridge-plugin",
+    "apple-homekit",
+    "smart-tv",
+    "siri",
+    "android-tv",
+    "bravia",
+    "tv-control-center"
+  ],
+  "engines": {
+    "node": ">=18.0.0",
+    "homebridge": ">=1.6.0"
+  },
+  "main": "index.js",
+  "author": "Ashish Dungdung <https://github.com/ashishdungdung>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashishdungdung/tv-control-center.git"
+  }
+}

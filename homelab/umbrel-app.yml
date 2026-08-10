@@ -1,0 +1,15 @@
+id: tv-control-center
+name: TV Control Center
+version: 0.0.2
+tagline: Universal Smart TV Management Suite & Optimization Engine
+description: High-performance desktop web console that connects wirelessly to your Smart TV over ADB.
+developer: Ashish Dungdung
+website: https://github.com/ashishdungdung/tv-control-center
+dependencies: []
+repo: https://github.com/ashishdungdung/tv-control-center
+support: https://github.com/ashishdungdung/tv-control-center/issues
+port: 8888
+gallery:
+  - https://raw.githubusercontent.com/ashishdungdung/tv-control-center/main/bravia_control/static/favicon.ico
+path: ""
+defaultWithAuth: false

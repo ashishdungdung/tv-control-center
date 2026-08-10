@@ -1,0 +1,26 @@
+{
+  "pluginAlias": "TVControlCenter",
+  "pluginType": "accessory",
+  "singular": true,
+  "headerDisplay": "Configure TV Control Center for Apple HomeKit & Siri",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "title": "Accessory Name",
+        "type": "string",
+        "default": "Living Room TV"
+      },
+      "host": {
+        "title": "Smart TV IP Address / Host",
+        "type": "string",
+        "default": "192.168.2.122"
+      },
+      "port": {
+        "title": "Control Console Port",
+        "type": "integer",
+        "default": 8888
+      }
+    }
+  }
+}
