@@ -1731,7 +1731,7 @@ function renderAbout() {
       <table class="data-table">
         <tbody>
           <tr><td class="text-caption">Product Title</td><td>TV Control Center — Universal Smart TV Management Suite</td></tr>
-          <tr><td class="text-caption">Release Version</td><td>v0.0.1</td></tr>
+          <tr><td class="text-caption">Release Version</td><td>v0.0.2</td></tr>
           <tr><td class="text-caption">Compatible Hardware</td><td>Universal Multi-TV (Sony BRAVIA, NVIDIA SHIELD, TCL, Hisense, Fire TV, Chromecast, Xiaomi)</td></tr>
           <tr><td class="text-caption">Target Platform</td><td>Android TV OS / Google TV / Fire OS (API Level 28–34)</td></tr>
           <tr><td class="text-caption">Storage Architecture</td><td>Host JSON (snapshots.json) • Browser localStorage • On-TV Storage (/data/local/tmp/)</td></tr>
