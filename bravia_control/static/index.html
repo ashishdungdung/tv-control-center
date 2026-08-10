@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TV Control Center — Universal Smart TV Management Suite</title>
+  <meta name="description" content="Universal Smart TV Management Suite for Sony BRAVIA, NVIDIA SHIELD, TCL, Hisense, Fire TV, Chromecast, Xiaomi">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="app-shell" id="app-shell">
+
+  <!-- ── Top Bar ──────────────────────────────────────────── -->
+  <header class="topbar" id="topbar">
+    <div class="topbar-left">
+      <button class="btn btn-icon btn-ghost" id="sidebar-toggle" title="Toggle Sidebar" aria-label="Toggle Sidebar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="topbar-brand">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg>
+        TV Control Center
+      </div>
+    </div>
+
+    <div class="topbar-right">
+      <div class="mode-switch" id="mode-switch" title="Toggle Simple / Advanced">
+        <span id="mode-label-simple" style="font-weight: 600">Simple</span>
+        <div class="mode-switch-track" id="mode-track" onclick="toggleAdvancedMode()">
+          <div class="mode-switch-thumb" id="mode-thumb"></div>
+        </div>
+        <span id="mode-label-advanced">Advanced</span>
+      </div>
+      <div class="topbar-search-hint" id="search-trigger" onclick="openCommandPalette()" title="Search settings, apps & commands">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Search...
+        <kbd>⌘K</kbd>
+      </div>
+      <div class="topbar-device" id="device-indicator" onclick="toggleConnectionPopover()">
+        <span class="connection-dot" id="topbar-dot"></span>
+        <span id="topbar-device-name">KD-55X8000H</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Sidebar ──────────────────────────────────────────── -->
+  <aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-section-label">Home</div>
+    <div class="sidebar-nav-item active" data-route="" onclick="navigate('')">
+      <span class="nav-icon">🏠</span>
+      <span>Overview</span>
+    </div>
+
+    <div class="sidebar-section-label">Optimize</div>
+    <div class="sidebar-nav-item" data-route="performance" onclick="navigate('performance')">
+      <span class="nav-icon">⚡</span>
+      <span>Performance</span>
+    </div>
+    <div class="sidebar-nav-item" data-route="display" onclick="navigate('display')">
+      <span class="nav-icon">🖥️</span>
+      <span>Display</span>
+    </div>
+    <div class="sidebar-nav-item" data-route="audio" onclick="navigate('audio')">
+      <span class="nav-icon">🔊</span>
+      <span>Audio</span>
+    </div>
+    <div class="sidebar-nav-item" data-route="network" onclick="navigate('network')">
+      <span class="nav-icon">🌐</span>
+      <span>Network</span>
+    </div>
+
+    <div class="sidebar-section-label">Manage</div>
+    <div class="sidebar-nav-item" data-route="apps" onclick="navigate('apps')">
+      <span class="nav-icon">📦</span>
+      <span>Apps</span>
+    </div>
+    <div class="sidebar-nav-item" data-route="launcher" onclick="navigate('launcher')">
+      <span class="nav-icon">🚀</span>
+      <span>Launcher</span>
+    </div>
+    <div class="sidebar-nav-item" data-route="remote" onclick="navigate('remote')">
+      <span class="nav-icon">🎮</span>
+      <span>Remote</span>
+    </div>
+
+    <div class="sidebar-section-label">System</div>
+    <div class="sidebar-nav-item" data-route="hardware" onclick="navigate('hardware')">
+      <span class="nav-icon">🔧</span>
+      <span>Hardware</span>
+    </div>
+    <div class="sidebar-nav-item" data-route="activity" onclick="navigate('activity')">
+      <span class="nav-icon">📋</span>
+      <span>Activity</span>
+    </div>
+    <div class="sidebar-nav-item" data-route="supported-devices" onclick="navigate('supported-devices')">
+      <span class="nav-icon">📺</span>
+      <span>Supported Devices</span>
+    </div>
+
+    <div class="sidebar-section-label">Settings</div>
+    <div class="sidebar-nav-item" data-route="appearance" onclick="navigate('appearance')">
+      <span class="nav-icon">🎨</span>
+      <span>Appearance & Theme</span>
+    </div>
+    <div class="sidebar-nav-item" data-route="snapshots" onclick="navigate('snapshots')">
+      <span class="nav-icon">📸</span>
+      <span>Snapshots</span>
+    </div>
+    <div class="sidebar-nav-item" data-route="settings" onclick="navigate('settings')">
+      <span class="nav-icon">⚙️</span>
+      <span>Preferences</span>
+    </div>
+
+    <div class="sidebar-section-label">Help & Info</div>
+    <div class="sidebar-nav-item" data-route="about" onclick="navigate('about')">
+      <span class="nav-icon">ℹ️</span>
+      <span>About & Support</span>
+    </div>
+
+    <!-- Connection indicator at bottom -->
+    <div class="sidebar-footer" id="sidebar-footer">
+      <div class="connection-indicator" id="connection-indicator" onclick="toggleConnectionPopover()">
+        <span class="connection-dot" id="sidebar-dot"></span>
+        <span id="conn-label">Connected</span>
+      </div>
+      <!-- Connection popover -->
+      <div class="connection-popover hidden" id="connection-popover">
+        <div style="font-weight:600; margin-bottom:var(--sp-2)">Target Device & Profile</div>
+        <div class="flex items-center gap-2 mb-3">
+          <span class="connection-dot"></span>
+          <span id="popover-status">ADB Connected</span>
+        </div>
+        <div class="mb-3">
+          <div class="text-caption mb-1">Preset Profile</div>
+          <select id="preset-device-select" onchange="switchDeviceProfile(this.value)"
+                  style="width:100%; background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius-sm); padding:var(--sp-1) var(--sp-2); color:var(--text-primary); font-family:var(--font-sans); font-size:0.8125rem; outline:none;">
+            <option value="sony_x80h">Sony BRAVIA X80H (55" 4K VA LED)</option>
+            <option value="sony_x90h">Sony BRAVIA X90H/X90L (120Hz FALD)</option>
+            <option value="sony_a8h_oled">Sony BRAVIA OLED A8H/A80L (120Hz QD-OLED)</option>
+            <option value="nvidia_shield_pro">NVIDIA SHIELD TV Pro (Tegra X1+)</option>
+            <option value="tcl_qled_c835">TCL C835 / QM8 Mini-LED QLED (144Hz)</option>
+            <option value="hisense_u8k">Hisense U8K / U8N Mini-LED ULED</option>
+            <option value="philips_ambilight_oled">Philips Ambilight OLED807 / The One</option>
+            <option value="panasonic_hcx_oled">Panasonic Master OLED LZ1500 / MZ2000</option>
+            <option value="sharp_aquos_4k">Sharp AQUOS 4K EQ1 / DN1 Series</option>
+            <option value="vu_glo_led">Vu GloLED 4K / Masterpiece QLED</option>
+            <option value="amazon_fire_tv_cube">Amazon Fire TV Cube / Stick 4K Max</option>
+            <option value="chromecast_google_tv">Chromecast with Google TV (4K)</option>
+            <option value="xiaomi_mi_box">Xiaomi Mi Box S 4K / Mi Stick</option>
+          </select>
+        </div>
+        <table style="width:100%; font-size:0.8125rem; color:var(--text-secondary)">
+          <tr><td>IP Address</td><td style="text-align:right" class="mono" id="popover-ip">192.168.2.122:5555</td></tr>
+          <tr><td>ADB</td><td style="text-align:right; color:var(--success)">✓</td></tr>
+          <tr><td>Shell</td><td style="text-align:right; color:var(--success)">✓</td></tr>
+        </table>
+        <div class="flex gap-2 mt-4">
+          <button class="btn btn-primary btn-sm" style="flex:1" onclick="openSetupGuideModal()">📖 Setup Guide</button>
+          <button class="btn btn-secondary btn-sm" style="flex:1" onclick="reconnectDevice()">Connect IP</button>
+          <button class="btn btn-ghost btn-sm" onclick="toggleConnectionPopover()">Close</button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Main Content ─────────────────────────────────────── -->
+  <main class="main-content" id="main-content">
+    <!-- Pages render here dynamically -->
+  </main>
+
+</div>
+
+<!-- ── Command Palette ──────────────────────────────────────── -->
+<div class="command-palette-overlay hidden" id="command-palette-overlay" onclick="closeCommandPalette(event)">
+  <div class="command-palette" onclick="event.stopPropagation()">
+    <input class="command-palette-input" id="command-palette-input"
+           placeholder="Search settings, apps & commands..."
+           oninput="filterCommands(this.value)"
+           onkeydown="handlePaletteKey(event)">
+    <div class="command-palette-results" id="command-palette-results"></div>
+  </div>
+</div>
+
+<!-- ── Confirm Dialog ───────────────────────────────────────── -->
+<div class="dialog-overlay hidden" id="dialog-overlay">
+  <div class="dialog" id="dialog">
+    <h2 id="dialog-title">Confirm</h2>
+    <p id="dialog-message">Are you sure?</p>
+    <div class="dialog-actions">
+      <button class="btn btn-secondary" onclick="closeDialog()">Cancel</button>
+      <button class="btn btn-danger" id="dialog-confirm" onclick="confirmDialog()">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Toast Container ──────────────────────────────────────── -->
+<div class="toast-container" id="toast-container"></div>
+
+<!-- ── Terminal Drawer ──────────────────────────────────────── -->
+<div class="terminal-drawer" id="terminal-drawer">
+  <div class="terminal-bar" onclick="toggleTerminal()">
+    <div class="terminal-bar-left">
+      <span>⌄</span>
+      <span class="terminal-label">Terminal</span>
+      <span class="terminal-count" id="terminal-count">0 commands</span>
+      <span class="connection-dot" id="terminal-dot"></span>
+    </div>
+    <div style="display:flex; gap:var(--sp-2)">
+      <button class="btn btn-ghost btn-sm" onclick="event.stopPropagation(); clearTerminal()">Clear</button>
+    </div>
+  </div>
+  <div class="terminal-body" id="terminal-body"></div>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

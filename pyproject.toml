@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tv-control-center"
+version = "0.0.1"
+description = "TV Control Center — Universal Smart TV Management Suite for Sony BRAVIA, SHIELD, TCL, Hisense, Fire TV, Chromecast, Xiaomi."
+readme = "README.md"
+authors = [{ name = "Ashish Dungdung", email = "ashish@example.com" }]
+license = { file = "LICENSE" }
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: End Users/Desktop",
+    "Topic :: System :: Hardware :: Hardware Drivers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+keywords = ["sony", "bravia", "androidtv", "adb", "debloat", "optimization", "dashboard", "smarttube", "projectivy"]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/anumac/SonyTV"
+Documentation = "https://github.com/anumac/SonyTV#readme"
+Repository = "https://github.com/anumac/SonyTV.git"
+Issues = "https://github.com/anumac/SonyTV/issues"
+
+[project.scripts]
+bravia-control = "bravia_control.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["bravia_control*"]
+
+[tool.setuptools.package-data]
+bravia_control = ["static/*"]

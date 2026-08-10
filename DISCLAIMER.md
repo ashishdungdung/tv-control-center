@@ -1,0 +1,49 @@
+# ⚖️ STRICT LEGAL DISCLOSURE, EXPRESS WARRANTY EXCLUSION & LIMITATION OF LIABILITY
+
+**PLEASE READ THIS LEGAL NOTICE CAREFULLY BEFORE INSTALLING, RUNNING, OR USING TV CONTROL CENTER.**
+
+---
+
+## 1. EXPRESS EXCLUSION OF ALL WARRANTIES ("AS-IS" AND "AS-AVAILABLE")
+
+**TV CONTROL CENTER** (THE "SOFTWARE") IS PROVIDED **"AS IS"** AND **"AS AVAILABLE"**, WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE DEVELOPERS, MAINTAINERS, AND CONTRIBUTORS EXPRESSLY DISCLAIM ALL WARRANTIES, INCLUDING BUT NOT LIMITED TO:
+
+- **IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.**
+- **WARRANTIES OF TITLE AND NON-INFRINGEMENT OF THIRD-PARTY INTELLECTUAL PROPERTY RIGHTS.**
+- **WARRANTIES REGARDING SYSTEM UNINTERRUPTED OPERATION, ERROR-FREE BEHAVIOR, OR ACCURACY.**
+- **WARRANTIES OF CONTINUED COMPATIBILITY WITH FUTURE MANUFACTURER FIRMWARE UPDATES (SONY, GOOGLE, NVIDIA, TCL, HISENSE, AMAZON, PHILIPS, PANASONIC, SHARP, VU, XIAOMI).**
+
+---
+
+## 2. STRICT LIMITATION OF LIABILITY
+
+TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL THE AUTHORS, DEVELOPERS, MAINTAINERS, CONTRIBUTORS, DISTRIBUTORS, OR COPYRIGHT HOLDERS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, PUNITIVE, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, SAVINGS, OR PROFITS; SYSTEM INSTABILITY; BOOT-LOOPS; DEVICE BRICKING; HARDWARE OVERHEATING; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+THIS LIMITATION APPLIES SPECIFICALLY TO:
+
+1. **HARDWARE & FIRMWARE INTEGRITY:** Any damage, malfunction, boot-loop, bricking, soft-bricking, display panel degradation, SoC mainboard damage, or overheating on your Smart TV, streaming box, or connected AV receiver.
+2. **MANUFACTURER WARRANTY VOIDANCE:** Any invalidation, voiding, or revocation of original equipment manufacturer (OEM) warranties (Sony, Google, NVIDIA, TCL, Hisense, Amazon, Philips, Panasonic, Sharp, Vu, Xiaomi) or retail service agreements.
+3. **DATA, STORAGE & APP DEBLOATING:** Any loss of data, user accounts, application state, DRM keys, or system settings resulting from package disabling, cache purging, or property overrides over Android Debug Bridge (ADB).
+4. **NETWORK DISRUPTIONS:** Any local network drops, router interface stalls, or DNS resolution failures caused by TCP buffer vector modifications or Private DNS-over-TLS specifiers.
+
+---
+
+## 3. ABSOLUTE USER ASSUMPTION OF RISK & INDEMNIFICATION
+
+BY LAUNCHING THIS CONSOLE OR EXECUTING ANY ADB OVERRIDES, YOU EXPRESSLY AGREE AND ACKNOWLEDGE THAT:
+
+- YOU ASSUME 100% SOLE RISK AND RESPONSIBILITY FOR ALL MODIFICATIONS EXECUTED ON YOUR TELEVISION OR NETWORK.
+- YOU AGREE TO INDEMNIFY AND HOLD HARMLESS THE DEVELOPERS AND CONTRIBUTORS FROM ANY AND ALL CLAIMS, LOSSES, LIABILITIES, AND EXPENSES ARISING FROM YOUR USE OF THIS SOFTWARE.
+- YOU WILL CREATE RECOVERABLE SYSTEM SNAPSHOTS BEFORE APPLYING SYSTEM-WIDE MODIFICATIONS.
+
+---
+
+## 4. INDEPENDENT OPEN-SOURCE TRADEMARK & AFFILIATION RELEASE
+
+- **Sony®** and **BRAVIA®** are registered trademarks of **Sony Group Corporation**.
+- **Android TV™**, **Google Play™**, **YouTube™**, and **Google TV™** are trademarks of **Google LLC**.
+- **SHIELD®** and **Tegra®** are registered trademarks of **NVIDIA Corporation**.
+- **Amazon®**, **Fire TV®**, and **Fire OS®** are trademarks of **Amazon.com, Inc.**.
+- **MediaTek®**, **Amlogic®**, **Realtek®**, **TCL®**, **Hisense®**, **Philips®**, **Panasonic®**, **Sharp®**, **Vu®**, and **Xiaomi®** are trademarks of their respective copyright holders.
+
+**TV Control Center** is an independent, community-driven open-source utility designed for universal power-user system management over Android Debug Bridge (ADB). It is **NOT** affiliated with, authorized by, maintained by, sponsored by, or endorsed by Sony Group Corporation, Google LLC, NVIDIA Corporation, TCL Electronics, Hisense Co. Ltd., Amazon.com Inc., MediaTek Inc., Philips N.V., Panasonic Corp., Sharp Corp., Vu Technologies, Xiaomi Corp., or their subsidiaries.
