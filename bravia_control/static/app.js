@@ -1833,6 +1833,9 @@ function setLanguage(langCode) {
 
   const topbarSel = document.getElementById('topbar-language-select');
   if (topbarSel) topbarSel.value = langCode;
+
+  const prefSel = document.getElementById('language-select');
+  if (prefSel) prefSel.value = langCode;
   
   // RTL (Right-to-Left) Direction Engine
   const rtlLanguages = ['ar', 'he', 'fa', 'ur'];
@@ -1884,7 +1887,6 @@ function setLanguage(langCode) {
   };
   showToast('Language Updated', `Switched language to ${langNames[langCode] || langCode}`);
   logActivity('Language Switch', `Active language: ${langNames[langCode] || langCode}`);
-  navigate(currentRoute);
 }
 
 function setTheme(themeName) {
@@ -1901,6 +1903,8 @@ function initTheme() {
   document.documentElement.setAttribute('lang', savedLang);
   const topbarSel = document.getElementById('topbar-language-select');
   if (topbarSel) topbarSel.value = savedLang;
+  const prefSel = document.getElementById('language-select');
+  if (prefSel) prefSel.value = savedLang;
   const rtlLanguages = ['ar', 'he', 'fa', 'ur'];
   if (rtlLanguages.includes(savedLang)) {
     document.documentElement.setAttribute('dir', 'rtl');
