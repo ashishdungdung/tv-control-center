@@ -12,8 +12,11 @@ dist/
 *.egg-info/
 *.apk
 
-# Local data & temporary caches
+# Local data, secrets & temporary caches
 *.log
+.env
+.env.local
+credentials.json
 scratch/
 .system_generated/
 .DS_Store
