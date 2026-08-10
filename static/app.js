@@ -1956,6 +1956,7 @@ let currentLang = localStorage.getItem('bravia_lang') || 'en';
 
 function setLanguage(langCode) {
   currentLang = langCode;
+  localStorage.setItem('tv_control_lang', langCode);
   localStorage.setItem('bravia_lang', langCode);
   document.documentElement.setAttribute('lang', langCode);
 
@@ -1994,15 +1995,17 @@ function setLanguage(langCode) {
 
 function setTheme(themeName) {
   document.documentElement.setAttribute('data-theme', themeName);
+  localStorage.setItem('tv_control_theme', themeName);
   localStorage.setItem('bravia_theme', themeName);
   showToast('Appearance Updated', `Switched theme to ${themeName}`);
   logActivity('Theme Switch', `Active theme: ${themeName}`);
 }
 
 function initTheme() {
-  const savedTheme = localStorage.getItem('bravia_theme') || 'day';
+  const savedTheme = localStorage.getItem('tv_control_theme') || localStorage.getItem('bravia_theme') || 'day';
   document.documentElement.setAttribute('data-theme', savedTheme);
-  const savedLang = localStorage.getItem('bravia_lang') || 'en';
+  const savedLang = localStorage.getItem('tv_control_lang') || localStorage.getItem('bravia_lang') || 'en';
+  currentLang = savedLang;
   document.documentElement.setAttribute('lang', savedLang);
   const topbarSel = document.getElementById('topbar-language-select');
   if (topbarSel) topbarSel.value = savedLang;
