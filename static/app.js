@@ -841,18 +841,18 @@ function renderOverview() {
   return `
     <div class="page-header">
       <div>
-        <h1 style="margin-bottom:var(--sp-1)">Living Room TV</h1>
+        <h1 style="margin-bottom:var(--sp-1)">${t('Living Room TV')}</h1>
         <div class="page-meta">
           <span class="connection-dot"></span>
           <span>Sony BRAVIA KD-55X8000H</span>
           <span>•</span>
           <span>Android 10</span>
           <span>•</span>
-          <span>Connected via ADB</span>
+          <span>${t('Connected via ADB')}</span>
         </div>
       </div>
       <button class="btn btn-primary btn-lg" onclick="openGuidedOptimizer()">
-        ⚡ Guided Optimization Wizard
+        ⚡ ${t('Guided Optimization Wizard')}
       </button>
     </div>
 
@@ -861,8 +861,8 @@ function renderOverview() {
       <div class="health-status">
         <div class="health-dot" style="background:var(--success)"></div>
         <div>
-          <div style="font-weight:600; font-size:1.125rem;">System Health: ${isStorageAttention ? 'Attention Required' : 'Optimal'}</div>
-          <div class="text-caption" style="color:var(--text-secondary)">${isStorageAttention ? 'Storage is near 85% capacity. Clear caches or debloat apps to maintain 60fps UI.' : 'All system services operating within peak efficiency parameters.'}</div>
+          <div style="font-weight:600; font-size:1.125rem;">${t('System Health:')} ${isStorageAttention ? t('Attention Required') : t('Optimal')}</div>
+          <div class="text-caption" style="color:var(--text-secondary)">${isStorageAttention ? t('Storage is near 85% capacity. Clear caches or debloat apps to maintain 60fps UI.') : t('All system services operating within peak efficiency parameters.')}</div>
         </div>
       </div>
     </div>
@@ -871,11 +871,11 @@ function renderOverview() {
     <div class="grid-4 mb-6">
       <div class="stat-card" style="border-top:3px solid ${isStorageAttention ? 'var(--warning)' : 'var(--success)'}">
         <div class="flex justify-between items-center mb-1">
-          <div class="stat-label">Storage</div>
-          <span class="badge ${isStorageAttention ? 'badge-warning' : 'badge-success'}">${isStorageAttention ? '⚠ Attention' : '✓ Good'}</span>
+          <div class="stat-label">${t('Storage')}</div>
+          <span class="badge ${isStorageAttention ? 'badge-warning' : 'badge-success'}">${isStorageAttention ? `⚠ ${t('Attention')}` : `✓ ${t('Good')}`}</span>
         </div>
-        <div class="stat-value" id="stat-storage">${m.storage_free || '803 MB'} free</div>
-        <div class="stat-sub">${m.storage_percent || '88%'} used of 6.2 GB</div>
+        <div class="stat-value" id="stat-storage">${m.storage_free || '803 MB'} ${t('free')}</div>
+        <div class="stat-sub">${m.storage_percent || '88%'} ${t('used of')} 6.2 GB</div>
         <div class="progress-bar mt-2">
           <div class="progress-fill ${isStorageAttention ? 'warning' : 'success'}" id="storage-bar" style="width:${storagePercent}%"></div>
         </div>
@@ -883,11 +883,11 @@ function renderOverview() {
 
       <div class="stat-card" style="border-top:3px solid var(--success)">
         <div class="flex justify-between items-center mb-1">
-          <div class="stat-label">Memory (RAM)</div>
-          <span class="badge badge-success">✓ Good</span>
+          <div class="stat-label">${t('Memory (RAM)')}</div>
+          <span class="badge badge-success">✓ ${t('Good')}</span>
         </div>
         <div class="stat-value" id="stat-ram">${ramDisplay}</div>
-        <div class="stat-sub">${ramPercent}% used of 2.2 GB</div>
+        <div class="stat-sub">${ramPercent}% ${t('used of')} 2.2 GB</div>
         <div class="progress-bar mt-2">
           <div class="progress-fill success" id="ram-bar" style="width:${ramPercent}%"></div>
         </div>
@@ -895,11 +895,11 @@ function renderOverview() {
 
       <div class="stat-card" style="border-top:3px solid var(--info)">
         <div class="flex justify-between items-center mb-1">
-          <div class="stat-label">Network & DNS</div>
-          <span class="badge badge-info">✓ DoT Active</span>
+          <div class="stat-label">${t('Network & DNS')}</div>
+          <span class="badge badge-info">✓ ${t('DoT Active')}</span>
         </div>
         <div class="stat-value">Cloudflare 1.1.1.1</div>
-        <div class="stat-sub">Wi-Fi 5GHz • 9.9 ms latency</div>
+        <div class="stat-sub">Wi-Fi 5GHz • 9.9 ms ${t('latency')}</div>
         <div class="progress-bar mt-2">
           <div class="progress-fill info" style="width:100%"></div>
         </div>
@@ -907,11 +907,11 @@ function renderOverview() {
 
       <div class="stat-card" style="border-top:3px solid var(--primary)">
         <div class="flex justify-between items-center mb-1">
-          <div class="stat-label">Picture & Engine</div>
-          <span class="badge badge-primary">✓ Accelerated</span>
+          <div class="stat-label">${t('Picture & Engine')}</div>
+          <span class="badge badge-primary">✓ ${t('Accelerated')}</span>
         </div>
         <div class="stat-value">Sony X1 4K HDR</div>
-        <div class="stat-sub">GPU SurfaceFlinger • 24p Cadence</div>
+        <div class="stat-sub">GPU SurfaceFlinger • 24p ${t('Cadence')}</div>
         <div class="progress-bar mt-2">
           <div class="progress-fill primary" style="width:100%"></div>
         </div>
@@ -922,16 +922,16 @@ function renderOverview() {
     ${sectionHeader('Quick Actions & Workflows')}
     <div class="grid-4 mb-6">
       <button class="btn btn-primary btn-lg" style="width:100%; justify-content:center" onclick="openGuidedOptimizer()">
-        ⚡ Guided Optimization
+        ⚡ ${t('Guided Optimization')}
       </button>
       <button class="btn btn-secondary btn-lg" style="width:100%; justify-content:center" onclick="doCleanRAM()">
-        🧹 Clean Memory
+        🧹 ${t('Clean Memory')}
       </button>
       <button class="btn btn-secondary btn-lg" style="width:100%; justify-content:center" onclick="doPurgeCache()">
-        🗑 Clear Caches
+        🗑 ${t('Clear Caches')}
       </button>
       <button class="btn btn-secondary btn-lg" style="width:100%; justify-content:center" onclick="doAccelerateYouTube()">
-        📺 Optimize YouTube
+        📺 ${t('Optimize YouTube')}
       </button>
     </div>
 
