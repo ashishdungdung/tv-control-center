@@ -787,13 +787,16 @@ function updateOverviewMetrics(m) {
 
 // ── Render Helpers ─────────────────────────────────────────
 function settingRow(name, desc, techInfo, modId, isActive = true, opts = {}) {
+  const trName = t(name);
+  const trDesc = t(desc);
+  const restoreLabel = t('btn_restore_stock');
   const showTech = advancedMode && techInfo;
-  const restoreBtn = opts.noRestore ? '' : `<button class="btn btn-ghost btn-sm" onclick="doToggleMod('${modId}', 'default')">Restore Stock</button>`;
+  const restoreBtn = opts.noRestore ? '' : `<button class="btn btn-ghost btn-sm" onclick="doToggleMod('${modId}', 'default')">${restoreLabel}</button>`;
   return `
     <div class="setting-row">
       <div class="setting-info">
-        <div class="setting-name">${name}</div>
-        <div class="setting-desc">${desc}</div>
+        <div class="setting-name">${trName}</div>
+        <div class="setting-desc">${trDesc}</div>
         ${showTech ? `<div class="setting-tech">${techInfo}</div>` : ''}
       </div>
       <div class="setting-actions">
@@ -807,9 +810,9 @@ function settingRow(name, desc, techInfo, modId, isActive = true, opts = {}) {
 function statCard(label, value, sub, barPercent, barClass = '') {
   return `
     <div class="stat-card">
-      <div class="stat-label">${label}</div>
+      <div class="stat-label">${t(label)}</div>
       <div class="stat-value">${value}</div>
-      <div class="stat-sub">${sub}</div>
+      <div class="stat-sub">${t(sub)}</div>
       <div class="progress-bar mt-2">
         <div class="progress-fill ${barClass}" id="${label.toLowerCase().replace(/\s/g,'-')}-bar" style="width:${barPercent}%"></div>
       </div>
@@ -818,7 +821,7 @@ function statCard(label, value, sub, barPercent, barClass = '') {
 }
 
 function sectionHeader(title, subtitle = '') {
-  return `<div class="mb-6 mt-8"><h2 class="text-section">${title}</h2>${subtitle ? `<p class="text-caption mt-2">${subtitle}</p>` : ''}</div>`;
+  return `<div class="mb-6 mt-8"><h2 class="text-section">${t(title)}</h2>${subtitle ? `<p class="text-caption mt-2">${t(subtitle)}</p>` : ''}</div>`;
 }
 
 // ── Page Renderers ─────────────────────────────────────────
@@ -987,31 +990,31 @@ function renderOverview() {
 function renderPerformance() {
   return `
     <div class="page-header">
-      <h1>Performance</h1>
-      <p class="page-subtitle">Optimization profiles and system tuning</p>
+      <h1>${t('nav_performance')}</h1>
+      <p class="page-subtitle">${t('Optimization profiles and system tuning')}</p>
     </div>
 
     ${sectionHeader('Profiles', 'Select a profile to apply a set of optimizations.')}
     <div class="grid-4 mb-6">
       <div class="profile-card" onclick="showToast('Profile', 'Balanced profile is the default state.', 'info')">
         <div class="profile-icon">🚀</div>
-        <div class="profile-name">Balanced</div>
-        <div class="profile-desc">Recommended for everyday use</div>
+        <div class="profile-name">${t('Balanced')}</div>
+        <div class="profile-desc">${t('Recommended for everyday use')}</div>
       </div>
       <div class="profile-card active" onclick="doOptimizeAll()">
         <div class="profile-icon">⚡</div>
-        <div class="profile-name">Performance</div>
-        <div class="profile-desc">Maximum responsiveness</div>
+        <div class="profile-name">${t('Performance')}</div>
+        <div class="profile-desc">${t('Maximum responsiveness')}</div>
       </div>
       <div class="profile-card" onclick="doProfile('gaming')">
         <div class="profile-icon">🎮</div>
-        <div class="profile-name">Gaming</div>
-        <div class="profile-desc">Low latency input</div>
+        <div class="profile-name">${t('Gaming')}</div>
+        <div class="profile-desc">${t('Low latency input')}</div>
       </div>
       <div class="profile-card" onclick="doProfile('cinema')">
         <div class="profile-icon">🎬</div>
-        <div class="profile-name">Cinema</div>
-        <div class="profile-desc">Prioritize picture quality</div>
+        <div class="profile-name">${t('Cinema')}</div>
+        <div class="profile-desc">${t('Prioritize picture quality')}</div>
       </div>
     </div>
 
@@ -1022,9 +1025,9 @@ function renderPerformance() {
     </div>
 
     <div class="flex gap-3 mt-6">
-      <button class="btn btn-primary" onclick="doCleanRAM()">🧹 Clean Memory Now</button>
-      <button class="btn btn-secondary" onclick="doPurgeCache()">🗑 Clear All Caches</button>
-      <button class="btn btn-secondary" onclick="doAccelerateYouTube()">📺 Optimize YouTube Playback</button>
+      <button class="btn btn-primary" onclick="doCleanRAM()">${t('🧹 Clean Memory Now')}</button>
+      <button class="btn btn-secondary" onclick="doPurgeCache()">${t('🗑 Clear All Caches')}</button>
+      <button class="btn btn-secondary" onclick="doAccelerateYouTube()">${t('📺 Optimize YouTube Playback')}</button>
     </div>
   `;
 }
