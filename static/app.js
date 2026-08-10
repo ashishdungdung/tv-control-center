@@ -1057,7 +1057,7 @@ function renderDisplay() {
             Eliminate 4K 120Hz VRR signal dropouts, black screens, and eARC audio desync on PS5, Xbox Series X, and PC gaming with certified 48Gbps HDMI 2.1 cables.
           </div>
         </div>
-        <a href="https://amazon.com/dp/B08X6VFCH9?tag=vtete-20" target="_blank" class="btn btn-secondary btn-sm" style="text-decoration:none; white-space:nowrap; gap:6px;">
+        <a href="https://www.amazon.com/dp/B081N5Y67Y?tag=vtete-20" target="_blank" class="btn btn-secondary btn-sm" style="text-decoration:none; white-space:nowrap; gap:6px;">
           ⚡ Recommended HDMI 2.1 Cable ↗
         </a>
       </div>
