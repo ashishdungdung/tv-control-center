@@ -1710,25 +1710,40 @@ function renderSettings() {
         <div class="setting-actions">
           <select id="language-select" style="background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius-sm); padding:6px 12px; color:var(--text-primary); outline:none; font-weight:500;" onchange="setLanguage(this.value)">
             <option value="en" ${currentLang==='en'?'selected':''}>🇺🇸 English (US)</option>
+            <option value="en-GB" ${currentLang==='en-GB'?'selected':''}>🇬🇧 English (UK)</option>
             <option value="es" ${currentLang==='es'?'selected':''}>🇪🇸 Español (Spanish)</option>
+            <option value="es-MX" ${currentLang==='es-MX'?'selected':''}>🇲🇽 Español (Latinoamérica)</option>
             <option value="de" ${currentLang==='de'?'selected':''}>🇩🇪 Deutsch (German)</option>
             <option value="fr" ${currentLang==='fr'?'selected':''}>🇫🇷 Français (French)</option>
+            <option value="fr-CA" ${currentLang==='fr-CA'?'selected':''}>🇨🇦 Français (Canadien)</option>
             <option value="ja" ${currentLang==='ja'?'selected':''}>🇯🇵 日本語 (Japanese)</option>
             <option value="hi" ${currentLang==='hi'?'selected':''}>🇮🇳 हिन्दी (Hindi)</option>
             <option value="zh-CN" ${currentLang==='zh-CN'?'selected':''}>🇨🇳 中文 (Simplified Chinese)</option>
             <option value="zh-TW" ${currentLang==='zh-TW'?'selected':''}>🇹🇼 繁體中文 (Traditional Chinese)</option>
-            <option value="pt" ${currentLang==='pt'?'selected':''}>🇵🇹 Português (Portuguese)</option>
+            <option value="zh-HK" ${currentLang==='zh-HK'?'selected':''}>🇭🇰 廣東話 (Cantonese / HK)</option>
+            <option value="pt-BR" ${currentLang==='pt-BR'?'selected':''}>🇧🇷 Português (Brasil)</option>
+            <option value="pt-PT" ${currentLang==='pt-PT'?'selected':''}>🇵🇹 Português (Portugal)</option>
             <option value="it" ${currentLang==='it'?'selected':''}>🇮🇹 Italiano (Italian)</option>
             <option value="ru" ${currentLang==='ru'?'selected':''}>🇷🇺 Русский (Russian)</option>
+            <option value="uk" ${currentLang==='uk'?'selected':''}>🇺🇦 Українська (Ukrainian)</option>
             <option value="ko" ${currentLang==='ko'?'selected':''}>🇰🇷 한국어 (Korean)</option>
             <option value="ar" ${currentLang==='ar'?'selected':''}>🇸🇦 العربية (Arabic)</option>
             <option value="nl" ${currentLang==='nl'?'selected':''}>🇳🇱 Nederlands (Dutch)</option>
             <option value="pl" ${currentLang==='pl'?'selected':''}>🇵🇱 Polski (Polish)</option>
             <option value="se" ${currentLang==='se'?'selected':''}>🇸🇪 Svenska (Swedish)</option>
+            <option value="no" ${currentLang==='no'?'selected':''}>🇳🇴 Norsk (Norwegian)</option>
+            <option value="da" ${currentLang==='da'?'selected':''}>🇩🇰 Dansk (Danish)</option>
+            <option value="fi" ${currentLang==='fi'?'selected':''}>🇫🇮 Suomi (Finnish)</option>
             <option value="tr" ${currentLang==='tr'?'selected':''}>🇹🇷 Türkçe (Turkish)</option>
+            <option value="el" ${currentLang==='el'?'selected':''}>🇬🇷 Ελληνικά (Greek)</option>
+            <option value="cs" ${currentLang==='cs'?'selected':''}>🇨🇿 Čeština (Czech)</option>
+            <option value="hu" ${currentLang==='hu'?'selected':''}>🇭🇺 Magyar (Hungarian)</option>
+            <option value="ro" ${currentLang==='ro'?'selected':''}>🇷🇴 Română (Romanian)</option>
             <option value="id" ${currentLang==='id'?'selected':''}>🇮🇩 Bahasa Indonesia (Indonesian)</option>
+            <option value="ms" ${currentLang==='ms'?'selected':''}>🇲🇾 Bahasa Melayu (Malay)</option>
             <option value="vi" ${currentLang==='vi'?'selected':''}>🇻🇳 Tiếng Việt (Vietnamese)</option>
             <option value="th" ${currentLang==='th'?'selected':''}>🇹🇭 ไทย (Thai)</option>
+            <option value="tl" ${currentLang==='tl'?'selected':''}>🇵🇭 Filipino (Tagalog)</option>
           </select>
         </div>
       </div>
@@ -1814,25 +1829,40 @@ function setLanguage(langCode) {
   document.documentElement.setAttribute('lang', langCode);
   const langNames = {
     'en': 'English (US)',
+    'en-GB': 'English (UK)',
     'es': 'Español (Spanish)',
+    'es-MX': 'Español (Latinoamérica)',
     'de': 'Deutsch (German)',
     'fr': 'Français (French)',
+    'fr-CA': 'Français (Canadien)',
     'ja': '日本語 (Japanese)',
     'hi': 'हिन्दी (Hindi)',
     'zh-CN': '中文 (Simplified Chinese)',
     'zh-TW': '繁體中文 (Traditional Chinese)',
-    'pt': 'Português (Portuguese)',
+    'zh-HK': '廣東話 (Cantonese / HK)',
+    'pt-BR': 'Português (Brasil)',
+    'pt-PT': 'Português (Portugal)',
     'it': 'Italiano (Italian)',
     'ru': 'Русский (Russian)',
+    'uk': 'Українська (Ukrainian)',
     'ko': '한국어 (Korean)',
     'ar': 'العربية (Arabic)',
     'nl': 'Nederlands (Dutch)',
     'pl': 'Polski (Polish)',
     'se': 'Svenska (Swedish)',
+    'no': 'Norsk (Norwegian)',
+    'da': 'Dansk (Danish)',
+    'fi': 'Suomi (Finnish)',
     'tr': 'Türkçe (Turkish)',
+    'el': 'Ελληνικά (Greek)',
+    'cs': 'Čeština (Czech)',
+    'hu': 'Magyar (Hungarian)',
+    'ro': 'Română (Romanian)',
     'id': 'Bahasa Indonesia (Indonesian)',
+    'ms': 'Bahasa Melayu (Malay)',
     'vi': 'Tiếng Việt (Vietnamese)',
-    'th': 'ไทย (Thai)'
+    'th': 'ไทย (Thai)',
+    'tl': 'Filipino (Tagalog)'
   };
   showToast('Language Updated', `Switched language to ${langNames[langCode] || langCode}`);
   logActivity('Language Switch', `Active language: ${langNames[langCode] || langCode}`);
