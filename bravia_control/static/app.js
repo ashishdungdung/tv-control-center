@@ -1699,6 +1699,26 @@ function renderSettings() {
         </div>
       </div>
     </div>
+
+    ${sectionHeader('Language & Localization')}
+    <div class="card mb-6">
+      <div class="setting-row">
+        <div class="setting-info">
+          <div class="setting-name">Console Interface Language</div>
+          <div class="setting-desc">Select primary display language for navigation, headers, tooltips, and notifications</div>
+        </div>
+        <div class="setting-actions">
+          <select id="language-select" style="background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius-sm); padding:6px 12px; color:var(--text-primary); outline:none; font-weight:500;" onchange="setLanguage(this.value)">
+            <option value="en" ${currentLang==='en'?'selected':''}>🇺🇸 English (US)</option>
+            <option value="es" ${currentLang==='es'?'selected':''}>🇪🇸 Español (Spanish)</option>
+            <option value="de" ${currentLang==='de'?'selected':''}>🇩🇪 Deutsch (German)</option>
+            <option value="fr" ${currentLang==='fr'?'selected':''}>🇫🇷 Français (French)</option>
+            <option value="ja" ${currentLang==='ja'?'selected':''}>🇯🇵 日本語 (Japanese)</option>
+            <option value="hi" ${currentLang==='hi'?'selected':''}>🇮🇳 हिन्दी (Hindi)</option>
+          </select>
+        </div>
+      </div>
+    </div>
   `;
 }
 
@@ -1772,7 +1792,25 @@ function renderAbout() {
   `;
 }
 
-// ── APPEARANCE & THEMES ENGINE ──────────────────────────────
+let currentLang = localStorage.getItem('bravia_lang') || 'en';
+
+function setLanguage(langCode) {
+  currentLang = langCode;
+  localStorage.setItem('bravia_lang', langCode);
+  document.documentElement.setAttribute('lang', langCode);
+  const langNames = {
+    'en': 'English (US)',
+    'es': 'Español (Spanish)',
+    'de': 'Deutsch (German)',
+    'fr': 'Français (French)',
+    'ja': '日本語 (Japanese)',
+    'hi': 'हिन्दी (Hindi)'
+  };
+  showToast('Language Updated', `Switched language to ${langNames[langCode] || langCode}`);
+  logActivity('Language Switch', `Active language: ${langNames[langCode] || langCode}`);
+  navigate(currentRoute);
+}
+
 function setTheme(themeName) {
   document.documentElement.setAttribute('data-theme', themeName);
   localStorage.setItem('bravia_theme', themeName);
@@ -1781,8 +1819,10 @@ function setTheme(themeName) {
 }
 
 function initTheme() {
-  const saved = localStorage.getItem('bravia_theme') || 'day';
-  document.documentElement.setAttribute('data-theme', saved);
+  const savedTheme = localStorage.getItem('bravia_theme') || 'day';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  const savedLang = localStorage.getItem('bravia_lang') || 'en';
+  document.documentElement.setAttribute('lang', savedLang);
 }
 
 function renderAppearance() {
