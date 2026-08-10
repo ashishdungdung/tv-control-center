@@ -1800,124 +1800,142 @@ function renderAbout() {
 }
 
 // ── INTERNATIONALIZATION (i18n) DICTIONARY ENGINE ─────────────
+// ── INTERNATIONALIZATION (i18n) DICTIONARY ENGINE ─────────────
 const I18N_DICTIONARY = {
   'en': {
-    sec_home: 'Home', sec_optimize: 'Optimize', sec_manage: 'Manage', sec_system: 'System',
+    sec_home: 'Home', sec_optimize: 'Optimize', sec_manage: 'Manage', sec_system: 'System', sec_settings: 'Settings', sec_help: 'Help & Info',
     nav_overview: 'Overview', nav_performance: 'Performance', nav_display: 'Display', nav_audio: 'Audio',
     nav_network: 'Network', nav_apps: 'Apps & Debloater', nav_launcher: 'Launcher', nav_remote: 'Remote Control',
-    nav_hardware: 'Hardware Profiles', nav_preferences: 'Preferences', nav_about: 'About & Support',
+    nav_hardware: 'Hardware Profiles', nav_activity: 'Activity Log', nav_supported_devices: 'Supported Devices',
+    nav_appearance: 'Appearance & Theme', nav_snapshots: 'Snapshots', nav_preferences: 'Preferences', nav_about: 'About & Support',
     simple: 'Simple', advanced: 'Advanced', connected: 'Connected'
   },
   'es': {
-    sec_home: 'Inicio', sec_optimize: 'Optimizar', sec_manage: 'Gestionar', sec_system: 'Sistema',
+    sec_home: 'Inicio', sec_optimize: 'Optimizar', sec_manage: 'Gestionar', sec_system: 'Sistema', sec_settings: 'Ajustes', sec_help: 'Ayuda e Info',
     nav_overview: 'Visión General', nav_performance: 'Rendimiento', nav_display: 'Pantalla', nav_audio: 'Sonido y Audio',
     nav_network: 'Red y DoT DNS', nav_apps: 'Aplicaciones', nav_launcher: 'Lanzador', nav_remote: 'Mando a Distancia',
-    nav_hardware: 'Perfiles Hardware', nav_preferences: 'Preferencias', nav_about: 'Acerca de',
+    nav_hardware: 'Perfiles Hardware', nav_activity: 'Registro de Actividad', nav_supported_devices: 'Dispositivos Compatibles',
+    nav_appearance: 'Apariencia y Tema', nav_snapshots: 'Instantáneas', nav_preferences: 'Preferencias', nav_about: 'Acerca de y Soporte',
     simple: 'Sencillo', advanced: 'Avanzado', connected: 'Conectado'
   },
   'de': {
-    sec_home: 'Start', sec_optimize: 'Optimieren', sec_manage: 'Verwalten', sec_system: 'System',
+    sec_home: 'Start', sec_optimize: 'Optimieren', sec_manage: 'Verwalten', sec_system: 'System', sec_settings: 'Einstellungen', sec_help: 'Hilfe & Info',
     nav_overview: 'Übersicht', nav_performance: 'Leistung', nav_display: 'Bildschirm', nav_audio: 'Audio & Ton',
     nav_network: 'Netzwerk', nav_apps: 'Apps & Bloatware', nav_launcher: 'Launcher', nav_remote: 'Fernbedienung',
-    nav_hardware: 'Hardware-Profile', nav_preferences: 'Einstellungen', nav_about: 'Über & Support',
+    nav_hardware: 'Hardware-Profile', nav_activity: 'Aktivitätsprotokoll', nav_supported_devices: 'Unterstützte Geräte',
+    nav_appearance: 'Erscheinungsbild & Theme', nav_snapshots: 'Snapshots', nav_preferences: 'Einstellungen', nav_about: 'Über & Support',
     simple: 'Einfach', advanced: 'Erweitert', connected: 'Verbunden'
   },
   'fr': {
-    sec_home: 'Accueil', sec_optimize: 'Optimiser', sec_manage: 'Gérer', sec_system: 'Système',
+    sec_home: 'Accueil', sec_optimize: 'Optimiser', sec_manage: 'Gérer', sec_system: 'Système', sec_settings: 'Paramètres', sec_help: 'Aide & Info',
     nav_overview: 'Aperçu', nav_performance: 'Performance', nav_display: 'Affichage', nav_audio: 'Audio & Son',
     nav_network: 'Réseau', nav_apps: 'Applications', nav_launcher: 'Lanceur', nav_remote: 'Télécommande',
-    nav_hardware: 'Profils Matériel', nav_preferences: 'Préférences', nav_about: 'À propos',
+    nav_hardware: 'Profils Matériel', nav_activity: "Journal d'activité", nav_supported_devices: 'Appareils Pris en Charge',
+    nav_appearance: 'Apparence & Thème', nav_snapshots: 'Instantanés', nav_preferences: 'Préférences', nav_about: 'À propos & Support',
     simple: 'Simple', advanced: 'Avancé', connected: 'Connecté'
   },
   'ja': {
-    sec_home: 'ホーム', sec_optimize: '最適化', sec_manage: '管理', sec_system: 'システム',
+    sec_home: 'ホーム', sec_optimize: '最適化', sec_manage: '管理', sec_system: 'システム', sec_settings: '設定', sec_help: 'ヘルプと情報',
     nav_overview: '概要', nav_performance: 'パフォーマンス', nav_display: 'ディスプレイ', nav_audio: 'オーディオ',
     nav_network: 'ネットワーク', nav_apps: 'アプリ削除', nav_launcher: 'ランチャー', nav_remote: 'リモコン',
-    nav_hardware: 'ハードウェア構成', nav_preferences: '設定', nav_about: 'サポート・情報',
+    nav_hardware: 'ハードウェア構成', nav_activity: 'アクティビティログ', nav_supported_devices: '対応デバイス',
+    nav_appearance: '外観とテーマ', nav_snapshots: 'スナップショット', nav_preferences: '環境設定', nav_about: 'サポート・情報',
     simple: 'シンプル', advanced: '高度', connected: '接続済み'
   },
   'hi': {
-    sec_home: 'होम', sec_optimize: 'अनुकूलन', sec_manage: 'प्रबंधन', sec_system: 'सिस्टम',
+    sec_home: 'होम', sec_optimize: 'अनुकूलन', sec_manage: 'प्रबंधन', sec_system: 'सिस्टम', sec_settings: 'सेटिंग्स', sec_help: 'सहायता एवं जानकारी',
     nav_overview: 'अवलोकन', nav_performance: 'प्रदर्शन (RAM)', nav_display: 'डिस्प्ले Calibration', nav_audio: 'ध्वनि एवं ऑडियो',
     nav_network: 'नेटवर्क (DNS)', nav_apps: 'ऐप्स एवं डिब्लोटर', nav_launcher: 'लॉन्चर', nav_remote: 'रिमोट कंट्रोल',
-    nav_hardware: 'हार्डवेयर प्रोफाइल', nav_preferences: 'प्राथमिकताएं', nav_about: 'के बारे में',
+    nav_hardware: 'हार्डवेयर प्रोफाइल', nav_activity: 'गतिविधि लॉग', nav_supported_devices: 'समर्थित उपकरण',
+    nav_appearance: 'उपस्थिति एवं थीम', nav_snapshots: 'स्नैपशॉट', nav_preferences: 'प्राथमिकताएं', nav_about: 'के बारे में',
     simple: 'सरल', advanced: 'उन्नत', connected: 'कनेक्टेड'
   },
   'zh-CN': {
-    sec_home: '首页', sec_optimize: '优化', sec_manage: '管理', sec_system: '系统',
+    sec_home: '首页', sec_optimize: '优化', sec_manage: '管理', sec_system: '系统', sec_settings: '设置', sec_help: '帮助与信息',
     nav_overview: '概览', nav_performance: '性能优化', nav_display: '显示校准', nav_audio: '声音音频',
     nav_network: '网络设置', nav_apps: '应用卸载', nav_launcher: '桌面切换', nav_remote: '遥控器',
-    nav_hardware: '硬件信息', nav_preferences: '偏好设置', nav_about: '关于支持',
+    nav_hardware: '硬件信息', nav_activity: '活动日志', nav_supported_devices: '支持的设备',
+    nav_appearance: '外观与主题', nav_snapshots: '快照备份', nav_preferences: '偏好设置', nav_about: '关于支持',
     simple: '精简', advanced: '专业', connected: '已连接'
   },
   'ar': {
-    sec_home: 'الرئيسية', sec_optimize: 'تحسين', sec_manage: 'إدارة', sec_system: 'النظام',
+    sec_home: 'الرئيسية', sec_optimize: 'تحسين', sec_manage: 'إدارة', sec_system: 'النظام', sec_settings: 'الإعدادات', sec_help: 'المساعدة والمعلومات',
     nav_overview: 'نظرة عامة', nav_performance: 'الأداء والذاكرة', nav_display: 'الشاشة والعرض', nav_audio: 'الصوت',
     nav_network: 'الشبكة والـ DNS', nav_apps: 'التطبيقات', nav_launcher: 'مشغل الشاشة', nav_remote: 'جهاز التحكم',
-    nav_hardware: 'مواصفات الجهاز', nav_preferences: 'التفضيلات', nav_about: 'حول البرنامج',
+    nav_hardware: 'مواصفات الجهاز', nav_activity: 'سجل النشاط', nav_supported_devices: 'الأجهزة المدعومة',
+    nav_appearance: 'المظهر والنسق', nav_snapshots: 'اللقطات الحافظة', nav_preferences: 'التفضيلات', nav_about: 'حول البرنامج',
     simple: 'بسيط', advanced: 'متقدم', connected: 'متصل'
   },
   'ko': {
-    sec_home: '홈', sec_optimize: '최적화', sec_manage: '관리', sec_system: '시스템',
+    sec_home: '홈', sec_optimize: '최적화', sec_manage: '관리', sec_system: '시스템', sec_settings: '설정', sec_help: '도움말 및 정보',
     nav_overview: '개요', nav_performance: '성능 최적화', nav_display: '디스플레이', nav_audio: '오디오',
     nav_network: '네트워크', nav_apps: '앱 관리', nav_launcher: '런처 변경', nav_remote: '리모컨',
-    nav_hardware: '하드웨어 프로필', nav_preferences: '환경 설정', nav_about: '정보 및 지원',
+    nav_hardware: '하드웨어 프로필', nav_activity: '활동 기록', nav_supported_devices: '지원 기기',
+    nav_appearance: '테마 및 디자인', nav_snapshots: '스냅샷', nav_preferences: '환경 설정', nav_about: '정보 및 지원',
     simple: '기본', advanced: '고급', connected: '연결됨'
   },
   'pt-BR': {
-    sec_home: 'Início', sec_optimize: 'Otimizar', sec_manage: 'Gerenciar', sec_system: 'Sistema',
+    sec_home: 'Início', sec_optimize: 'Otimizar', sec_manage: 'Gerenciar', sec_system: 'Sistema', sec_settings: 'Configurações', sec_help: 'Ajuda e Info',
     nav_overview: 'Visão Geral', nav_performance: 'Desempenho', nav_display: 'Tela e Calibração', nav_audio: 'Áudio e Som',
     nav_network: 'Rede e DNS', nav_apps: 'Aplicativos', nav_launcher: 'Launcher', nav_remote: 'Controle Remoto',
-    nav_hardware: 'Perfis de Hardware', nav_preferences: 'Preferências', nav_about: 'Sobre e Suporte',
+    nav_hardware: 'Perfis de Hardware', nav_activity: 'Registro de Atividade', nav_supported_devices: 'Dispositivos Suportados',
+    nav_appearance: 'Aparência e Tema', nav_snapshots: 'Instantâneos', nav_preferences: 'Preferências', nav_about: 'Sobre e Suporte',
     simple: 'Simples', advanced: 'Avançado', connected: 'Conectado'
   },
   'ru': {
-    sec_home: 'Главная', sec_optimize: 'Оптимизация', sec_manage: 'Управление', sec_system: 'Система',
+    sec_home: 'Главная', sec_optimize: 'Оптимизация', sec_manage: 'Управление', sec_system: 'Система', sec_settings: 'Настройки', sec_help: 'Помощь и Инфо',
     nav_overview: 'Обзор', nav_performance: 'Производительность', nav_display: 'Дисплей', nav_audio: 'Звук и Аудио',
     nav_network: 'Сеть и DNS', nav_apps: 'Приложения', nav_launcher: 'Лаунчер', nav_remote: 'Пульт ДУ',
-    nav_hardware: 'Профили ТВ', nav_preferences: 'Настройки', nav_about: 'О программе',
+    nav_hardware: 'Профили ТВ', nav_activity: 'Журнал активности', nav_supported_devices: 'Поддерживаемые устройства',
+    nav_appearance: 'Внешний вид и Тема', nav_snapshots: 'Снимки состояния', nav_preferences: 'Настройки', nav_about: 'О программе',
     simple: 'Простой', advanced: 'Расширенный', connected: 'Подключено'
   },
   'it': {
-    sec_home: 'Home', sec_optimize: 'Ottimizza', sec_manage: 'Gestisci', sec_system: 'Sistema',
+    sec_home: 'Home', sec_optimize: 'Ottimizza', sec_manage: 'Gestisci', sec_system: 'Sistema', sec_settings: 'Impostazioni', sec_help: 'Aiuto e Info',
     nav_overview: 'Panoramica', nav_performance: 'Prestazioni', nav_display: 'Schermo', nav_audio: 'Audio',
     nav_network: 'Rete e DNS', nav_apps: 'Applicazioni', nav_launcher: 'Launcher', nav_remote: 'Telecomando',
-    nav_hardware: 'Profili Hardware', nav_preferences: 'Preferenze', nav_about: 'Info e Supporto',
+    nav_hardware: 'Profili Hardware', nav_activity: 'Registro Attività', nav_supported_devices: 'Dispositivi Supportati',
+    nav_appearance: 'Aspetto e Tema', nav_snapshots: 'Istantanee', nav_preferences: 'Preferenze', nav_about: 'Info e Supporto',
     simple: 'Semplice', advanced: 'Avanzato', connected: 'Connesso'
   },
   'nl': {
-    sec_home: 'Home', sec_optimize: 'Optimaliseren', sec_manage: 'Beheren', sec_system: 'Systeem',
+    sec_home: 'Home', sec_optimize: 'Optimaliseren', sec_manage: 'Beheren', sec_system: 'Systeem', sec_settings: 'Instellingen', sec_help: 'Help & Info',
     nav_overview: 'Overzicht', nav_performance: 'Prestaties', nav_display: 'Scherm', nav_audio: 'Geluid',
     nav_network: 'Netwerk', nav_apps: 'Apps', nav_launcher: 'Launcher', nav_remote: 'Afstandsbediening',
-    nav_hardware: 'Hardwareprofielen', nav_preferences: 'Voorkeuren', nav_about: 'Over',
+    nav_hardware: 'Hardwareprofielen', nav_activity: 'Activiteitenlog', nav_supported_devices: 'Ondersteunde Apparaten',
+    nav_appearance: 'Uiterlijk & Thema', nav_snapshots: 'Momentopnamen', nav_preferences: 'Voorkeuren', nav_about: 'Over & Support',
     simple: 'Eenvoudig', advanced: 'Geavanceerd', connected: 'Verbonden'
   },
   'tr': {
-    sec_home: 'Ana Sayfa', sec_optimize: 'Optimize Et', sec_manage: 'Yönet', sec_system: 'Sistem',
+    sec_home: 'Ana Sayfa', sec_optimize: 'Optimize Et', sec_manage: 'Yönet', sec_system: 'Sistem', sec_settings: 'Ayarlar', sec_help: 'Yardım ve Bilgi',
     nav_overview: 'Genel Bakış', nav_performance: 'Performans', nav_display: 'Ekran', nav_audio: 'Ses',
     nav_network: 'Ağ ve DNS', nav_apps: 'Uygulamalar', nav_launcher: 'Başlatıcı', nav_remote: 'Uzaktan Kumanda',
-    nav_hardware: 'Donanım Profilleri', nav_preferences: 'Tercihler', nav_about: 'Hakkında',
+    nav_hardware: 'Donanım Profilleri', nav_activity: 'Etkinlik Günlüğü', nav_supported_devices: 'Desteklenen Cihazlar',
+    nav_appearance: 'Görünüm ve Tema', nav_snapshots: 'Anlık Görüntüler', nav_preferences: 'Tercihler', nav_about: 'Hakkında ve Destek',
     simple: 'Basit', advanced: 'Gelişmiş', connected: 'Bağlandı'
   },
   'id': {
-    sec_home: 'Beranda', sec_optimize: 'Optimalkan', sec_manage: 'Kelola', sec_system: 'Sistem',
+    sec_home: 'Beranda', sec_optimize: 'Optimalkan', sec_manage: 'Kelola', sec_system: 'Sistem', sec_settings: 'Pengaturan', sec_help: 'Bantuan & Info',
     nav_overview: 'Ikhtisar', nav_performance: 'Performa', nav_display: 'Tampilan', nav_audio: 'Audio',
     nav_network: 'Jaringan', nav_apps: 'Aplikasi', nav_launcher: 'Peluncur', nav_remote: 'Remot Kontrol',
-    nav_hardware: 'Profil Perangkat', nav_preferences: 'Preferensi', nav_about: 'Tentang',
+    nav_hardware: 'Profil Perangkat', nav_activity: 'Log Aktivitas', nav_supported_devices: 'Perangkat Terdukung',
+    nav_appearance: 'Tampilan & Tema', nav_snapshots: 'Snapshot', nav_preferences: 'Preferensi', nav_about: 'Tentang & Bantuan',
     simple: 'Sederhana', advanced: 'Lanjutan', connected: 'Terhubung'
   },
   'vi': {
-    sec_home: 'Trang chủ', sec_optimize: 'Tối ưu hóa', sec_manage: 'Quản lý', sec_system: 'Hệ thống',
+    sec_home: 'Trang chủ', sec_optimize: 'Tối ưu hóa', sec_manage: 'Quản lý', sec_system: 'Hệ thống', sec_settings: 'Cài đặt', sec_help: 'Trợ giúp & Thông tin',
     nav_overview: 'Tổng quan', nav_performance: 'Hiệu suất', nav_display: 'Màn hình', nav_audio: 'Âm thanh',
     nav_network: 'Mạng & DNS', nav_apps: 'Ứng dụng', nav_launcher: 'Giao diện', nav_remote: 'Điều khiển',
-    nav_hardware: 'Cấu hình phần cứng', nav_preferences: 'Tùy chỉnh', nav_about: 'Giới thiệu',
+    nav_hardware: 'Cấu hình phần cứng', nav_activity: 'Nhật ký hoạt động', nav_supported_devices: 'Thiết bị được hỗ trợ',
+    nav_appearance: 'Giao diện & Chủ đề', nav_snapshots: 'Bản chụp', nav_preferences: 'Tùy chỉnh', nav_about: 'Giới thiệu & Hỗ trợ',
     simple: 'Đơn giản', advanced: 'Nâng cao', connected: 'Đã kết nối'
   },
   'th': {
-    sec_home: 'หน้าแรก', sec_optimize: 'ปรับแต่ง', sec_manage: 'จัดการ', sec_system: 'ระบบ',
+    sec_home: 'หน้าแรก', sec_optimize: 'ปรับแต่ง', sec_manage: 'จัดการ', sec_system: 'ระบบ', sec_settings: 'การตั้งค่า', sec_help: 'ช่วยเหลือและข้อมูล',
     nav_overview: 'ภาพรวม', nav_performance: 'ประสิทธิภาพ', nav_display: 'จอแสดงผล', nav_audio: 'ระบบเสียง',
     nav_network: 'เครือข่าย', nav_apps: 'แอปพลิเคชัน', nav_launcher: 'ตัวเปิดแอป', nav_remote: 'รีโมทคอนโทรล',
-    nav_hardware: 'ฮาร์ดแวร์', nav_preferences: 'การตั้งค่า', nav_about: 'เกี่ยวกับ',
+    nav_hardware: 'ฮาร์ดแวร์', nav_activity: 'บันทึกกิจกรรม', nav_supported_devices: 'อุปกรณ์ที่รองรับ',
+    nav_appearance: 'รูปลักษณ์และธีม', nav_snapshots: 'สแนปชอต', nav_preferences: 'การตั้งค่า', nav_about: 'เกี่ยวกับและสนับสนุน',
     simple: 'เริ่มต้น', advanced: 'ขั้นสูง', connected: 'เชื่อมต่อแล้ว'
   }
 };
