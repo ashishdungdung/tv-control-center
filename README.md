@@ -1,5 +1,7 @@
 # 📺 TV Control Center — Universal Smart TV Management Suite
 
+[![PyPI Package](https://img.shields.io/pypi/v/tv-control-center?logo=pypi&color=blue)](https://pypi.org/project/tv-control-center/)
+[![Docker Image](https://img.shields.io/badge/Docker%20Hub-ashishdungdung%2Ftv--control--center-blue?logo=docker)](https://hub.docker.com/repository/docker/ashishdungdung/tv-control-center/general)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python)](https://www.python.org/)
 [![Platform: Android TV / Google TV](https://img.shields.io/badge/Platform-Android%20TV%20%7C%20Google%20TV-green?logo=android)](https://developer.android.com/)
@@ -20,9 +22,9 @@ graph TD
         DESK["Desktop Browser Console<br>(http://localhost:8888)"] -->|HTTP REST API| PY["Python 3 Async HTTP Server<br>(bravia_control / server.py)"]
         PY -->|Wireless ADB Bridge| TV["Smart TV Device Bridge<br>(192.168.2.122:5555)"]
         
-        TV -->|SoC Hardware| MTK["MediaTek MT5893 Quad-Core @ 1.5 GHz"]
-        TV -->|Picture Processor| X1["Sony X1 4K HDR Processor"]
-        TV -->|Sound Engine| DSEE["Sony DSEE Audio Enhancer & Voice Zoom"]
+        TV -->|SoC Hardware| MTK["MediaTek / Amlogic / Realtek / Tegra"]
+        TV -->|Picture Processor| X1["Sony X1 4K HDR / AiPQ / Hi-View Pro"]
+        TV -->|Sound Engine| DSEE["Audio Enhancer & Dialogue Zoom"]
     end
 ```
 
@@ -30,16 +32,18 @@ graph TD
 
 ## ⚡ Key Features
 
-- **🗂 Persistent Sidebar Navigation:** Clean, modern SPA shell with Home, Performance, Display, Audio, Network, Apps, Launcher, Remote, Hardware, Activity, and Settings views.
+- **🗂 Persistent Sidebar Navigation:** Clean, modern SPA shell with Home, Performance, Display, Audio, Network, Apps, Launcher, Remote, Hardware, Activity, Preferences, and About views.
+- **🔌 Guided Connect to TV Workflow:** Interactive first-run onboarding modal to enter IP address (`192.168.2.122`), ADB Port (`5555`), and run pre-flight connection checks.
+- **⚡ 5-Step Guided Optimization Wizard:** Automated scan, bucketed priority recommendations, snapshot backup, and real sequential ADB property overrides.
 - **🎛 Simple / Advanced Mode Toggle:** Hide technical parameters (`debug.sf.hw`, `tcp_window_scaling`) from casual users while giving power users deep low-level control.
 - **🔍 Command Palette (`⌘K` / `Ctrl+K`):** Fuzzy-search search bar across all settings, actions, DNS configurations, and page routes.
-- **🚀 1-Click Optimizations:** One-click RAM cleaner, cache purger, YouTube accelerator, and full-system performance booster.
+- **🧹 Memory & Cache Optimization:** Terminate idle background apps and purge application cache vectors with live reclaimed RAM delta measurements.
 - **🛡️ 20-Package Safe Debloater:** Easily disable Samba TV tracking (`tv.samba.ssm`), Sony bug reporters, Google TV recommendation ads, and demo stubs.
 - **📱 Live App Utilization Telemetry:** Scan all 52+ installed apps, track live PSS memory footprints, and disable unused apps with 1 click.
 - **📸 Snapshot & Restore System:** Save and restore full system configuration states locally on host JSON, browser LocalStorage, and TV storage (`/data/local/tmp/`).
 - **📦 APK Drag-and-Drop Sideloader:** Sideload APK files directly to your TV by dropping them onto the browser.
 - **🎮 Virtual Remote Control:** Wireless D-pad, Home, Back, Menu, Volume controls, and desktop keyboard arrow keys integration.
-- **🍞 Toast & Activity Timeline:** Instant notifications and full audit trail of every modification with exact timestamps.
+- **🎨 6 Theme Engines:** Comfortable Day (Default Light), Hardware Night (Dark Console), and 4 Neon accents (Cyan, Violet, Magenta, Amber).
 
 ---
 
@@ -63,46 +67,49 @@ graph TD
 
 ---
 
-## 📊 Performance Comparison Matrix
+## 🚀 Installation & Quick Start
 
-| Feature / Mod | Stock Sony TV Default | BRAVIA Control Center v3.0 | Real-World Gain |
-| :--- | :--- | :--- | :--- |
-| **UI Composition** | Software CPU Blending | 🟢 **GPU Mali Hardware Composition** | 0% CPU Overhead \| 60fps UI |
-| **Pixel Mapping** | 2%–5% Overscan Edge Crop | 🟢 **1:1 Native Pixel Mapping** | 100% 4K Sharpness \| 0 Edge Crop |
-| **Movie Playback** | 3:2 Pulldown Judder | 🟢 **True 24p Cinema Cadence** | Smooth Judder-Free 24fps Motion |
-| **OpenGL Pipeline** | Software Vector Fallback | 🟢 **Hardware EGL Acceleration** | Fast Icon & Texture Rendering |
-| **HDR Tone Mapping** | Static Metadata Only | 🟢 **Sony X1 Dynamic Tone Mapping** | Vibrant Highlights & Shadow Detail |
-| **Audio Processing** | Flat / Unenhanced | 🟢 **Sony DSEE + Voice Zoom 3** | Crystal Clear Dialogue in Movies |
-| **Network Buffer** | 256 KB Small Buffer | 🟢 **Ultra 4.0 MB TCP Buffer Vector** | 🚀 **16x Buffer \| 0% 4K Buffering** |
-| **DNS Resolution** | Unencrypted ISP DNS | 🟢 **Cloudflare Encrypted DoT (1.1.1.1)** | 9.9 ms Latency \| 0 DNS Leaks |
-| **Wi-Fi Stability** | Aggressive Disconnects | 🟢 **Wi-Fi Watchdog Suppressed** | Zero Wi-Fi Drops on Streaming |
-| **Home Screen** | Stock Google Launcher (Ads) | 🟢 **Projectivy Launcher (Zero Ads)** | Reclaims ~150–200 MB RAM |
-
----
-
-## 🚀 Quick Start (1 Command Launch)
-
-> 📖 **Need help enabling ADB on your TV?** Follow our step-by-step [SETUP_GUIDE.md](SETUP_GUIDE.md) for brand-specific navigation paths (Sony BRAVIA, Google TV, NVIDIA SHIELD, TCL, Hisense, Fire TV).
-
-### 1. Prerequisites
-- Python 3.8 or higher installed on your computer.
-- Android Debug Bridge (`adb`) installed (`brew install android-platform-tools` on macOS).
-- Smart TV connected to the same Wi-Fi network with **ADB Debugging** enabled under Developer Options.
-
-### 2. Run Control Console
+### Option 1: Install via PyPI (`pip`) — Recommended
 ```bash
-python3 -m bravia_control serve --port 8888
+# 1. Install package from PyPI
+pip install tv-control-center
+
+# 2. Launch Universal Smart TV Management Suite
+tv-control-center serve --port 8888
 ```
 Open **`http://localhost:8888`** in your browser.
 
 ---
 
-## 💖 Support & Monetization
+### Option 2: Run via Docker Hub
+Official Docker repository: **[ashishdungdung/tv-control-center](https://hub.docker.com/repository/docker/ashishdungdung/tv-control-center/general)**
 
-BRAVIA Control Center is 100% free and open-source. If this tool helped speed up your TV, consider supporting ongoing development:
+```bash
+docker run -d \
+  --name tv-control-center \
+  -p 8888:8888 \
+  --restart unless-stopped \
+  ashishdungdung/tv-control-center:latest
+```
+Open **`http://localhost:8888`** in your browser.
 
-- ☕ **Buy Me a Coffee:** [buymeacoffee.com/braviacontrol](https://buymeacoffee.com/braviacontrol)
-- 💖 **GitHub Sponsors:** [github.com/sponsors/anumac](https://github.com/sponsors/anumac)
+---
+
+### Option 3: Run from Source Code (GitHub)
+```bash
+git clone https://github.com/ashishdungdung/tv-control-center.git
+cd tv-control-center
+python3 -m bravia_control serve --port 8888
+```
+
+---
+
+## 💖 Open-Source Sponsorship & Community Support
+
+TV Control Center is 100% free and open-source software. You can sponsor ongoing maintenance and hardware profile expansion:
+
+- ☕ **Buy Me a Coffee:** [buymeacoffee.com/ashishdungdung](https://buymeacoffee.com/ashishdungdung)
+- 💖 **GitHub Sponsors:** [github.com/sponsors/ashishdungdung](https://github.com/sponsors/ashishdungdung)
 
 ---
 
@@ -119,11 +126,11 @@ We gratefully acknowledge the developers of the open-source tools and components
 
 ---
 
-## ⚖️ Legal, Warranty & Limitation of Liability Disclosures
+## ⚖️ Strict Legal Disclosures & Limitation of Liability
 
 > [!CAUTION]
-> **NO WARRANTY & LIMITATION OF LIABILITY:**
-> BRAVIA Control Center is provided **"AS IS"** and **"AS AVAILABLE"** without warranties of any kind.
+> **EXPRESS WARRANTY EXCLUSION & LIMITATION OF LIABILITY:**
+> TV Control Center is provided **"AS IS"** and **"AS AVAILABLE"** without warranties of any kind, either express, implied, statutory, or otherwise.
 > Under no circumstances shall the authors, maintainers, or contributors be held liable for any direct, indirect, incidental, special, exemplary, or consequential damages (including, but not limited to, device bricking, soft-bricking, boot-loops, warranty voidance, data loss, app malfunction, or system instability) arising out of the use or inability to use this software.
 >
 > All ADB property overrides (`setprop`), package debloating (`pm disable-user`), and network buffer tweaks are executed at the **user's sole risk and discretion**.
@@ -134,9 +141,9 @@ We gratefully acknowledge the developers of the open-source tools and components
 
 ## 📜 Trademark Notice
 
-**BRAVIA®** is a registered trademark of **Sony Group Corporation**. **Android TV™**, **Google Play™**, **YouTube™**, and **Google TV™** are trademarks of **Google LLC**.
+**Sony®** and **BRAVIA®** are registered trademarks of **Sony Group Corporation**. **Android TV™**, **Google Play™**, **YouTube™**, and **Google TV™** are trademarks of **Google LLC**. **SHIELD®** is a registered trademark of **NVIDIA Corporation**. **Amazon®** and **Fire TV®** are trademarks of **Amazon.com, Inc.**. **MediaTek®**, **Amlogic®**, **Realtek®**, **TCL®**, **Hisense®**, **Philips®**, **Panasonic®**, **Sharp®**, **Vu®**, and **Xiaomi®** are trademarks of their respective copyright holders.
 
-BRAVIA Control Center is an independent, community-driven open-source project. It is **not affiliated with, authorized by, maintained by, sponsored by, or endorsed by Sony Group Corporation, Google LLC, MediaTek Inc., or any of their subsidiaries**.
+TV Control Center is an independent, community-driven open-source project. It is **not affiliated with, authorized by, maintained by, sponsored by, or endorsed by Sony Group Corporation, Google LLC, NVIDIA Corporation, TCL Electronics, Hisense Co. Ltd., Amazon.com Inc., MediaTek Inc., Philips N.V., Panasonic Corp., Sharp Corp., Vu Technologies, Xiaomi Corp., or any of their subsidiaries**.
 
 ---
 
