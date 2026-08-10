@@ -30,6 +30,47 @@
     </div>
 
     <div class="topbar-right">
+      <select id="topbar-language-select" style="background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius-sm); padding:4px 8px; color:var(--text-primary); outline:none; font-size:12px; font-weight:600; cursor:pointer;" onchange="setLanguage(this.value)" title="Select Language">
+        <option value="en">🇺🇸 EN</option>
+        <option value="en-GB">🇬🇧 UK</option>
+        <option value="es">🇪🇸 ES</option>
+        <option value="es-MX">🇲🇽 MX</option>
+        <option value="de">🇩🇪 DE</option>
+        <option value="fr">🇫🇷 FR</option>
+        <option value="fr-CA">🇨🇦 CA</option>
+        <option value="ja">🇯🇵 JA</option>
+        <option value="hi">🇮🇳 HI</option>
+        <option value="zh-CN">🇨🇳 CN</option>
+        <option value="zh-TW">🇹🇼 TW</option>
+        <option value="zh-HK">🇭🇰 HK</option>
+        <option value="pt-BR">🇧🇷 BR</option>
+        <option value="pt-PT">🇵🇹 PT</option>
+        <option value="it">🇮🇹 IT</option>
+        <option value="ru">🇷🇺 RU</option>
+        <option value="uk">🇺🇦 UA</option>
+        <option value="ko">🇰🇷 KO</option>
+        <option value="ar">🇸🇦 AR</option>
+        <option value="he">🇮🇱 HE</option>
+        <option value="fa">🇮🇷 FA</option>
+        <option value="ur">🇵🇰 UR</option>
+        <option value="nl">🇳🇱 NL</option>
+        <option value="pl">🇵🇱 PL</option>
+        <option value="se">🇸🇪 SE</option>
+        <option value="no">🇳🇴 NO</option>
+        <option value="da">🇩🇰 DA</option>
+        <option value="fi">🇫🇮 FI</option>
+        <option value="tr">🇹🇷 TR</option>
+        <option value="el">🇬🇷 EL</option>
+        <option value="cs">🇨🇿 CS</option>
+        <option value="hu">🇭🇺 HU</option>
+        <option value="ro">🇷🇴 RO</option>
+        <option value="id">🇮🇩 ID</option>
+        <option value="ms">🇲🇾 MS</option>
+        <option value="vi">🇻🇳 VI</option>
+        <option value="th">🇹🇭 TH</option>
+        <option value="tl">🇵🇭 TL</option>
+      </select>
+
       <div class="mode-switch" id="mode-switch" title="Toggle Simple / Advanced">
         <span id="mode-label-simple" style="font-weight: 600">Simple</span>
         <div class="mode-switch-track" id="mode-track" onclick="toggleAdvancedMode()">

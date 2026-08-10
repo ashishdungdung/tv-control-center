@@ -1830,6 +1830,9 @@ function setLanguage(langCode) {
   currentLang = langCode;
   localStorage.setItem('bravia_lang', langCode);
   document.documentElement.setAttribute('lang', langCode);
+
+  const topbarSel = document.getElementById('topbar-language-select');
+  if (topbarSel) topbarSel.value = langCode;
   
   // RTL (Right-to-Left) Direction Engine
   const rtlLanguages = ['ar', 'he', 'fa', 'ur'];
@@ -1896,6 +1899,8 @@ function initTheme() {
   document.documentElement.setAttribute('data-theme', savedTheme);
   const savedLang = localStorage.getItem('bravia_lang') || 'en';
   document.documentElement.setAttribute('lang', savedLang);
+  const topbarSel = document.getElementById('topbar-language-select');
+  if (topbarSel) topbarSel.value = savedLang;
   const rtlLanguages = ['ar', 'he', 'fa', 'ur'];
   if (rtlLanguages.includes(savedLang)) {
     document.documentElement.setAttribute('dir', 'rtl');
