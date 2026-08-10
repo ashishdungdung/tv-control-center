@@ -1902,6 +1902,48 @@ const I18N_DICTIONARY = {
     nav_network: 'Сеть и DNS', nav_apps: 'Приложения', nav_launcher: 'Лаунчер', nav_remote: 'Пульт ДУ',
     nav_hardware: 'Профили ТВ', nav_preferences: 'Настройки', nav_about: 'О программе',
     simple: 'Простой', advanced: 'Расширенный', connected: 'Подключено'
+  },
+  'it': {
+    sec_home: 'Home', sec_optimize: 'Ottimizza', sec_manage: 'Gestisci', sec_system: 'Sistema',
+    nav_overview: 'Panoramica', nav_performance: 'Prestazioni', nav_display: 'Schermo', nav_audio: 'Audio',
+    nav_network: 'Rete e DNS', nav_apps: 'Applicazioni', nav_launcher: 'Launcher', nav_remote: 'Telecomando',
+    nav_hardware: 'Profili Hardware', nav_preferences: 'Preferenze', nav_about: 'Info e Supporto',
+    simple: 'Semplice', advanced: 'Avanzato', connected: 'Connesso'
+  },
+  'nl': {
+    sec_home: 'Home', sec_optimize: 'Optimaliseren', sec_manage: 'Beheren', sec_system: 'Systeem',
+    nav_overview: 'Overzicht', nav_performance: 'Prestaties', nav_display: 'Scherm', nav_audio: 'Geluid',
+    nav_network: 'Netwerk', nav_apps: 'Apps', nav_launcher: 'Launcher', nav_remote: 'Afstandsbediening',
+    nav_hardware: 'Hardwareprofielen', nav_preferences: 'Voorkeuren', nav_about: 'Over',
+    simple: 'Eenvoudig', advanced: 'Geavanceerd', connected: 'Verbonden'
+  },
+  'tr': {
+    sec_home: 'Ana Sayfa', sec_optimize: 'Optimize Et', sec_manage: 'Yönet', sec_system: 'Sistem',
+    nav_overview: 'Genel Bakış', nav_performance: 'Performans', nav_display: 'Ekran', nav_audio: 'Ses',
+    nav_network: 'Ağ ve DNS', nav_apps: 'Uygulamalar', nav_launcher: 'Başlatıcı', nav_remote: 'Uzaktan Kumanda',
+    nav_hardware: 'Donanım Profilleri', nav_preferences: 'Tercihler', nav_about: 'Hakkında',
+    simple: 'Basit', advanced: 'Gelişmiş', connected: 'Bağlandı'
+  },
+  'id': {
+    sec_home: 'Beranda', sec_optimize: 'Optimalkan', sec_manage: 'Kelola', sec_system: 'Sistem',
+    nav_overview: 'Ikhtisar', nav_performance: 'Performa', nav_display: 'Tampilan', nav_audio: 'Audio',
+    nav_network: 'Jaringan', nav_apps: 'Aplikasi', nav_launcher: 'Peluncur', nav_remote: 'Remot Kontrol',
+    nav_hardware: 'Profil Perangkat', nav_preferences: 'Preferensi', nav_about: 'Tentang',
+    simple: 'Sederhana', advanced: 'Lanjutan', connected: 'Terhubung'
+  },
+  'vi': {
+    sec_home: 'Trang chủ', sec_optimize: 'Tối ưu hóa', sec_manage: 'Quản lý', sec_system: 'Hệ thống',
+    nav_overview: 'Tổng quan', nav_performance: 'Hiệu suất', nav_display: 'Màn hình', nav_audio: 'Âm thanh',
+    nav_network: 'Mạng & DNS', nav_apps: 'Ứng dụng', nav_launcher: 'Giao diện', nav_remote: 'Điều khiển',
+    nav_hardware: 'Cấu hình phần cứng', nav_preferences: 'Tùy chỉnh', nav_about: 'Giới thiệu',
+    simple: 'Đơn giản', advanced: 'Nâng cao', connected: 'Đã kết nối'
+  },
+  'th': {
+    sec_home: 'หน้าแรก', sec_optimize: 'ปรับแต่ง', sec_manage: 'จัดการ', sec_system: 'ระบบ',
+    nav_overview: 'ภาพรวม', nav_performance: 'ประสิทธิภาพ', nav_display: 'จอแสดงผล', nav_audio: 'ระบบเสียง',
+    nav_network: 'เครือข่าย', nav_apps: 'แอปพลิเคชัน', nav_launcher: 'ตัวเปิดแอป', nav_remote: 'รีโมทคอนโทรล',
+    nav_hardware: 'ฮาร์ดแวร์', nav_preferences: 'การตั้งค่า', nav_about: 'เกี่ยวกับ',
+    simple: 'เริ่มต้น', advanced: 'ขั้นสูง', connected: 'เชื่อมต่อแล้ว'
   }
 };
 
