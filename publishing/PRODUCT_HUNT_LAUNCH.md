@@ -21,7 +21,7 @@ BRAVIA Control Center is an open-source, zero-cloud desktop web application that
 - 🎮 Virtual Remote Control & Desktop Keyboard Shortcuts
 
 ## Links
-- **GitHub Repository:** https://github.com/anumac/SonyTV
+- **GitHub Repository:** https://github.com/ashishdungdung/tv-control-center
 - **License:** MIT License
-- **PyPI Package:** `pip install bravia-control`
-- **Docker Container:** `anumac/bravia-control-center:latest`
+- **PyPI Package:** `pip install tv-control-center`
+- **Docker Container:** `ashishdungdung/tv-control-center:latest`

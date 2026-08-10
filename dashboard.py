@@ -1507,7 +1507,7 @@ INDEX_HTML = """<!DOCTYPE html>
             <div class="card-header">📦 One-Click APK Sideloader</div>
             <p style="font-size: 0.85rem; color: var(--text-sub);">Enter the file path of any APK file on your laptop to sideload it directly onto your TV over wireless ADB.</p>
             <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 16px;">
-                <input type="text" id="apk-path-input" placeholder="e.g. /Users/anumac/Downloads/SmartTube.apk" style="width: 100%;">
+                <input type="text" id="apk-path-input" placeholder="e.g. /home/user/Downloads/SmartTube.apk" style="width: 100%;">
                 <button class="btn btn-success" onclick="sideloadAPK()">Sideload APK to Sony TV</button>
             </div>
         </div>

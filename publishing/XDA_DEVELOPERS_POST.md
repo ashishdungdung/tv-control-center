@@ -43,16 +43,18 @@ bravia-control serve --port 8888 --target 192.168.2.122:5555
 
 #### Option 2: Via Docker / Unraid / TrueNAS
 ```bash
-docker run -d --name bravia-control -p 8888:8888 anumac/bravia-control-center:latest
+docker run -d --name tv-control-center -p 8888:8888 ashishdungdung/tv-control-center:latest
 ```
 
-#### Option 3: From Source
+**Run from Source Code:**
 ```bash
-git clone https://github.com/anumac/SonyTV.git
-cd SonyTV
-python3 dashboard.py
+git clone https://github.com/ashishdungdung/tv-control-center.git
+cd tv-control-center
+python3 -m bravia_control serve --port 8888
 ```
-Then open **`http://localhost:8888`** in your browser!
+
+[SIZE=4][B]Links & Repository[/B][/SIZE]
+* **GitHub Repository:** [URL]https://github.com/ashishdungdung/tv-control-center[/URL]
 
 ---
 

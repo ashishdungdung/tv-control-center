@@ -21,7 +21,7 @@ build:
 	python3 -m build
 
 docker:
-	docker build -t anumac/bravia-control-center:latest .
+	docker build -t ashishdungdung/tv-control-center:latest .
 
 pypi: build
 	python3 -m pip install --upgrade twine

@@ -1225,7 +1225,7 @@ function renderApps() {
         <input type="file" id="apk-file-input" accept=".apk" style="display:none">
       </div>
       <div class="flex gap-3 mt-4">
-        <input type="text" id="apk-path-input" placeholder="/Users/anumac/Downloads/SmartTube.apk"
+        <input type="text" id="apk-path-input" placeholder="e.g. /home/user/Downloads/SmartTube.apk"
                style="flex:1; background:var(--bg-elevated); border:1px solid var(--border); border-radius:var(--radius-md); padding:var(--sp-2) var(--sp-4); color:var(--text-primary); font-family:var(--font-mono); font-size:0.8125rem; outline:none;">
         <button class="btn btn-primary" onclick="doSideloadAPK()">Install APK</button>
       </div>

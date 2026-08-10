@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   bravia-control-center:
-    image: anumac/bravia-control-center:latest
+    image: ashishdungdung/tv-control-center:latest
     build: .
     container_name: bravia-control-center
     restart: unless-stopped

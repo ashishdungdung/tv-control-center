@@ -45,18 +45,17 @@ bravia-control serve --port 8888
 
 Or via Docker / Unraid:
 ```bash
-docker run -d --name bravia-control -p 8888:8888 anumac/bravia-control-center:latest
+docker run -d --name tv-control-center -p 8888:8888 ashishdungdung/tv-control-center:latest
 ```
 
-Or run the Python code directly:
+**Option 3: Run from Source (GitHub)**
 ```bash
-git clone https://github.com/anumac/SonyTV.git
-cd SonyTV && python3 dashboard.py
+git clone https://github.com/ashishdungdung/tv-control-center.git
+cd tv-control-center
+python3 -m bravia_control serve --port 8888
 ```
-Open **`http://localhost:8888`** in your browser!
 
-### 📄 Links & Open Source
-- **GitHub Repo:** https://github.com/anumac/SonyTV (MIT Licensed)
+- **GitHub Repo:** https://github.com/ashishdungdung/tv-control-center (MIT Licensed)
 - Feedback, bug reports, and PRs are super welcome! Let me know how it works on your BRAVIA model!
 
 ---
