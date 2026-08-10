@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="day">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TV Control Center — Universal Smart TV Management Suite</title>
   <meta name="description" content="Universal Smart TV Management Suite for Sony BRAVIA, NVIDIA SHIELD, TCL, Hisense, Fire TV, Chromecast, Xiaomi">
+  <script>
+    (function() {
+      var saved = localStorage.getItem('bravia_theme') || 'day';
+      document.documentElement.setAttribute('data-theme', saved);
+    })();
+  </script>
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
