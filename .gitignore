@@ -25,6 +25,16 @@ scratch/
 snapshots.json
 profiles.json
 
-# Internal Design Instructions & Scratch Notes
+# Internal Publishing Drafts & Notes
+publishing/
 BRAVIA_Control_Center_*.txt
 *.txt
+audit_results.json
+unsplash_4k.jpg
+*.jpg
+*.png
+*.webp
+run_bravia_control_center.sh
+
+# Build & Duplicate Mirror Folders
+static/
