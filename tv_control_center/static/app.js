@@ -706,7 +706,72 @@ async function doToggleMod(modId, state) {
 }
 
 async function doSendKey(keycode) {
-  await apiPost('/api/remote', { keycode });
+  const data = await apiPost('/api/remote', { keycode });
+  if (data) {
+    logTerminal(`ADB keyevent: ${keycode}`, 'info');
+  }
+}
+
+async function doSendText() {
+  const input = document.getElementById('remote-text-input');
+  if (!input) return;
+  const text = input.value;
+  if (!text) {
+    showToast('Input Required', 'Please enter text to send to TV', 'warning');
+    return;
+  }
+  const data = await apiPost('/api/remote', { text });
+  if (data) {
+    showToast('Text Sent', data.result);
+    logTerminal(`ADB text: "${text}"`, 'success');
+    logActivity('Remote Text', `Sent text '${text}'`);
+    input.value = '';
+  }
+}
+
+async function doLaunchRemoteApp(app) {
+  const data = await apiPost('/api/remote', { app });
+  if (data) {
+    showToast('App Launched', data.result);
+    logTerminal(`ADB app: ${app}`, 'success');
+    logActivity('App Launch', `Launched ${app}`);
+  }
+}
+
+async function doSwitchInput(source) {
+  const data = await apiPost('/api/remote', { input_source: source });
+  if (data) {
+    showToast('Input Switched', data.result);
+    logTerminal(`ADB input: ${source}`, 'success');
+    logActivity('Input Switch', `Switched to ${source.toUpperCase()}`);
+  }
+}
+
+async function doRemoteAction(action) {
+  if (action === 'reboot') {
+    showDialog('Reboot Smart TV', 'Are you sure you want to reboot the TV now?', async () => {
+      showToast('Rebooting', 'Sending reboot signal...', 'warning');
+      const data = await apiPost('/api/remote', { action: 'reboot' });
+      if (data) { showToast('Reboot Sent', data.result); logActivity('TV Reboot', data.result); }
+    }, 'Reboot TV', 'btn-danger');
+    return;
+  }
+  const data = await apiPost('/api/remote', { action });
+  if (data) {
+    showToast('Remote Action', data.result);
+    logActivity('Remote Action', `Executed ${action}`);
+  }
+}
+
+function toggleNumpad() {
+  const np = document.getElementById('remote-numpad');
+  const btn = document.getElementById('numpad-toggle-btn');
+  if (np) {
+    np.classList.toggle('hidden');
+    if (btn) {
+      btn.textContent = np.classList.contains('hidden') ? '🔢 ' + t('Show Numpad') : '❌ ' + t('Hide Numpad');
+    }
+  }
 }
 
 async function doSwitchLauncher(launcher) {
@@ -1376,44 +1441,195 @@ function renderLauncher() {
 function renderRemote() {
   return `
     <div class="page-header">
-      <h1>Virtual Remote</h1>
-      <p class="page-subtitle">Control your TV from your desktop</p>
+      <div class="flex items-center justify-between">
+        <div>
+          <h1>${t('nav_remote')}</h1>
+          <p class="page-subtitle">${t('Control your TV, send keyboard text, and launch apps directly')}</p>
+        </div>
+        <div class="flex gap-2">
+          <button class="btn btn-secondary btn-sm" id="numpad-toggle-btn" onclick="toggleNumpad()">🔢 ${t('Show Numpad')}</button>
+          <button class="btn btn-danger btn-sm" onclick="doRemoteAction('reboot')">🔄 ${t('Reboot')}</button>
+        </div>
+      </div>
     </div>
 
-    <div class="remote-surface">
-      <div class="dpad-grid">
-        <div></div>
-        <button class="dpad-btn" onclick="doSendKey(19)" title="Up">↑</button>
-        <div></div>
-        <button class="dpad-btn" onclick="doSendKey(21)" title="Left">←</button>
-        <button class="dpad-btn dpad-ok" onclick="doSendKey(23)" title="OK">OK</button>
-        <button class="dpad-btn" onclick="doSendKey(22)" title="Right">→</button>
-        <div></div>
-        <button class="dpad-btn" onclick="doSendKey(20)" title="Down">↓</button>
-        <div></div>
+    <div class="remote-layout">
+      <!-- Left Column: Virtual Controller Chassis -->
+      <div class="remote-surface">
+        <!-- Top Bar: Power, Inputs, Sleep/Wake -->
+        <div class="remote-header-bar">
+          <button class="remote-power-btn" onclick="doSendKey(26)" title="${t('Power Toggle')}">⏻</button>
+          
+          <div class="flex items-center gap-1">
+            <button class="btn btn-ghost btn-sm" onclick="doRemoteAction('sleep')" title="${t('Sleep')}">🌙</button>
+            <button class="btn btn-ghost btn-sm" onclick="doRemoteAction('wake')" title="${t('Wake')}">☀️</button>
+            <select onchange="if(this.value){doSwitchInput(this.value); this.value='';}" style="background:var(--bg-elevated); border:1px solid var(--border); border-radius:var(--radius-sm); padding:4px 8px; color:var(--text-primary); font-size:0.75rem; outline:none;">
+              <option value="">📺 ${t('Inputs')}</option>
+              <option value="hdmi1">HDMI 1</option>
+              <option value="hdmi2">HDMI 2</option>
+              <option value="hdmi3">HDMI 3</option>
+              <option value="hdmi4">HDMI 4</option>
+              <option value="tv">TV Tuner</option>
+              <option value="menu">Input Menu</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- D-Pad Controller -->
+        <div class="dpad-container">
+          <button class="dpad-direction-btn up" onclick="doSendKey(19)" title="${t('Up')} (↑)">▲</button>
+          <button class="dpad-direction-btn left" onclick="doSendKey(21)" title="${t('Left')} (←)">◀</button>
+          <button class="dpad-ok-center" onclick="doSendKey(23)" title="${t('OK / Select')} (Enter)">OK</button>
+          <button class="dpad-direction-btn right" onclick="doSendKey(22)" title="${t('Right')} (→)">▶</button>
+          <button class="dpad-direction-btn down" onclick="doSendKey(20)" title="${t('Down')} (↓)">▼</button>
+        </div>
+
+        <!-- Navigation Bar: Back, Home, Menu, Recents -->
+        <div class="remote-nav-bar">
+          <button class="remote-icon-btn" onclick="doSendKey(4)" title="${t('Back')} (Esc)">
+            <span style="font-size:1.1rem;">↩</span>
+            <span>${t('Back')}</span>
+          </button>
+          <button class="remote-icon-btn" onclick="doSendKey(3)" title="${t('Home')} (H)">
+            <span style="font-size:1.1rem;">🏠</span>
+            <span>${t('Home')}</span>
+          </button>
+          <button class="remote-icon-btn" onclick="doSendKey(82)" title="${t('Menu')} (M)">
+            <span style="font-size:1.1rem;">☰</span>
+            <span>${t('Menu')}</span>
+          </button>
+          <button class="remote-icon-btn" onclick="doSendKey(187)" title="${t('Recent Apps')}">
+            <span style="font-size:1.1rem;">🗂️</span>
+            <span>${t('Recents')}</span>
+          </button>
+        </div>
+
+        <!-- Rockers Grid: Volume, Info/Mute, Channel -->
+        <div class="remote-rockers-grid">
+          <!-- Volume Rocker -->
+          <div class="rocker-pill">
+            <button class="rocker-btn" onclick="doSendKey(24)" title="${t('Volume Up')} (+)">＋</button>
+            <div class="rocker-label">VOL</div>
+            <button class="rocker-btn" onclick="doSendKey(25)" title="${t('Volume Down')} (-)">－</button>
+          </div>
+
+          <!-- Center Utility Controls -->
+          <div class="flex flex-col gap-2">
+            <button class="btn btn-ghost btn-sm" style="font-size:0.75rem;" onclick="doSendKey(164)" title="${t('Mute')}">🔇 ${t('Mute')}</button>
+            <button class="btn btn-ghost btn-sm" style="font-size:0.75rem;" onclick="doSendKey(165)" title="${t('Info')}">ℹ️ ${t('Info')}</button>
+            <button class="btn btn-ghost btn-sm" style="font-size:0.75rem;" onclick="apiPost('/api/open_tv_menu',{menu:'sound'}).then(d=>{if(d)showToast('TV',d.result)})" title="${t('Settings')}">⚙️ ${t('Settings')}</button>
+          </div>
+
+          <!-- Channel Rocker -->
+          <div class="rocker-pill">
+            <button class="rocker-btn" onclick="doSendKey(166)" title="${t('Channel Up')}">▲</button>
+            <div class="rocker-label">CH</div>
+            <button class="rocker-btn" onclick="doSendKey(167)" title="${t('Channel Down')}">▼</button>
+          </div>
+        </div>
+
+        <!-- Media Playback Row -->
+        <div class="remote-media-row">
+          <button class="media-btn" onclick="doSendKey(89)" title="${t('Rewind')}">⏪</button>
+          <button class="media-btn" onclick="doSendKey(85)" title="${t('Play / Pause')} (Space)">⏯️</button>
+          <button class="media-btn" onclick="doSendKey(90)" title="${t('Fast Forward')}">⏩</button>
+          <button class="media-btn" onclick="doSendKey(86)" title="${t('Stop')}">⏹️</button>
+        </div>
+
+        <!-- Expandable Numeric Pad -->
+        <div id="remote-numpad" class="hidden">
+          <div class="numpad-grid">
+            <button class="num-btn" onclick="doSendKey(8)">1</button>
+            <button class="num-btn" onclick="doSendKey(9)">2</button>
+            <button class="num-btn" onclick="doSendKey(10)">3</button>
+            <button class="num-btn" onclick="doSendKey(11)">4</button>
+            <button class="num-btn" onclick="doSendKey(12)">5</button>
+            <button class="num-btn" onclick="doSendKey(13)">6</button>
+            <button class="num-btn" onclick="doSendKey(14)">7</button>
+            <button class="num-btn" onclick="doSendKey(15)">8</button>
+            <button class="num-btn" onclick="doSendKey(16)">9</button>
+            <button class="num-btn" onclick="doSendKey(67)" title="${t('Backspace')}">⌫</button>
+            <button class="num-btn" onclick="doSendKey(7)">0</button>
+            <button class="num-btn" onclick="doSendKey(66)" title="${t('Enter')}">↵</button>
+          </div>
+        </div>
       </div>
 
-      <div class="remote-controls">
-        <button class="btn btn-secondary" onclick="doSendKey(4)">Back</button>
-        <button class="btn btn-primary" onclick="doSendKey(3)">Home</button>
-        <button class="btn btn-secondary" onclick="doSendKey(82)">Menu</button>
-      </div>
+      <!-- Right Column: ADB Keyboard Typing, Streaming Deck, & Shortcuts -->
+      <div>
+        <!-- Instant ADB Text Transmitter -->
+        <div class="card mb-6">
+          <div class="card-title mb-1">⌨️ ${t('Send Text to TV')}</div>
+          <div class="card-subtitle mb-3">${t('Type on your keyboard to instantly send text, searches, or passwords to your TV.')}</div>
+          <div class="flex gap-2">
+            <input type="text" id="remote-text-input" placeholder="${t('Type search or text here...')}"
+                   onkeydown="if(event.key==='Enter') doSendText()"
+                   style="flex:1; background:var(--bg-elevated); border:1px solid var(--border); border-radius:var(--radius-md); padding:var(--sp-2) var(--sp-4); color:var(--text-primary); font-size:0.875rem; outline:none;">
+            <button class="btn btn-primary" onclick="doSendText()">🚀 ${t('Send')}</button>
+            <button class="btn btn-secondary" onclick="doSendKey(66)" title="${t('Send Enter Key')}">↵</button>
+          </div>
+        </div>
 
-      <div class="remote-controls mb-6">
-        <button class="btn btn-secondary" onclick="doSendKey(24)">Vol +</button>
-        <button class="btn btn-secondary" onclick="doSendKey(25)">Vol −</button>
-        <button class="btn btn-ghost" onclick="doSendKey(164)">Mute</button>
-      </div>
+        <!-- Streaming & App Quick Launch Deck -->
+        <div class="card mb-6">
+          <div class="card-title mb-1">🚀 ${t('Streaming Apps')}</div>
+          <div class="card-subtitle mb-3">${t('One-click direct launcher for installed media services.')}</div>
+          <div class="app-deck-grid">
+            <div class="app-deck-card" onclick="doLaunchRemoteApp('youtube')">
+              <span class="app-deck-icon">📺</span>
+              <span class="app-deck-name">YouTube</span>
+            </div>
+            <div class="app-deck-card" onclick="doLaunchRemoteApp('smarttube')">
+              <span class="app-deck-icon">⚡</span>
+              <span class="app-deck-name">SmartTube</span>
+            </div>
+            <div class="app-deck-card" onclick="doLaunchRemoteApp('netflix')">
+              <span class="app-deck-icon">🎬</span>
+              <span class="app-deck-name">Netflix</span>
+            </div>
+            <div class="app-deck-card" onclick="doLaunchRemoteApp('prime')">
+              <span class="app-deck-icon">🍿</span>
+              <span class="app-deck-name">Prime Video</span>
+            </div>
+            <div class="app-deck-card" onclick="doLaunchRemoteApp('disney')">
+              <span class="app-deck-icon">🏰</span>
+              <span class="app-deck-name">Disney+</span>
+            </div>
+            <div class="app-deck-card" onclick="doLaunchRemoteApp('spotify')">
+              <span class="app-deck-icon">🎵</span>
+              <span class="app-deck-name">Spotify</span>
+            </div>
+            <div class="app-deck-card" onclick="doLaunchRemoteApp('plex')">
+              <span class="app-deck-icon">📽️</span>
+              <span class="app-deck-name">Plex</span>
+            </div>
+            <div class="app-deck-card" onclick="doLaunchRemoteApp('kodi')">
+              <span class="app-deck-icon">📦</span>
+              <span class="app-deck-name">Kodi</span>
+            </div>
+            <div class="app-deck-card" onclick="doLaunchRemoteApp('twitch')">
+              <span class="app-deck-icon">👾</span>
+              <span class="app-deck-name">Twitch</span>
+            </div>
+            <div class="app-deck-card" onclick="doLaunchRemoteApp('browser')">
+              <span class="app-deck-icon">🌐</span>
+              <span class="app-deck-name">Browser</span>
+            </div>
+          </div>
+        </div>
 
-      ${sectionHeader('Quick Launch')}
-      <div class="remote-quick-actions">
-        <button class="btn btn-secondary btn-sm" onclick="doSendKey(3)">🏠 Home</button>
-        <button class="btn btn-secondary btn-sm" onclick="apiPost('/api/remote',{keycode:176})">📺 YouTube</button>
-        <button class="btn btn-secondary btn-sm" onclick="apiPost('/api/open_tv_menu',{menu:'sound'}).then(d=>{if(d)showToast('TV',d.result)})">⚙️ Settings</button>
-      </div>
-
-      <div class="text-caption mt-6" style="text-align:center">
-        Keyboard shortcuts: Arrow keys = D-pad, Enter = OK, Escape = Back
+        <!-- Desktop Keyboard Shortcuts Cheatsheet -->
+        <div class="card" style="background:var(--bg-elevated)">
+          <div class="card-title mb-2" style="font-size:0.875rem;">⌨️ ${t('Desktop Keyboard Controls')}</div>
+          <div class="grid-2 text-caption" style="gap:var(--sp-2);">
+            <div><kbd style="background:var(--bg-surface); padding:2px 6px; border-radius:4px; border:1px solid var(--border)">↑ ↓ ← →</kbd> : ${t('D-Pad Navigation')}</div>
+            <div><kbd style="background:var(--bg-surface); padding:2px 6px; border-radius:4px; border:1px solid var(--border)">Enter</kbd> : ${t('OK / Select')}</div>
+            <div><kbd style="background:var(--bg-surface); padding:2px 6px; border-radius:4px; border:1px solid var(--border)">Esc</kbd> / <kbd style="background:var(--bg-surface); padding:2px 6px; border-radius:4px; border:1px solid var(--border)">Backspace</kbd> : ${t('Back')}</div>
+            <div><kbd style="background:var(--bg-surface); padding:2px 6px; border-radius:4px; border:1px solid var(--border)">Space</kbd> : ${t('Play / Pause')}</div>
+            <div><kbd style="background:var(--bg-surface); padding:2px 6px; border-radius:4px; border:1px solid var(--border)">H</kbd> : ${t('Home')}</div>
+            <div><kbd style="background:var(--bg-surface); padding:2px 6px; border-radius:4px; border:1px solid var(--border)">M</kbd> : ${t('Menu')}</div>
+          </div>
+        </div>
       </div>
     </div>
   `;
@@ -2235,10 +2451,23 @@ document.addEventListener('keydown', (e) => {
 
   if (isInput) return;
 
-  // Virtual remote D-pad keys when on Remote page
+  // Virtual remote desktop shortcuts when on Remote page
   if (currentRoute === 'remote') {
-    const keyMap = { ArrowUp: 19, ArrowDown: 20, ArrowLeft: 21, ArrowRight: 22, Enter: 23, Backspace: 4 };
-    if (keyMap[e.key]) { e.preventDefault(); doSendKey(keyMap[e.key]); return; }
+    const keyMap = {
+      ArrowUp: 19, ArrowDown: 20, ArrowLeft: 21, ArrowRight: 22, Enter: 23,
+      Backspace: 4, Escape: 4,
+      h: 3, H: 3,
+      m: 82, M: 82,
+      '+': 24, '=': 24,
+      '-': 25, '_': 25,
+      ' ': 85,
+      p: 26, P: 26
+    };
+    if (keyMap[e.key] !== undefined) {
+      e.preventDefault();
+      doSendKey(keyMap[e.key]);
+      return;
+    }
   }
 
   // T → Toggle terminal

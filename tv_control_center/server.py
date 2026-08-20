@@ -133,8 +133,57 @@ class ADBDashboardHandler(http.server.SimpleHTTPRequestHandler):
             self.send_json({"result": res})
         elif parsed.path == "/api/remote":
             keycode = data.get("keycode")
-            res = run_adb_timeout(["shell", "input", "keyevent", str(keycode)], target, timeout=3.0)
-            self.send_json({"result": res})
+            text = data.get("text")
+            app = data.get("app")
+            action = data.get("action")
+            input_source = data.get("input_source")
+
+            if text is not None:
+                escaped = str(text).replace(" ", "%s").replace("&", "\\&").replace("'", "\\'").replace('"', '\\"')
+                res = run_adb_timeout(["shell", "input", "text", escaped], target, timeout=4.0)
+                self.send_json({"result": f"Sent text to TV: '{text}'"})
+            elif app:
+                app_map = {
+                    "youtube": "com.google.android.youtube.tv",
+                    "smarttube": "org.smarttube.stable",
+                    "netflix": "com.netflix.ninja",
+                    "prime": "com.amazon.amazonvideo.livingroom",
+                    "disney": "in.startv.hotstar",
+                    "spotify": "com.spotify.tv.android",
+                    "plex": "com.plexapp.android",
+                    "kodi": "org.xbmc.kodi",
+                    "twitch": "tv.twitch.android.app",
+                    "browser": "com.android.chrome"
+                }
+                pkg = app_map.get(str(app).lower(), str(app))
+                res = run_adb_timeout(["shell", "monkey", "-p", pkg, "-c", "android.intent.category.LAUNCHER", "1"], target, timeout=4.0)
+                self.send_json({"result": f"Launched {str(app).capitalize()} ({pkg})"})
+            elif input_source:
+                input_map = {
+                    "hdmi1": 247, # KEYCODE_TV_INPUT_HDMI_1
+                    "hdmi2": 248, # KEYCODE_TV_INPUT_HDMI_2
+                    "hdmi3": 249, # KEYCODE_TV_INPUT_HDMI_3
+                    "hdmi4": 250, # KEYCODE_TV_INPUT_HDMI_4
+                    "tv": 170,    # KEYCODE_TV_INPUT
+                    "menu": 178   # KEYCODE_TV_INPUT_COMPOSITE_1 / Input Chooser
+                }
+                k = input_map.get(str(input_source).lower(), 178)
+                res = run_adb_timeout(["shell", "input", "keyevent", str(k)], target, timeout=3.0)
+                self.send_json({"result": f"Switched input source to {str(input_source).upper()}"})
+            elif action == "reboot":
+                res = run_adb_timeout(["reboot"], target, timeout=5.0)
+                self.send_json({"result": "Reboot command sent to TV via ADB."})
+            elif action == "sleep":
+                res = run_adb_timeout(["shell", "input", "keyevent", "223"], target, timeout=3.0)
+                self.send_json({"result": "Screen Sleep command sent to TV."})
+            elif action == "wake":
+                res = run_adb_timeout(["shell", "input", "keyevent", "224"], target, timeout=3.0)
+                self.send_json({"result": "Screen Wake command sent to TV."})
+            elif keycode is not None:
+                res = run_adb_timeout(["shell", "input", "keyevent", str(keycode)], target, timeout=3.0)
+                self.send_json({"result": f"Keyevent {keycode} sent."})
+            else:
+                self.send_json({"result": "No keycode or command provided"}, status=400)
         elif parsed.path == "/api/speedup":
             scale = str(data.get("scale", 0.5))
             r1 = run_adb_timeout(["shell", "settings", "put", "global", "window_animation_scale", scale], target, timeout=3.0)
