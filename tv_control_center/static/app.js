@@ -5,7 +5,7 @@
    ============================================================ */
 
 // ── Global State ───────────────────────────────────────────
-const TARGET = '192.168.2.122:5555';
+let TARGET = localStorage.getItem('tv_control_target') || '192.168.2.122:5555';
 let advancedMode = false;
 let terminalExpanded = false;
 let terminalCmdCount = 0;
@@ -19,10 +19,21 @@ const activity = [];
 
 const state = {
   connected: true,
+  device: { brand: 'Sony', model: 'KD-55X8000H', target: TARGET },
   metrics: { available_ram: '...', storage_free: '...', storage_percent: '...', uptime: '...' },
   audit: null,
   apps: null,
 };
+
+function setTarget(newTarget) {
+  if (!newTarget) return;
+  if (!newTarget.includes(':')) newTarget = `${newTarget}:5555`;
+  TARGET = newTarget;
+  localStorage.setItem('tv_control_target', newTarget);
+  state.device.target = newTarget;
+  updateConnectionUI();
+  apiPost('/api/set_target', { target: newTarget });
+}
 
 // ── API Layer ──────────────────────────────────────────────
 async function api(path, method = 'GET', body = null) {
@@ -314,15 +325,97 @@ function toggleAdvancedMode() {
   renderPage();
 }
 
+function updateConnectionUI() {
+  const isConn = state.connected;
+  
+  const topbarDev = document.getElementById('topbar-device-name');
+  if (topbarDev) topbarDev.textContent = state.device ? state.device.model : TARGET;
+  
+  const topbarDot = document.getElementById('topbar-dot');
+  if (topbarDot) {
+    topbarDot.className = 'connection-dot' + (isConn ? '' : ' disconnected');
+    topbarDot.style.background = isConn ? 'var(--success)' : 'var(--danger)';
+  }
+  
+  const sidebarDot = document.getElementById('sidebar-dot');
+  if (sidebarDot) {
+    sidebarDot.className = 'connection-dot' + (isConn ? '' : ' disconnected');
+    sidebarDot.style.background = isConn ? 'var(--success)' : 'var(--danger)';
+  }
+
+  const connLabel = document.getElementById('conn-label');
+  if (connLabel) {
+    connLabel.textContent = isConn ? t('Connected') : t('Disconnected');
+  }
+
+  const popoverStatus = document.getElementById('popover-status');
+  if (popoverStatus) {
+    popoverStatus.textContent = isConn ? `ADB Connected (${state.device?.model || TARGET})` : 'Offline / Disconnected';
+  }
+
+  const popoverIp = document.getElementById('popover-ip');
+  if (popoverIp) {
+    popoverIp.textContent = TARGET;
+  }
+}
+
+async function checkConnectionStatus() {
+  const data = await api('/api/device_state');
+  if (data) {
+    state.connected = true;
+    state.device = {
+      brand: data.brand || 'Sony',
+      model: data.model || 'KD-55X8000H',
+      target: TARGET
+    };
+  } else {
+    state.connected = false;
+  }
+  updateConnectionUI();
+}
+
 function toggleConnectionPopover() {
   connectionPopoverOpen = !connectionPopoverOpen;
-  document.getElementById('connection-popover').classList.toggle('hidden', !connectionPopoverOpen);
+  const popover = document.getElementById('connection-popover');
+  if (popover) {
+    popover.classList.toggle('hidden', !connectionPopoverOpen);
+    if (connectionPopoverOpen) updateConnectionUI();
+  }
 }
 
 async function reconnectDevice() {
+  const [ip, port] = TARGET.split(':');
+  showToast('Connecting', `Connecting to ${TARGET}...`, 'info');
   logTerminal(`adb connect ${TARGET}`);
-  const data = await apiPost('/api/connect', { ip: '192.168.2.122' });
-  if (data) { logTerminal(data.result, 'success'); showToast('Reconnected', data.result); }
+  const data = await apiPost('/api/connect_device', { ip, port: port || '5555' });
+  if (data && (data.status === 'connected' || data.connected)) {
+    state.connected = true;
+    if (data.device) {
+      state.device = data.device;
+    }
+    showToast('Connected', data.message || `Connected to ${TARGET}`, 'success');
+    logTerminal(data.message || `Connected to ${TARGET}`, 'success');
+    logActivity('TV Reconnected', `Target: ${TARGET}`);
+    refreshMetrics();
+  } else if (data && data.status === 'unauthorized') {
+    showToast('Authorization Required', data.message, 'warning');
+    logTerminal(data.message, 'warning');
+  } else {
+    showToast('Connection Failed', data?.message || `Could not reach ${TARGET}`, 'error');
+    logTerminal(data?.message || `Could not reach ${TARGET}`, 'error');
+  }
+  updateConnectionUI();
+  toggleConnectionPopover();
+}
+
+async function disconnectDevice() {
+  logTerminal(`adb disconnect ${TARGET}`);
+  const data = await apiPost('/api/disconnect_device', { target: TARGET });
+  state.connected = false;
+  showToast('Disconnected', `Disconnected from ${TARGET}`, 'info');
+  logTerminal(`Disconnected from ${TARGET}`, 'info');
+  logActivity('TV Disconnected', `Target: ${TARGET}`);
+  updateConnectionUI();
   toggleConnectionPopover();
 }
 
@@ -358,25 +451,107 @@ function openSetupGuideModal() {
 }
 
 // ── CONNECT TO TV WORKFLOW MODAL ────────────────────────────
+async function doScanNetworkInModal() {
+  const container = document.getElementById('scan-results-container');
+  const scanBtn = document.getElementById('scan-network-btn');
+  if (!container) return;
+  
+  if (scanBtn) {
+    scanBtn.disabled = true;
+    scanBtn.textContent = '⏳ Scanning Subnet...';
+  }
+  container.innerHTML = '<div class="text-caption p-3" style="text-align:center;">🔍 Scanning local subnet on port 5555 for Smart TVs...</div>';
+  
+  const data = await api('/api/scan_network');
+  if (scanBtn) {
+    scanBtn.disabled = false;
+    scanBtn.textContent = '🔍 Auto-Scan Subnet';
+  }
+  
+  if (data && data.devices && data.devices.length > 0) {
+    container.innerHTML = `
+      <div style="font-size:0.8125rem; font-weight:600; margin-bottom:var(--sp-2)">Discovered Smart TVs (${data.devices.length}):</div>
+      <div class="flex flex-col gap-2">
+        ${data.devices.map(d => `
+          <div class="flex items-center justify-between p-2" style="background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius-sm)">
+            <div>
+              <div style="font-weight:600; font-size:0.8125rem;">📺 ${d.brand} ${d.model}</div>
+              <div class="text-caption mono" style="color:var(--text-muted)">${d.target}</div>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="connectToDiscoveredDevice('${d.ip}', '${d.port}')">⚡ Connect</button>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  } else {
+    container.innerHTML = `
+      <div class="text-caption p-3" style="text-align:center; color:var(--text-secondary)">
+        No new Android TVs found on port 5555. Ensure TV ADB Debugging is enabled and TV is on the same Wi-Fi network.
+      </div>
+    `;
+  }
+}
+
+async function connectToDiscoveredDevice(ip, port) {
+  const target = `${ip}:${port}`;
+  showToast('Connecting', `Connecting to ${target}...`, 'info');
+  logTerminal(`adb connect ${target}`);
+  const data = await apiPost('/api/connect_device', { ip, port });
+  if (data && (data.status === 'connected' || data.connected)) {
+    setTarget(target);
+    state.connected = true;
+    if (data.device) state.device = data.device;
+    showToast('TV Connected', data.message || `Successfully paired with ${target}`);
+    logActivity('TV Connected', `Active target set to ${target}`);
+    closeDialog();
+    refreshMetrics();
+    renderPage();
+  } else if (data && data.status === 'unauthorized') {
+    setTarget(target);
+    showToast('Authorization Required', data.message, 'warning');
+    logTerminal(data.message, 'warning');
+    closeDialog();
+  } else {
+    showToast('Connection Succeeded', `Target IP set to ${target}`);
+    setTarget(target);
+    closeDialog();
+    refreshMetrics();
+  }
+}
+
 function openConnectTVModal() {
-  showDialog('🔌 Connect to Smart TV', `
+  showDialog('🔌 Connect & Auto-Discover Smart TV', `
     <div class="text-left">
-      <p class="text-caption mb-4">Enter your target Smart TV's IP address and ADB port to establish a wireless debugging connection over your local network.</p>
-      
+      <!-- Auto-Discovery Scanner -->
       <div class="card mb-4" style="background:var(--bg-elevated); padding:var(--sp-4);">
-        <div class="mb-3">
-          <label style="font-size:0.8125rem; font-weight:600; display:block;" class="mb-1">TV IP Address</label>
-          <input type="text" id="conn-ip-input" value="${TARGET.split(':')[0]}" placeholder="e.g. 192.168.2.122"
-                 style="width:100%; background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius-sm); padding:var(--sp-2) var(--sp-3); color:var(--text-primary); font-family:var(--font-mono); outline:none;">
+        <div class="flex items-center justify-between mb-2">
+          <div>
+            <div style="font-size:0.875rem; font-weight:600;">🔍 Local Network Auto-Discovery</div>
+            <div class="text-caption">Scan your Wi-Fi subnet for active Android TVs on port 5555.</div>
+          </div>
+          <button class="btn btn-primary btn-sm" id="scan-network-btn" onclick="doScanNetworkInModal()">🔍 Auto-Scan Subnet</button>
         </div>
-        <div>
-          <label style="font-size:0.8125rem; font-weight:600; display:block;" class="mb-1">ADB Port</label>
-          <input type="text" id="conn-port-input" value="${TARGET.split(':')[1] || '5555'}" placeholder="5555"
-                 style="width:100%; background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius-sm); padding:var(--sp-2) var(--sp-3); color:var(--text-primary); font-family:var(--font-mono); outline:none;">
+        <div id="scan-results-container" class="mt-2"></div>
+      </div>
+
+      <!-- Manual IP Entry -->
+      <div class="card mb-4" style="background:var(--bg-elevated); padding:var(--sp-4);">
+        <div style="font-size:0.875rem; font-weight:600;" class="mb-3">⌨️ Manual Target IP Configuration</div>
+        <div class="grid-2 gap-3 mb-2">
+          <div>
+            <label style="font-size:0.8125rem; font-weight:600; display:block;" class="mb-1">TV IP Address</label>
+            <input type="text" id="conn-ip-input" value="${TARGET.split(':')[0]}" placeholder="e.g. 192.168.2.122"
+                   style="width:100%; background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius-sm); padding:var(--sp-2) var(--sp-3); color:var(--text-primary); font-family:var(--font-mono); outline:none;">
+          </div>
+          <div>
+            <label style="font-size:0.8125rem; font-weight:600; display:block;" class="mb-1">ADB Port</label>
+            <input type="text" id="conn-port-input" value="${TARGET.split(':')[1] || '5555'}" placeholder="5555"
+                   style="width:100%; background:var(--bg-surface); border:1px solid var(--border); border-radius:var(--radius-sm); padding:var(--sp-2) var(--sp-3); color:var(--text-primary); font-family:var(--font-mono); outline:none;">
+          </div>
         </div>
       </div>
 
-      <div class="card mb-4" style="padding:var(--sp-3)">
+      <div class="card mb-3" style="padding:var(--sp-3)">
         <div style="font-size:0.8125rem; font-weight:600;" class="mb-1">Quick Select Device Preset:</div>
         <div class="flex flex-wrap gap-2">
           <button class="btn btn-ghost btn-sm" onclick="document.getElementById('conn-ip-input').value='192.168.2.122'">Sony BRAVIA (192.168.2.122)</button>
@@ -396,13 +571,23 @@ function openConnectTVModal() {
     showToast('Connecting', `Pinging wireless bridge at ${ip}:${port}...`, 'info');
     logTerminal(`ADB connect ${ip}:${port}`);
     const data = await apiPost('/api/connect_device', { ip, port });
-    if (data && data.status === 'connected') {
-      showToast('TV Connected', `Successfully paired with ${ip}:${port}`);
+    if (data && (data.status === 'connected' || data.connected)) {
+      setTarget(`${ip}:${port}`);
+      state.connected = true;
+      if (data.device) state.device = data.device;
+      showToast('TV Connected', data.message || `Successfully paired with ${ip}:${port}`);
       logActivity('TV Connected', `Target set to ${ip}:${port}`);
       refreshMetrics();
+      renderPage();
+    } else if (data && data.status === 'unauthorized') {
+      setTarget(`${ip}:${port}`);
+      showToast('Authorization Pending', data.message, 'warning');
+      logTerminal(data.message, 'warning');
     } else {
-      showToast('Connection Succeeded', `Target IP set to ${ip}:${port}`);
+      setTarget(`${ip}:${port}`);
+      showToast('Target Set', `Target IP set to ${ip}:${port}`);
       refreshMetrics();
+      renderPage();
     }
   }, 'Connect & Verify', 'btn-primary');
 }
@@ -2521,6 +2706,9 @@ function init() {
   // Init Theme & i18n Language Engine
   initTheme();
 
+  // Check live TV connection state & populate device info
+  checkConnectionStatus();
+
   // Render initial page
   renderPage();
 
@@ -2529,8 +2717,8 @@ function init() {
   metricsInterval = setInterval(refreshMetrics, 15000);
 
   // Log startup
-  logTerminal('BRAVIA Control Center initialized');
-  logTerminal(`Connected to ${TARGET}`, 'success');
+  logTerminal('TV Control Center initialized');
+  logTerminal(`Active Target: ${TARGET}`, 'info');
 }
 
 window.addEventListener('hashchange', () => {

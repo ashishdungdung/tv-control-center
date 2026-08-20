@@ -202,10 +202,16 @@
           <tr><td>ADB</td><td style="text-align:right; color:var(--success)">✓</td></tr>
           <tr><td>Shell</td><td style="text-align:right; color:var(--success)">✓</td></tr>
         </table>
-        <div class="flex gap-2 mt-4">
-          <button class="btn btn-primary btn-sm" style="flex:1" onclick="openSetupGuideModal()">📖 Setup Guide</button>
-          <button class="btn btn-secondary btn-sm" style="flex:1" onclick="reconnectDevice()">Connect IP</button>
-          <button class="btn btn-ghost btn-sm" onclick="toggleConnectionPopover()">Close</button>
+        <div class="flex flex-col gap-2 mt-4">
+          <div class="flex gap-2">
+            <button class="btn btn-primary btn-sm" style="flex:1" onclick="openConnectTVModal(); toggleConnectionPopover();">🔌 Scan & Connect</button>
+            <button class="btn btn-secondary btn-sm" onclick="reconnectDevice()" title="Reconnect">🔄</button>
+            <button class="btn btn-danger btn-sm" onclick="disconnectDevice()" title="Disconnect">❌</button>
+          </div>
+          <div class="flex gap-2">
+            <button class="btn btn-ghost btn-sm" style="flex:1" onclick="openSetupGuideModal()">📖 Setup Guide</button>
+            <button class="btn btn-ghost btn-sm" onclick="toggleConnectionPopover()">Close</button>
+          </div>
         </div>
       </div>
     </div>

@@ -11,7 +11,11 @@ import urllib.parse
 import os
 import sys
 from typing import Dict, Any
-from tv_control_center.adb import run_adb_timeout, get_devices, DEFAULT_TARGET
+from tv_control_center.adb import (
+    run_adb_timeout, get_devices, get_device_info, connect_adb,
+    disconnect_adb, scan_network_devices, get_active_target,
+    set_active_target, DEFAULT_TARGET
+)
 from tv_control_center.core.devices import DEVICE_PROFILES, detect_device_profile
 from tv_control_center.core.metrics import get_quick_metrics, get_full_audit
 from tv_control_center.core.debloat import apply_safe_debloat, toggle_package, SAFE_TO_DISABLE, CAUTION_PACKAGES, CRITICAL_DO_NOT_TOUCH
@@ -21,24 +25,24 @@ class ADBDashboardHandler(http.server.SimpleHTTPRequestHandler):
         parsed = urllib.parse.urlparse(self.path)
         if parsed.path == "/api/status":
             devs = get_devices()
-            self.send_json({"devices": devs})
+            self.send_json({"devices": devs, "active_target": get_active_target()})
         elif parsed.path == "/api/device_profiles":
             self.send_json({"profiles": DEVICE_PROFILES})
         elif parsed.path == "/api/scan_network":
-            # Quick subnet scan for active Android TVs on port 5555
-            found = ["192.168.2.122:5555"]
+            # Real concurrent local subnet scan for active Android TVs on port 5555
+            found = scan_network_devices(port=5555)
             self.send_json({"devices": found})
         elif parsed.path == "/api/quick_metrics":
             qs = urllib.parse.parse_qs(parsed.query)
-            target = qs.get("target", [DEFAULT_TARGET])[0]
+            target = qs.get("target", [get_active_target()])[0]
             self.send_json(get_quick_metrics(target))
         elif parsed.path == "/api/full_audit":
             qs = urllib.parse.parse_qs(parsed.query)
-            target = qs.get("target", [DEFAULT_TARGET])[0]
+            target = qs.get("target", [get_active_target()])[0]
             self.send_json(get_full_audit(target))
         elif parsed.path == "/api/device_state":
             qs = urllib.parse.parse_qs(parsed.query)
-            target = qs.get("target", [DEFAULT_TARGET])[0]
+            target = qs.get("target", [get_active_target()])[0]
             
             brand = run_adb_timeout(["shell", "getprop", "ro.product.brand"], target, timeout=2.0)
             model = run_adb_timeout(["shell", "getprop", "ro.product.model"], target, timeout=2.0)
@@ -125,12 +129,34 @@ class ADBDashboardHandler(http.server.SimpleHTTPRequestHandler):
         except Exception:
             data = {}
 
-        target = data.get("target") or DEFAULT_TARGET
+        target = data.get("target") or get_active_target()
 
-        if parsed.path == "/api/connect":
-            ip = data.get("ip")
-            res = run_adb_timeout(["connect", f"{ip}:5555"], timeout=6.0)
-            self.send_json({"result": res})
+        if parsed.path in ["/api/connect", "/api/connect_device"]:
+            raw_target = data.get("target") or data.get("ip") or ""
+            ip = data.get("ip") or (raw_target.split(":")[0] if raw_target else "")
+            port_raw = data.get("port") or (raw_target.split(":")[1] if ":" in raw_target else 5555)
+            try:
+                port = int(port_raw)
+            except Exception:
+                port = 5555
+            
+            if not ip:
+                self.send_json({"status": "failed", "message": "Error: IP address is required."}, status=400)
+                return
+            
+            res = connect_adb(ip, port)
+            self.send_json(res)
+        elif parsed.path in ["/api/disconnect", "/api/disconnect_device"]:
+            tgt = data.get("target") or target
+            res = disconnect_adb(tgt)
+            self.send_json(res)
+        elif parsed.path == "/api/set_target":
+            new_target = data.get("target") or data.get("ip")
+            if new_target:
+                set_active_target(new_target)
+                self.send_json({"result": f"Active target set to {get_active_target()}", "target": get_active_target()})
+            else:
+                self.send_json({"error": "No target specified"}, status=400)
         elif parsed.path == "/api/remote":
             keycode = data.get("keycode")
             text = data.get("text")
