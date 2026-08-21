@@ -12,9 +12,9 @@ import os
 import sys
 from typing import Dict, Any
 from tv_control_center.adb import (
-    run_adb_timeout, get_devices, get_device_info, connect_adb,
-    disconnect_adb, scan_network_devices, get_active_target,
-    set_active_target, DEFAULT_TARGET
+    run_adb_timeout, send_fast_keyevent, send_fast_text, get_devices,
+    get_device_info, connect_adb, disconnect_adb, scan_network_devices,
+    get_active_target, set_active_target, DEFAULT_TARGET
 )
 from tv_control_center.core.devices import DEVICE_PROFILES, detect_device_profile
 from tv_control_center.core.metrics import get_quick_metrics, get_full_audit
@@ -165,8 +165,7 @@ class ADBDashboardHandler(http.server.SimpleHTTPRequestHandler):
             input_source = data.get("input_source")
 
             if text is not None:
-                escaped = str(text).replace(" ", "%s").replace("&", "\\&").replace("'", "\\'").replace('"', '\\"')
-                res = run_adb_timeout(["shell", "input", "text", escaped], target, timeout=4.0)
+                send_fast_text(str(text), target)
                 self.send_json({"result": f"Sent text to TV: '{text}'"})
             elif app:
                 app_map = {
@@ -194,19 +193,19 @@ class ADBDashboardHandler(http.server.SimpleHTTPRequestHandler):
                     "menu": 178   # KEYCODE_TV_INPUT_COMPOSITE_1 / Input Chooser
                 }
                 k = input_map.get(str(input_source).lower(), 178)
-                res = run_adb_timeout(["shell", "input", "keyevent", str(k)], target, timeout=3.0)
+                send_fast_keyevent(k, target)
                 self.send_json({"result": f"Switched input source to {str(input_source).upper()}"})
             elif action == "reboot":
                 res = run_adb_timeout(["reboot"], target, timeout=5.0)
                 self.send_json({"result": "Reboot command sent to TV via ADB."})
             elif action == "sleep":
-                res = run_adb_timeout(["shell", "input", "keyevent", "223"], target, timeout=3.0)
+                send_fast_keyevent(223, target)
                 self.send_json({"result": "Screen Sleep command sent to TV."})
             elif action == "wake":
-                res = run_adb_timeout(["shell", "input", "keyevent", "224"], target, timeout=3.0)
+                send_fast_keyevent(224, target)
                 self.send_json({"result": "Screen Wake command sent to TV."})
             elif keycode is not None:
-                res = run_adb_timeout(["shell", "input", "keyevent", str(keycode)], target, timeout=3.0)
+                send_fast_keyevent(int(keycode), target)
                 self.send_json({"result": f"Keyevent {keycode} sent."})
             else:
                 self.send_json({"result": "No keycode or command provided"}, status=400)

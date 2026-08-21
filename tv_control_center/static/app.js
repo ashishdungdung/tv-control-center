@@ -890,11 +890,16 @@ async function doToggleMod(modId, state) {
   }
 }
 
-async function doSendKey(keycode) {
-  const data = await apiPost('/api/remote', { keycode });
-  if (data) {
-    logTerminal(`ADB keyevent: ${keycode}`, 'info');
+function doSendKey(keycode) {
+  if (navigator.vibrate) {
+    try { navigator.vibrate(12); } catch (e) {}
   }
+  fetch('/api/remote', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ target: TARGET, keycode }),
+    keepalive: true
+  }).catch(() => {});
 }
 
 async function doSendText() {

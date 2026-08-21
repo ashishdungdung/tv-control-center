@@ -48,6 +48,51 @@ def run_adb_timeout(args: List[str], target: Optional[str] = None, timeout: floa
     except Exception as e:
         return f"Error executing ADB: {str(e)}"
 
+def send_fast_keyevent(keycode: int, target: Optional[str] = None) -> bool:
+    """Sends keyevent via direct ADB daemon socket protocol (~10ms response time)."""
+    tgt = target or get_active_target()
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.settimeout(0.8)
+        s.connect(('127.0.0.1', 5037))
+        transport_cmd = f'host:transport:{tgt}'
+        s.sendall(f'{len(transport_cmd):04x}{transport_cmd}'.encode('utf-8'))
+        resp = s.recv(4)
+        if resp != b'OKAY':
+            s.close()
+            run_adb_timeout(["shell", "input", "keyevent", str(keycode)], tgt, timeout=2.0)
+            return True
+        shell_cmd = f'shell:input keyevent {keycode}'
+        s.sendall(f'{len(shell_cmd):04x}{shell_cmd}'.encode('utf-8'))
+        s.close()
+        return True
+    except Exception:
+        run_adb_timeout(["shell", "input", "keyevent", str(keycode)], tgt, timeout=2.0)
+        return True
+
+def send_fast_text(text: str, target: Optional[str] = None) -> bool:
+    """Sends text typing via direct ADB daemon socket protocol for instant typing."""
+    tgt = target or get_active_target()
+    escaped = str(text).replace(" ", "%s").replace("&", "\\&").replace("'", "\\'").replace('"', '\\"')
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.settimeout(1.2)
+        s.connect(('127.0.0.1', 5037))
+        transport_cmd = f'host:transport:{tgt}'
+        s.sendall(f'{len(transport_cmd):04x}{transport_cmd}'.encode('utf-8'))
+        resp = s.recv(4)
+        if resp != b'OKAY':
+            s.close()
+            run_adb_timeout(["shell", "input", "text", escaped], tgt, timeout=2.5)
+            return True
+        shell_cmd = f'shell:input text {escaped}'
+        s.sendall(f'{len(shell_cmd):04x}{shell_cmd}'.encode('utf-8'))
+        s.close()
+        return True
+    except Exception:
+        run_adb_timeout(["shell", "input", "text", escaped], tgt, timeout=2.5)
+        return True
+
 def get_devices() -> List[str]:
     """Returns connected and authorized ADB devices."""
     try:
