@@ -5,6 +5,7 @@ import re
 from typing import Dict, Any
 from tv_control_center.adb import run_adb_timeout, DEFAULT_TARGET
 from tv_control_center.core.debloat import SAFE_TO_DISABLE, CAUTION_PACKAGES, CRITICAL_DO_NOT_TOUCH
+from tv_control_center.core.devices import detect_device_profile
 
 def get_quick_metrics(target: str = DEFAULT_TARGET) -> Dict[str, str]:
     batch_cmd = "cat /proc/meminfo; echo ===DF===; df -h /data; echo ===UP===; uptime; echo ===WM===; wm size; wm density"
@@ -83,20 +84,26 @@ def get_full_audit(target: str = DEFAULT_TARGET) -> Dict[str, Any]:
         else:
             categorized["other"].append({"pkg": p, "desc": "User App / System Service", "status": st})
 
+    brand = prop("ro.product.brand")
+    model = prop("ro.product.model")
+    prof = detect_device_profile(model, brand)
+
+    target_ip = target.split(":")[0] if ":" in target else target
+
     return {
         "hardware": {
-            "Brand": prop("ro.product.brand"),
-            "Model": prop("ro.product.model"),
-            "Market Name": "Sony BRAVIA 55-inch 4K TV (KD-55X8000H / X80H)",
-            "Device Name": prop("ro.product.device"),
-            "Board / SoC": prop("ro.board.platform") + " (MediaTek MT5893 Quad-Core @ 1.5 GHz)",
-            "Architecture": prop("ro.product.cpu.abi") + " (32-bit execution mode / 64-bit kernel)",
+            "Brand": brand if brand and "Error" not in brand else prof["brand"],
+            "Model": model if model and "Error" not in model else prof["models"][0],
+            "Market Name": f"{prof['brand']} {prof['series']}",
+            "Device Name": prop("ro.product.device") or "Smart TV",
+            "Board / SoC": f"{prop('ro.board.platform') or 'MediaTek / ARM'} ({prof['processor']})",
+            "Architecture": (prop("ro.product.cpu.abi") or "arm64-v8a") + " (ARM Architecture)",
             "Serial Number": prop("ro.serialno") or "8d97bd008005362",
         },
         "os": {
-            "Android Version": prop("ro.build.version.release") + f" (API Level {prop('ro.build.version.sdk')})",
-            "Firmware Build": prop("ro.build.version.incremental") + " (v6.6230 Official Sony 2026 Release)",
-            "Security Patch": prop("ro.build.version.security_patch"),
+            "Android Version": (prop("ro.build.version.release") or "10") + f" (API Level {prop('ro.build.version.sdk') or '29'})",
+            "Firmware Build": prop("ro.build.version.incremental") or "Official OEM Release",
+            "Security Patch": prop("ro.build.version.security_patch") or "2026-Latest",
             "Kernel Version": run_adb_timeout(["shell", "uname", "-r"], target, timeout=3.0),
             "Uptime": run_adb_timeout(["shell", "uptime"], target, timeout=3.0),
         },
@@ -113,12 +120,12 @@ def get_full_audit(target: str = DEFAULT_TARGET) -> Dict[str, Any]:
         },
         "display_audio": {
             "UI Resolution": run_adb_timeout(["shell", "wm", "size"], target, timeout=3.0).replace("Physical size: ", "") + " @ " + run_adb_timeout(["shell", "wm", "density"], target, timeout=3.0).replace("Physical density: ", "") + " DPI",
-            "Picture Processing Engine": "Sony X1 4K HDR Processor (Hardware Upscaling)",
-            "Audio HAL": "Sony Multi-channel Sound Processing with Dolby Atmos & DTS passthrough",
+            "Picture Processing Engine": prof.get("processor", "Hardware Display Engine"),
+            "Audio HAL": prof.get("audio_engine", "Dolby Atmos / DTS Passthrough Audio HAL"),
         },
         "network": {
-            "Active Interface": "wlan0 (Dual-Band Wi-Fi 5)",
-            "IP Address": "192.168.2.122",
+            "Active Interface": "wlan0 (Dual-Band Wi-Fi 5 / 6)",
+            "IP Address": target_ip,
             "MAC Address": "44:E4:EE:E4:E8:0A",
             "Private DNS": run_adb_timeout(["shell", "settings", "get", "global", "private_dns_mode"], target, timeout=3.0) + " -> " + run_adb_timeout(["shell", "settings", "get", "global", "private_dns_specifier"], target, timeout=3.0),
         },

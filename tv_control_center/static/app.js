@@ -988,6 +988,14 @@ async function doApplySafeDebloat() {
   }, 'Apply Debloat', 'btn-primary');
 }
 
+async function doRestoreSafeDebloat() {
+  showDialog('Restore Stock Packages', 'This will re-enable all 20+ previously disabled telemetry and demo packages back to stock factory state.', async () => {
+    showToast('Restoring', 'Re-enabling packages...', 'info');
+    const data = await apiPost('/api/restore_safe_debloat');
+    if (data) { showToast('Packages Restored', data.result); logActivity('Restore Packages', data.result); }
+  }, 'Restore All', 'btn-secondary');
+}
+
 async function doNightMode(state) {
   logTerminal(`Night mode → ${state}`);
   const data = await apiPost('/api/night_mode', { state });

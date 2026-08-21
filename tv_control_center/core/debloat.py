@@ -52,6 +52,13 @@ def apply_safe_debloat(target: str = DEFAULT_TARGET) -> List[str]:
         results.append(f"{pkg}: {res}")
     return results
 
+def restore_safe_debloat(target: str = DEFAULT_TARGET) -> List[str]:
+    results = []
+    for pkg in SAFE_TO_DISABLE:
+        res = run_adb_timeout(["shell", "pm", "enable", pkg], target, timeout=3.0)
+        results.append(f"{pkg}: {res}")
+    return results
+
 def toggle_package(pkg: str, action: str, target: str = DEFAULT_TARGET) -> str:
     if action == "disable":
         return run_adb_timeout(["shell", "pm", "disable-user", "--user", "0", pkg], target, timeout=4.0)

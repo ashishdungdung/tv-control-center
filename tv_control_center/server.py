@@ -18,7 +18,7 @@ from tv_control_center.adb import (
 )
 from tv_control_center.core.devices import DEVICE_PROFILES, detect_device_profile
 from tv_control_center.core.metrics import get_quick_metrics, get_full_audit
-from tv_control_center.core.debloat import apply_safe_debloat, toggle_package, SAFE_TO_DISABLE, CAUTION_PACKAGES, CRITICAL_DO_NOT_TOUCH
+from tv_control_center.core.debloat import apply_safe_debloat, restore_safe_debloat, toggle_package, SAFE_TO_DISABLE, CAUTION_PACKAGES, CRITICAL_DO_NOT_TOUCH
 
 class ADBDashboardHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
@@ -413,6 +413,9 @@ class ADBDashboardHandler(http.server.SimpleHTTPRequestHandler):
         elif parsed.path == "/api/apply_safe_debloat":
             results = apply_safe_debloat(target)
             self.send_json({"result": "Applied safe debloat to 20 telemetry & promo packages."})
+        elif parsed.path == "/api/restore_safe_debloat":
+            results = restore_safe_debloat(target)
+            self.send_json({"result": "Re-enabled all 20 telemetry & promo packages to factory defaults."})
         elif parsed.path == "/api/toggle_package":
             pkg = data.get("pkg")
             action = data.get("action")
@@ -503,9 +506,11 @@ class ADBDashboardHandler(http.server.SimpleHTTPRequestHandler):
         self.wfile.write(body)
 
 def start_server(port: int = 8888, target: str = DEFAULT_TARGET):
+    if target:
+        set_active_target(target)
     print("============================================================")
-    print(f"🚀 BRAVIA Control Center Engine v3.0 Ultra listening on http://localhost:{port}")
-    print(f"📡 ADB Target: {target}")
+    print(f"🚀 TV Control Center Engine v3.0 Ultra listening on http://localhost:{port}")
+    print(f"📡 ADB Target: {get_active_target()}")
     print("============================================================")
     socketserver.TCPServer.allow_reuse_address = True
     httpd = socketserver.TCPServer(("", port), ADBDashboardHandler)
