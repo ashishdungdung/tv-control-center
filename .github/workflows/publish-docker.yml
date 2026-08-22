@@ -3,6 +3,9 @@ name: Publish Docker Image
 on:
   release:
     types: [published]
+  push:
+    tags:
+      - 'v*'
   workflow_dispatch:
 
 jobs:
@@ -28,4 +31,4 @@ jobs:
         push: true
         tags: |
           ashishdungdung/tv-control-center:latest
-          ashishdungdung/tv-control-center:0.0.2
+          ashishdungdung/tv-control-center:0.0.4

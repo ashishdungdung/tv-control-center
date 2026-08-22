@@ -16,4 +16,4 @@ EXPOSE 8888
 
 ENV ADB_TARGET="192.168.2.122:5555"
 
-CMD ["bravia-control", "serve", "--port", "8888"]
+CMD ["tv-control-center", "serve", "--port", "8888"]

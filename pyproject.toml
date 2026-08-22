@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tv-control-center"
-version = "0.0.3"
+version = "0.0.4"
 description = "TV Control Center — Universal Smart TV Management Suite for Sony BRAVIA, SHIELD, TCL, Hisense, Fire TV, Chromecast, Xiaomi."
 readme = "README.md"
 authors = [{ name = "Ashish Dungdung", email = "ashishdungdung@users.noreply.github.com" }]
